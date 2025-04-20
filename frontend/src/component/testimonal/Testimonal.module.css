@@ -1,0 +1,13 @@
+.testimonal {
+  margin-top: 50px;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.testimonal__flex {
+  display: flex;
+  flex-wrap: nowrap;
+}

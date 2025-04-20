@@ -1,0 +1,96 @@
+.login {
+  height: 90vh;
+  background-color: rgb(222, 224, 226);
+}
+
+.login__box {
+  width: 100%;
+
+  /* background-color: rgb(69, 95, 95); */
+}
+
+.login__container {
+  width: 320px; /* Set a reasonable width */
+  margin: auto;
+  position: relative;
+  top: 20px;
+  padding: 30px;
+  background-color: aqua;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login__container h1 {
+  text-align: center;
+}
+
+.form__fields {
+  margin-top: -10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.login__container h1 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form__fields span {
+  display: block;
+  margin-left: 10px;
+}
+
+.form__fields input {
+  margin-bottom: 16px;
+  border: none;
+  height: 35px;
+  border-radius: 20px;
+  padding: 2px 5px 2px 20px;
+}
+
+.btn {
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+}
+
+.btn__login {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.login__icon__container {
+  margin-top: 20px;
+}
+
+.login__icon__container span {
+  display: block;
+  text-align: center;
+}
+
+.login__icons ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.login__footer {
+  margin-top: 50px;
+}
+
+.login__footer {
+  margin-left: 16px;
+}
+
+.login__footer span {
+  color: green;
+}

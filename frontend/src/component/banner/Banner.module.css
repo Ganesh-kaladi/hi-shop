@@ -1,0 +1,49 @@
+.banner {
+  margin-top: 50px;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.banner__flex {
+  display: flex;
+  gap: 10px;
+}
+
+.banner__flex__box {
+  flex-basis: 50%;
+}
+.banner__container {
+  position: relative;
+}
+.banner__container img {
+  border-radius: 6px;
+  width: 100%;
+}
+
+.banner__text {
+  width: 60%;
+  position: absolute;
+  top: 50px;
+  left: 40px;
+  color: #fff;
+}
+
+.banner__text h5 {
+  margin-bottom: 10px;
+}
+
+.banner__text p {
+  margin-bottom: 20px;
+}
+
+.banner__text button {
+  border-radius: 6px;
+  color: #056121;
+  border: 1px solid #0561218a;
+  height: 40px;
+  width: 100px;
+  font-weight: 600;
+}

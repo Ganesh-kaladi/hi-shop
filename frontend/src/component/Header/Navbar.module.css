@@ -1,0 +1,85 @@
+/* navbar */
+
+.navbar {
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
+  color: #fff;
+  width: 100%;
+  background: linear-gradient(
+    45deg,
+    rgb(62, 182, 32) 10%,
+    rgb(88, 194, 62) 20%,
+    rgb(127, 207, 90) 30%,
+    rgb(150, 224, 116) 50%,
+    rgb(149, 216, 104) 70%,
+    rgb(184, 236, 149) 90%,
+    rgb(230, 255, 198) 100%
+  );
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+.nav {
+  height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  /* flex-basis: 33%; */
+  text-align: center;
+}
+
+.logo img {
+  height: 50px;
+  width: 50px;
+  border-radius: 8px;
+}
+
+/* .nav__search {
+  flex-basis: 33%;
+} */
+
+.nav__search input {
+  width: 480px;
+  height: 38px;
+  border-radius: 6px;
+  border: none;
+  padding-left: 10px;
+}
+
+/* .nav__link {
+  flex-basis: 33%;
+} */
+
+.nav__link ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav__link ul li {
+  margin-right: 30px;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+.nav__link ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav__link ul li select {
+  background-color: unset;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+/* .nav__link ul {
+} */

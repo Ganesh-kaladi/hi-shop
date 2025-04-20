@@ -1,0 +1,37 @@
+.footer {
+  background-color: rgb(29, 29, 29);
+  color: #fff;
+  width: 100%;
+  padding: 40px 0px;
+  margin-top: 50px;
+}
+
+.footer__container {
+  display: flex;
+  text-align: center;
+  gap: 10px;
+}
+
+.footer__social__icons ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.footer__flex__box {
+  flex-basis: 25%;
+}
+
+.footer__logo img {
+  height: 100px;
+  margin-bottom: 30px;
+}
+.footer__link__box h1 {
+  margin-bottom: 10px;
+}
+.footer__link__box h1 span {
+  border-bottom: 1px solid rgb(146, 241, 57);
+}
+.footer__link__box ul {
+  list-style: none;
+}
