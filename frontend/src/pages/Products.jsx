@@ -9,7 +9,6 @@ import {
   getAllProducts,
   getAllProductsBasedOnQuery,
 } from "../slice/allProductSlice";
-import { useLocation, useParams } from "react-router-dom";
 import Spinner from "../components/spinner/Spinner";
 
 const Container = styled.div`
@@ -34,10 +33,25 @@ const Grid = styled.div`
 
 function Products() {
   const dispatch = useDispatch();
-  const { isPending, products } = useSelector((state) => state.allProduct);
-  useEffect(function () {
-    dispatch(getAllProducts());
-  }, []);
+  const { isPending, products, query } = useSelector(
+    (state) => state.allProduct
+  );
+
+  console.log(query);
+  useEffect(
+    function () {
+      dispatch(getAllProducts());
+    },
+    [dispatch]
+  );
+
+  useEffect(
+    function () {
+      if (query === "") return;
+      dispatch(getAllProductsBasedOnQuery(query));
+    },
+    [query]
+  );
 
   return (
     <>

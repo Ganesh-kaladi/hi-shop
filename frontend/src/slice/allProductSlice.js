@@ -17,7 +17,23 @@ export const getAllProducts = createAsyncThunk(
 export const getAllProductsBasedOnQuery = createAsyncThunk(
   "allproducts/getAllProductsBasedOnQuery",
   async function (query, thunkAPI) {
+    // const cat = category;
+    // const fie = fields;
+    // console.log(cat);
     try {
+      // let query;
+      // if (category === "") {
+      //   return;
+      // } else {
+      //   query = category;
+      // }
+
+      // if (fields === "") {
+      //   return;
+      // } else {
+      //   query = query + fields;
+      // }
+      // console.log(query);
       const res = await axios.get(
         `http://127.0.0.1:5050/api/v1/product${query}`
       );
@@ -35,11 +51,23 @@ const allProductSlice = createSlice({
     products: null,
     isPending: false,
     error: null,
-    query: null,
+    category: "",
+    fields: "",
+    query: "",
   },
   reducers: {
     removeProducts(state, action) {
       state.products = null;
+    },
+    addQuery(state, action) {
+      const queryFields = action.payload;
+      if (Object.keys(queryFields).includes("category")) {
+        state.category = queryFields.category;
+      }
+      if (Object.keys(queryFields).includes("fields")) {
+        state.fields = queryFields.fields;
+      }
+      state.query = `?${state.category}&${state.fields}`;
     },
   },
   extraReducers: (builder) => {
@@ -73,6 +101,6 @@ const allProductSlice = createSlice({
   },
 });
 
-export const { removeProducts } = allProductSlice.actions;
+export const { removeProducts, addQuery } = allProductSlice.actions;
 
 export default allProductSlice.reducer;

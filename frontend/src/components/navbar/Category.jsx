@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import {
+  addQuery,
   getAllProducts,
   getAllProductsBasedOnQuery,
   removeProducts,
@@ -42,10 +43,12 @@ function Category() {
     navigate(`?`);
   }
 
-  function handleQueryCategory(category) {
+  function handleQueryCategory(cat) {
     // dispatch(removeProducts());
-    dispatch(getAllProductsBasedOnQuery(`?category=${category}`));
-    navigate(`?category=${category}`);
+    const category = `category=${cat}`;
+    dispatch(addQuery({ category }));
+    // dispatch(getAllProductsBasedOnQuery(`category=${category}`));
+    // navigate(`?category=${category}`);
   }
   return (
     <Section>
