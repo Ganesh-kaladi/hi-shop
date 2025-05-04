@@ -4,14 +4,25 @@ import Style from "./Orders.module.css";
 import Order from "../components/orders/Order";
 
 const Block = styled.div`
-  padding: 0px 14px;
+  padding: 1rem;
+
+  @media (max-width: 480px) {
+    padding-top: 0;
+  }
+`;
+
+const H3 = styled.h3`
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 10px;
 `;
 
 function Orders() {
   return (
     <Block>
-      <div className={Style.orders}>
-        <h3>Orders</h3>
+      <div>
+        <H3>Orders</H3>
         <Order />
         <Order />
         <Order />

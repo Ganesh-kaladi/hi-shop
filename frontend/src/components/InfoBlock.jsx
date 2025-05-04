@@ -21,17 +21,16 @@ const Block = styled.div`
 const Title = styled.h3`
   font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  font-family: "Gabarito", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
+  margin-bottom: 0.4rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
   font-style: normal;
 `;
 
 const Description = styled.p`
   font-size: 1rem;
   color: #14161a;
-  font-family: "Raleway", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;

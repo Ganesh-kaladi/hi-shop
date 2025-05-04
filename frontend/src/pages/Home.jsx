@@ -16,7 +16,7 @@ import kid__col__2 from "../assets/feature/kid-bottomware.jpeg";
 import kid__col__3 from "../assets/feature/kid-footware.jpeg";
 import kid__col__4 from "../assets/feature/kid-acc.jpeg";
 import Deals from "../components/collections/Deals";
-import PopularProduct from "../components/product/PopularProduct";
+// import PopularProduct from "../components/product/PopularProduct";
 import InfoBlocks from "../components/InfoBlock";
 import CompanyHighlights from "../components/CompanyHighlights";
 import HeroSection from "../components/Hero";
@@ -24,6 +24,7 @@ import styled from "styled-components";
 
 const menCollection = {
   heading: "Men's Collection",
+  icon: "/assets/men-icon.png",
   col: [
     {
       id: 1,
@@ -58,6 +59,7 @@ const menCollection = {
 
 const womenCollection = {
   heading: "Women's Collection",
+  icon: "/assets/women-icon.png",
   col: [
     {
       id: 5,
@@ -92,6 +94,7 @@ const womenCollection = {
 
 const kidCollection = {
   heading: "Kid's Collection",
+  icon: "/assets/kid-icon.png",
   col: [
     {
       id: 5,
@@ -132,8 +135,8 @@ const Container = styled.div`
 function Home() {
   return (
     <div>
-      <HeroSection />
       <Container>
+        <HeroSection />
         <Banner />
         <Collection collection={menCollection} />
         <Collection collection={womenCollection} />

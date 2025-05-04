@@ -1,55 +1,176 @@
-import Style from "./Order.module.css";
 import styled from "styled-components";
 import { FaArrowRight } from "react-icons/fa6";
 import image from "../../assets/product/shirt-2.jpg";
+import { useNavigate } from "react-router-dom";
+
+const Container = styled.div`
+  border: 1px solid #d3ceced6;
+  padding: 0.4rem 1rem;
+  margin-bottom: 12px;
+
+  @media (max-width: 480px) {
+    padding: 0.4rem 1rem 1rem;
+  }
+`;
+
+const H5 = styled.h5`
+  font-weight: lighter;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+`;
 
 const List = styled.ul`
   list-style: none;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2px;
+  grid-template-rows: 1fr;
+  gap: 4px;
 `;
 
 const ListItem = styled.li`
-  background-color: var(--color-grey-0);
-  border: 1px solid rgb(203, 204, 204);
+  padding: 0 1rem;
+  margin-bottom: 14px;
+
+  @media (max-width: 480px) {
+    padding: 0;
+  }
 `;
 
 const Row = styled.div`
+  position: relative;
   height: 100%;
+  width: 100%;
   display: flex;
-  gap: 20px;
+  gap: 5;
+`;
+
+const ImageContainer = styled.div`
+  flex: 0 0 22%;
+  @media (max-width: 480px) {
+    flex: 0 0 36%;
+    align-self: stretch;
+  }
 `;
 
 const Image = styled.img`
-  width: 120px;
+  width: 100%;
+  @media (max-width: 480px) {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const ProductDetails = styled.div`
+  flex: 0 0 78%;
+  padding: 1rem;
+  background-color: #f3f1f1;
+  width: 100%;
+
+  @media (max-width: 480px) {
+    flex: 0 0 64%;
+  }
+`;
+
+const H6 = styled.h6`
+  font-weight: lighter;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+`;
+
+const DelivaryStatus = styled.span`
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
+`;
+
+const DelivaryTime = styled.span`
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+    margin-bottom: 12px;
+  }
+`;
+
+const NavIcon = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 96%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  font-size: 1rem;
+  padding: 8px 8px 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #413e3ec5;
+  color: rgb(36, 42, 48);
+  cursor: pointer;
+
+  &:hover {
+    background-color: #555151;
+    color: #fff;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+    padding: 4px;
+    left: 94%;
+  }
 `;
 
 function Order() {
+  const navigate = useNavigate();
   return (
-    <div className={Style.ord__container}>
-      <h5>order id</h5>
+    <Container>
+      <H5>order id</H5>
       <List>
         <ListItem>
-          <Row className={Style.ord__list}>
-            <Image src={image} alt="..." />
-            <div className={Style.ord__text}>
-              <h6>Product Titkle</h6>
-              <span className={Style.ord__delivery__status}>
-                Delivery Status
-              </span>
-              <span className={Style.ord__delivery__time}>
-                mon 01/01/2025-12:00 pm
-              </span>
+          <Row>
+            <ImageContainer>
+              <Image src={image} alt="..." />
+            </ImageContainer>
+            <ProductDetails>
+              <H6>Product Title</H6>
+              <DelivaryStatus>Delivery Status</DelivaryStatus>
+              <DelivaryTime>mon 01/01/2025-12:00 pm</DelivaryTime>
               <div>⭐⭐⭐⭐⭐</div>
-            </div>
-            <span className={Style.ord__right__icon}>
+            </ProductDetails>
+            <NavIcon onClick={() => navigate("/orders/1")}>
               <FaArrowRight />
-            </span>
+            </NavIcon>
           </Row>
         </ListItem>
       </List>
-    </div>
+    </Container>
   );
 }
 

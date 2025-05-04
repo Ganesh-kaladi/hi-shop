@@ -57,7 +57,7 @@ function App() {
               }
             />
             <Route
-              path="/orders/:id"
+              path="orders/:id"
               element={
                 <ProtectedRoute>
                   <SingleOrder />

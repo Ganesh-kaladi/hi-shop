@@ -10,11 +10,12 @@ import {
   getAllProductsBasedOnQuery,
 } from "../slice/allProductSlice";
 import Spinner from "../components/spinner/Spinner";
+import Arrange from "../components/navbar/Arrange";
 
 const Container = styled.div`
-  margin: var(--container-margin);
-  width: var(--container-width);
-  margin-top: 100px;
+  margin: auto;
+  width: 80%;
+  margin-top: 60px;
 `;
 
 const Grid = styled.div`
@@ -23,11 +24,20 @@ const Grid = styled.div`
   margin-top: 10px;
   gap: 22px;
 
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    margin-top: -10px;
+  }
+
   ${(props) =>
     props.type === "product" &&
     css`
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       gap: 10px;
+
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr 1fr;
+      }
     `}
 `;
 
@@ -36,8 +46,8 @@ function Products() {
   const { isPending, products, query } = useSelector(
     (state) => state.allProduct
   );
+  const { width } = useSelector((state) => state.pageWidth);
 
-  console.log(query);
   useEffect(
     function () {
       dispatch(getAllProducts());
@@ -50,18 +60,22 @@ function Products() {
       if (query === "") return;
       dispatch(getAllProductsBasedOnQuery(query));
     },
-    [query]
+    [query, dispatch]
   );
 
   return (
     <>
       {isPending && <Spinner />}
       <Container>
-        <Category />
+        {width > 800 && <Category />}
+
         <Grid>
-          <AsideBar />
+          {width > 800 && <AsideBar />}
           <div>
             <Grid type="product">
+              {isPending === false && products === null && (
+                <p>Check Youn internet connection</p>
+              )}
               {products?.map((el) => (
                 <Product key={el._id} product={el} id={el._id} />
               ))}
@@ -69,6 +83,7 @@ function Products() {
           </div>
         </Grid>
       </Container>
+      {width <= 800 && <Arrange />}
     </>
   );
 }

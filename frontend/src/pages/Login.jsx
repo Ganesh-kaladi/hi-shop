@@ -7,20 +7,35 @@ import { useSelector } from "react-redux";
 import Spinner from "../components/spinner/Spinner";
 
 const Section = styled.section`
-  margin-top: 120px;
+  margin-top: 60px;
+`;
+
+const Container = styled.div`
+  width: 420px;
+  margin: 0 auto;
+  background-color: #ced9db65;
+`;
+
+const Title = styled.h1`
+  font-size: 1.6rem;
+  background-color: #5a8383;
+  padding: 1.2rem;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  color: #fff;
 `;
 
 const Row = styled.div`
+  padding: 2rem 3rem;
   display: flex;
-
   ${(props) =>
     props.type === "login-box" &&
     css`
-      margin: 20px auto auto;
-      width: 380px;
       flex-direction: column;
       border-radius: 4px;
-      background-color: #ffffff;
     `}
 
   ${(props) =>
@@ -31,12 +46,9 @@ const Row = styled.div`
     `}
 `;
 
-const Title = styled.h1`
-  margin-bottom: 1.2rem;
-  font-size: 1.8rem;
-  background-color: aqua;
-  padding: 1.4rem 2rem;
-  text-align: center;
+const LoginBody = styled.div`
+  width: 100%;
+  margin-bottom: 14px;
 `;
 
 const Span = styled.span`
@@ -44,15 +56,17 @@ const Span = styled.span`
   width: 100%;
   font-size: 1.1rem;
   text-align: center;
-  margin-top: 10px;
+  margin-bottom: -14px;
 `;
 
 const List = styled.ul`
-  margin-top: 20px;
   letter-spacing: 1px;
-  padding: 1.4rem 2.8rem;
-  background-color: #28333d;
-  color: #fff;
+  padding: 0 1rem;
+  color: #444644;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 `;
 
 const Navigation = styled(Link)`
@@ -60,13 +74,13 @@ const Navigation = styled(Link)`
 `;
 
 const Anchor = styled.span`
-  color: #128112;
+  color: #14b614;
   font-weight: 600;
   cursor: pointer;
   transition: color 0.3s;
 
   &:hover {
-    color: #055a05;
+    color: #18dd18;
   }
 `;
 
@@ -76,34 +90,38 @@ function Login() {
     <>
       {isPending && <Spinner />}
       <Section>
-        <Row type="login-box">
+        <Container>
           <Title>Login</Title>
-          <LoginForm />
-          <Span>or</Span>
-          <Row type="icon-box">
-            <FaFacebook size={38} />
-            <FaTwitter size={38} />
-            <FaGoogle size={38} />
+          <Row type="login-box">
+            <LoginBody>
+              <LoginForm />
+              <Span>or</Span>
+              <Row type="icon-box">
+                <FaFacebook size={32} color=" #0ddbff" />
+                <FaTwitter size={32} color=" #0995ad" />
+                <FaGoogle size={32} color=" #ee291a" />
+              </Row>
+              <List>
+                <li>
+                  Forget &nbsp;
+                  <Navigation to="/username-find">
+                    <Anchor>Username</Anchor>
+                  </Navigation>
+                  /
+                  <Navigation to="/forget-password">
+                    <Anchor> Password</Anchor>
+                  </Navigation>
+                </li>
+                <li>
+                  Don't have an account?
+                  <Navigation to="/sign-up">
+                    <Anchor>&nbsp;Sign Up</Anchor>
+                  </Navigation>
+                </li>
+              </List>
+            </LoginBody>
           </Row>
-          <List>
-            <li>
-              Forget &nbsp;
-              <Navigation to="/username-find">
-                <Anchor>Username</Anchor>
-              </Navigation>
-              /
-              <Navigation to="/forget-password">
-                <Anchor> Password</Anchor>
-              </Navigation>
-            </li>
-            <li>
-              Don't have an account?
-              <Navigation to="/sign-up">
-                <Anchor>Sign Up</Anchor>
-              </Navigation>
-            </li>
-          </List>
-        </Row>
+        </Container>
       </Section>
     </>
   );

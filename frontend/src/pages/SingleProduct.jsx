@@ -1,29 +1,31 @@
 import styled, { css } from "styled-components";
-import image from "../assets/product/shirt-2.jpg";
-import image2 from "../assets/product/shirt-3.jpg";
-import image3 from "../assets/product/shirt-4.jpg";
-import image4 from "../assets/product/shirt-5.jpg";
-import Product from "../components/product/Product";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, removeProduct } from "../slice/singleProductSlice";
 import { addToCart } from "../slice/cartSlice";
 import CheckIsInCart from "../assets/logics/checkIsInCart";
 import Spinner from "../components/spinner/Spinner";
 
-const arrImage = [image2, image3, image4, image2, image3];
-
 const Container = styled.div`
-  margin: var(--container-margin);
+  margin: 0 auto;
   width: 80%;
-  margin-top: 120px;
+  margin-top: 60px;
+
+  @media (max-width: 480px) {
+    margin-top: 80px;
+  }
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 420px 1fr;
   background-color: #fff;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(380px) 1fr;
+  }
 `;
 
 const ImageContainer = styled.div``;
@@ -34,15 +36,32 @@ const Image = styled.img`
   border-top-right-radius: 1.8rem;
   border-bottom-right-radius: 1.8rem;
   box-shadow: 4px 0px 8px -1px #000000a7;
+
+  @media (max-width: 480px) {
+    border-radius: 0px;
+    box-shadow: 0px 0px 8px -1px #000000a7;
+  }
 `;
 
 const TextContainer = styled.div`
   margin: 0 2rem;
   padding: 2rem 3.5rem;
+
+  @media (max-width: 480px) {
+    padding: 0px;
+    margin-top: 2.6rem;
+  }
 `;
 
 const Title = styled.h1`
   font-size: 2.4rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const PriceContainer = styled.div`
@@ -52,10 +71,17 @@ const PriceContainer = styled.div`
   align-items: end;
   gap: 20px;
   margin-bottom: 2rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 `;
 
 const Price = styled.h3`
   font-size: 1.8rem;
+  font-weight: 400;
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const ActualPrice = styled.span`
@@ -74,6 +100,15 @@ const ColorContainer = styled.div`
 
 const H4 = styled.h4`
   font-size: 1.2rem;
+  padding-left: 1rem;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Color = styled.span`
@@ -106,6 +141,11 @@ const Size = styled.button`
   color: #464242;
   font-weight: 1.9rem;
   cursor: pointer;
+
+  &:hover {
+    background-color: #686868;
+    color: #fff;
+  }
 `;
 
 const QuantityContainer = styled.div`
@@ -120,6 +160,11 @@ const QuantityBtn = styled.button`
   height: 1.6rem;
   background-color: unset;
   cursor: pointer;
+
+  &:hover {
+    background-color: #686868;
+    color: #fff;
+  }
 `;
 
 const CartContainer = styled.div`
@@ -164,12 +209,54 @@ const WishListBtn = styled.button`
 `;
 
 const ProductDetails = styled.div`
-  padding: 2rem;
-  background-color: aliceblue;
-  margin-bottom: 2.4rem;
+  margin-bottom: 1rem;
 `;
 
-const SProductsContainer = styled.div``;
+const DescriptionContainer = styled.div`
+  padding: 1rem;
+`;
+
+const H3 = styled.h3`
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.9rem;
+`;
+
+const DescriptionPara = styled.p`
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-style: normal;
+`;
+
+const FeaturesContainer = styled.div`
+  padding: 1rem;
+`;
+
+const FeatureH4 = styled.h4`
+  font-size: 1.4rem;
+  padding-left: 0rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+`;
+
+const Features = styled.ul`
+  padding-left: 2rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.9rem;
+`;
+
+const SimilarProductsContainer = styled.div``;
 
 const H1 = styled.h1`
   font-size: 2rem;
@@ -177,11 +264,11 @@ const H1 = styled.h1`
   margin-bottom: 1.1rem;
 `;
 
-const SProducts = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  gap: 12px;
-`;
+// const SProducts = styled.div`
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+//   gap: 12px;
+// `;
 
 function SingleProduct() {
   const navigate = useNavigate();
@@ -234,7 +321,7 @@ function SingleProduct() {
               <TextContainer>
                 <Title>{singleDoc.title}</Title>
                 <p>
-                  ⭐⭐⭐⭐⭐<b>{singleDoc.ratings}</b> <span>343</span>
+                  ⭐⭐⭐⭐⭐<b>{singleDoc.ratings}</b> <span>(343)</span>
                 </p>
                 <PriceContainer>
                   <Price>₹{singleDoc.discountPrice}/-</Price>
@@ -258,7 +345,7 @@ function SingleProduct() {
                   </div>
                 </SizeContainer>
                 <QuantityContainer>
-                  <H4>Quantity</H4>
+                  <H4>quantity</H4>
                   <div>
                     <QuantityBtn>-</QuantityBtn>
                     <QuantityBtn>1</QuantityBtn>
@@ -280,30 +367,28 @@ function SingleProduct() {
               </TextContainer>
             </Grid>
             <ProductDetails>
-              <div>
-                <h1>description</h1>
-                <p>{singleDoc.description}</p>
-              </div>
-              <div>
-                <H4>Features:</H4>
-                <ul>
-                  <li>Soft and breathable 100% cotton</li>
-                  <li>Classic crew neck design</li>
-                  <li>Regular fit — not too loose, not too tight</li>
-                  <li>Pre-shrunk to minimize shrinkage</li>
-                  <li>Available in multiple colors</li>
-                </ul>
-              </div>
+              <DescriptionContainer>
+                <H3>Description</H3>
+                <DescriptionPara>{singleDoc.description}</DescriptionPara>
+              </DescriptionContainer>
+              <FeaturesContainer>
+                <FeatureH4>Features:</FeatureH4>
+                <Features>
+                  {singleDoc.highlights?.length > 0 &&
+                    singleDoc.highlights?.map((el, i) => <li key={i}>{el}</li>)}
+                </Features>
+              </FeaturesContainer>
             </ProductDetails>
 
-            <SProductsContainer>
+            <SimilarProductsContainer>
               <H1>similar products</H1>
+              <p>similar products api not completed...</p>
               {/* <SProducts>
               {arrImage.map((el) => (
                 <Product image={el} />
               ))}
             </SProducts> */}
-            </SProductsContainer>
+            </SimilarProductsContainer>
           </section>
         )}
       </Container>

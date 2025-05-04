@@ -14,6 +14,7 @@ exports.getAllProduct = async (req, res, next) => {
 
   let query = Product.find(JSON.parse(queryObj));
 
+  //productCollection
   if (req.query.productCollection) {
     const productCollectionQuery = req.query.productCollection
       .split(",")
@@ -21,11 +22,19 @@ exports.getAllProduct = async (req, res, next) => {
     query = query.where({ productCollection: productCollectionQuery });
   }
 
+  if (req.query.size) {
+    console.log(req.query.size);
+    const size = req.query.size;
+    query = query.where({ size });
+  }
+
+  //category
   if (req.query.category) {
     const categoryQuery = req.query.category.split(",").join(" ");
     query = query.where({ category: categoryQuery });
   }
 
+  //sort
   if (req.query.sort) {
     const sortQuery = req.query.sort.split(",").join(" ");
     query = query.sort(sortQuery);
@@ -33,12 +42,13 @@ exports.getAllProduct = async (req, res, next) => {
     query = query.sort("createdAt");
   }
 
+  //fields
   if (req.query.fields) {
     const fieldQuery = req.query.fields.split(",").join(" ");
     query = query.select(fieldQuery);
   } else {
     query = query.select(
-      "_id title stock price discountPrice category productCollection percentage ratings image"
+      "_id title stock price discountPrice category productCollection percentage ratings image size"
     );
   }
 
@@ -83,7 +93,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
       {
         folder: "product",
         transformation: [
-          { width: 540, height: 580, gravity: "faces", crop: "fill" },
+          { width: 540, height: 540, gravity: "faces", crop: "fill" },
           { quality: "auto", fetch_format: "auto" },
           { background: "lightblue" },
         ],

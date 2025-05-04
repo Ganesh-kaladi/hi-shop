@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import UserNav from "../components/navbar/UserNav";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
-  margin: var(--container-margin);
-  width: var(--container-width);
-  margin-top: 100px;
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 60px;
 `;
 
 const Grid = styled.div`
@@ -13,15 +14,23 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 24% 76%;
   gap: 20px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 function User() {
+  const { width } = useSelector((state) => state.pageWidth);
+  console.log(width > 801);
   return (
     <Container>
       <Grid>
-        <div>
+        {width > 801 && (
+          // <div>
           <UserNav />
-        </div>
+          // </div>
+        )}
         <div>
           <Outlet />
         </div>

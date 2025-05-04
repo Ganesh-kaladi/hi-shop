@@ -5,17 +5,20 @@ import { useNavigate } from "react-router-dom";
 const Section = styled.section`
   margin-top: 1.8rem;
   padding-bottom: 1.8rem;
-  /* background-color: #f9fafb; */
+`;
+
+const Img = styled.img`
+  width: 25px;
+  height: 25px;
 `;
 
 const Heading = styled.h1`
-  font-size: 1.8rem;
-  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
   color: #1f2937;
   text-align: start;
-  font-family: "Gabarito", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
   font-style: normal;
 `;
 
@@ -23,17 +26,25 @@ const Grid = styled.div`
   display: grid;
   gap: 1.5rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 20px;
+  }
 `;
 
 const CollectionContainer = styled.div`
-  background-color: #fff;
-  padding: 1.2rem;
+  border: 1px solid #9b9b9b;
+  padding: 1rem;
+`;
+
+const Block = styled.div`
+  /* background-color: #fff; */
 `;
 
 const ImageContainer = styled.div`
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
 `;
 
 const Image = styled.img`
@@ -46,57 +57,64 @@ const Image = styled.img`
   }
 `;
 
-const Span = styled.span`
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 0.3rem 0.7rem;
-  border-radius: 8px;
-  font-family: "Gabarito", sans-serif;
+const Description = styled.p`
+  padding: 0rem 1rem;
+  color: #3c424b;
+  font-size: 0.8rem;
+  font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
+
+  @media (max-width: 480px) {
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+  }
 `;
 
-const Description = styled.p`
-  margin: 0.75rem 0;
-  color: #4b5563;
-  font-family: "Raleway", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+const BtnContainer = styled.div`
+  width: 100%;
+  padding: 0.8rem 0.9rem;
 `;
 
 const Button = styled.button`
-  background-color: #111827;
-  color: #fff;
+  width: 100%;
+  background-color: #f7f7f7;
+  color: #3d3d3d;
   padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  border-left: 1px solid #3d3d3d;
+  border-right: 4px solid #3d3d3d;
+  border-top: 1px solid #3d3d3d;
+  border-bottom: 4px solid #3d3d3d;
   cursor: pointer;
   font-size: 0.95rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: background 0.2s ease;
+  justify-content: center;
+  gap: 2px;
+  transition: background 0.2s ease, transform 0.3s ease;
 
   &:hover {
-    background-color: #374151;
+    background-color: #cfcfcf;
+    transform: scale(0.97);
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
   }
 `;
 
 function Collection({ collection }) {
-  const { heading, col } = collection;
+  const { heading, col, icon } = collection;
 
   return (
     <Section>
-      <Heading>🛍️ {heading}</Heading>
+      <Heading>
+        <Img src={icon} alt="" /> {heading}
+      </Heading>
       <Grid>
         {col.map((el, index) => (
           <CollectionList key={index} el={el} />
@@ -110,16 +128,18 @@ function CollectionList({ el }) {
   const navigate = useNavigate();
   return (
     <CollectionContainer>
-      <ImageContainer>
-        <Image src={el.image} alt={el.category} />
-        <Span>
-          <FaTags /> {el.category}
-        </Span>
-      </ImageContainer>
-      <Description>{el.description} 👕🧥👟</Description>
-      <Button onClick={() => navigate("/products")}>
-        <FaShoppingBag /> Shop Now <FaArrowRight />
-      </Button>
+      <Block>
+        <ImageContainer>
+          <Image src={el.image} alt={el.category} />
+        </ImageContainer>
+        <Description>{el.description} 👕🧥👟</Description>
+        <BtnContainer>
+          <Button onClick={() => navigate("/products")}>
+            <FaShoppingBag />
+            Shop Now <FaArrowRight />
+          </Button>
+        </BtnContainer>
+      </Block>
     </CollectionContainer>
   );
 }

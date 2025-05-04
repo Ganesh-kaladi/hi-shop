@@ -1,12 +1,5 @@
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import {
-  addQuery,
-  getAllProducts,
-  getAllProductsBasedOnQuery,
-  removeProducts,
-} from "../../slice/allProductSlice";
-import { useNavigate } from "react-router-dom";
+import { useQueryFields } from "../../assets/logics/advanceFiltering";
 
 const Section = styled.section`
   margin-top: 20px;
@@ -27,6 +20,10 @@ const NavItem = styled.li`
   color: var(--color-white);
   letter-spacing: 1.4px;
   cursor: pointer;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
 
   &:hover {
     background-color: var(--color-green-600);
@@ -34,26 +31,11 @@ const NavItem = styled.li`
 `;
 
 function Category() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { handleQueryCategory } = useQueryFields();
 
-  function handleAllCategory() {
-    // dispatch(removeProducts());
-    dispatch(getAllProducts());
-    navigate(`?`);
-  }
-
-  function handleQueryCategory(cat) {
-    // dispatch(removeProducts());
-    const category = `category=${cat}`;
-    dispatch(addQuery({ category }));
-    // dispatch(getAllProductsBasedOnQuery(`category=${category}`));
-    // navigate(`?category=${category}`);
-  }
   return (
     <Section>
       <Nav>
-        <NavItem onClick={handleAllCategory}>All</NavItem>
         <NavItem onClick={() => handleQueryCategory("topware")}>
           topware
         </NavItem>

@@ -67,7 +67,9 @@ const allProductSlice = createSlice({
       if (Object.keys(queryFields).includes("fields")) {
         state.fields = queryFields.fields;
       }
-      state.query = `?${state.category}&${state.fields}`;
+      state.query = `?${state.category}${state.category === "" ? "" : "&"}${
+        state.fields
+      }`;
     },
   },
   extraReducers: (builder) => {
@@ -91,7 +93,9 @@ const allProductSlice = createSlice({
         state.error = null;
       })
       .addCase(getAllProductsBasedOnQuery.fulfilled, function (state, action) {
-        state.products = action.payload.data.doc;
+        action.payload.data.doc === undefined
+          ? (state.products = null)
+          : (state.products = action.payload.data.doc);
         state.isPending = false;
       })
       .addCase(getAllProductsBasedOnQuery.rejected, function (state, action) {

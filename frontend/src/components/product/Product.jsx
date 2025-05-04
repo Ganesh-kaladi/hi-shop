@@ -4,18 +4,15 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Card = styled.div`
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  padding: 1rem;
-  text-align: center;
+  border: 1px solid #9b9b9b;
+  padding: 0.8rem;
 `;
+
+const ProductContainer = styled.div``;
 
 const ImageContainer = styled.div`
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
   &:hover img {
     transform: scale(1.05);
   }
@@ -39,52 +36,80 @@ const Icon = styled.span`
   }
 `;
 
-const Title = styled.h2`
-  font-size: 1.1rem;
-  margin: 0.75rem 0 0.25rem;
+const Title = styled.h4`
+  min-height: 42px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8rem;
   color: #111827;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
 `;
 
 const Price = styled.h4`
+  padding: auto 0.9rem;
   color: #ef4444;
-  margin-bottom: 0.5rem;
 `;
 
-const Row = styled.div`
+const RateingDiv = styled.div`
+  padding: 0 0.8rem;
   display: flex;
-  justify-content: ${(props) =>
-    props.type === "rate" ? "center" : "space-between"};
+  justify-content: space-between;
   align-items: center;
-  gap: ${(props) => (props.type === "rate" ? "1rem" : "0.5rem")};
-  margin-bottom: 0.5rem;
+  background-color: aliceblue;
+  font-size: 0.8rem;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+`;
+
+const PriceDiv = styled.div`
+  padding: 0.4rem 0.8rem 0rem;
+  display: flex;
+  justify-content: space-around;
+  font-family: "Gabarito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  letter-spacing: 1px;
+  font-size: 0.7rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+`;
+
+const DiscountPrice = styled.div`
+  color: #0d5e45;
 `;
 
 function Product({ product, id }) {
   return (
     <Card>
-      <ImageContainer>
-        <Link to={`/products/${id}`}>
-          <Image src={product.image[1]} alt="product" />
-        </Link>
-        <Icon>
-          <FaHeart />
-        </Icon>
-      </ImageContainer>
-      <Title>{product.title}</Title>
-      <Price>₹{product.price}/-</Price>
-      <Row type="rate">
-        <p>⭐ {product.ratings}</p>
-        <span>|</span>
-        <p>243 reviews</p>
-      </Row>
-      <Row>
-        <p style={{ fontWeight: "bold", color: "#10b981" }}>
-          ₹{product.discountPrice}/-
-        </p>
-        <p style={{ textDecoration: "line-through", color: "#9ca3af" }}>
-          ₹{product.price}/-
-        </p>
-      </Row>
+      <ProductContainer>
+        <ImageContainer>
+          <Link to={`/products/${id}`}>
+            <Image src={product.image[1]} alt="product" />
+          </Link>
+          <Icon>
+            <FaHeart />
+          </Icon>
+        </ImageContainer>
+        <Title>{product.title}</Title>
+        {/* <Price>₹{product.price}/-</Price> */}
+        <RateingDiv type="rate">
+          <p>⭐ {product.ratings}</p>
+          <span>|</span>
+          <p>243 reviews</p>
+        </RateingDiv>
+        <PriceDiv>
+          <DiscountPrice>₹{product.discountPrice}/-</DiscountPrice>
+          <p style={{ textDecoration: "line-through", color: "#9ca3af" }}>
+            ₹{product.price}/-
+          </p>
+        </PriceDiv>
+      </ProductContainer>
     </Card>
   );
 }

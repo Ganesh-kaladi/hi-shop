@@ -60,7 +60,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body{
-    background-color:rgb(158, 169, 170);
+    background-color:rgb(255, 255, 255);
 }
 `;
 

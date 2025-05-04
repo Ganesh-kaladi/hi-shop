@@ -4,43 +4,73 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slice/authSlice";
 import { useNavigate } from "react-router-dom";
 
+const FormContainer = styled.div`
+  width: 100%;
+  margin-bottom: 0.8rem;
+`;
+
 export const Label = styled.label`
-  margin-bottom: 0.9rem;
-  font-size: 1.1rem;
+  display: block;
+  width: 100%;
+  margin-bottom: 0.2rem;
   letter-spacing: 1px;
-  padding: 0 2.5rem;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  padding-left: 7px;
 `;
 
 export const Input = styled.input`
+  display: block;
+  width: 100%;
   margin-bottom: 0.9rem;
   border: none;
-  background-color: #ffffff;
+  outline: none;
+  background-color: #f8f9fa;
+  border: 1px solid #bfc9ca;
+  color: #2c3e50;
   border-radius: 20px;
-  padding: 0.6rem;
-  margin-bottom: 10px;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  padding: 0.6rem 0.6rem 0.6rem 1rem;
   outline: none;
   font-size: 0.9rem;
   letter-spacing: 1px;
-  border: 1px solid rgb(124, 124, 124);
+  transition: box-shadow 0.3s;
+  transition: all 0.4s;
+
+  &:hover,
+  &:active {
+    box-shadow: 0 0px 4px 1px rgba(150, 224, 224, 0.9);
+  }
+  &:focus {
+    box-shadow: 0 0px 4px 1px rgba(150, 224, 224, 0.9);
+  }
 `;
 
 const Button = styled.button`
-  background-color: white;
-  border: 1px solid rgb(124, 124, 124);
-  padding: 0.6rem;
+  width: 100%;
+  background-color: unset;
+  border: 1px solid #0995ad;
+  background-color: #f8f9fa;
+  color: #0995ad;
   margin-top: 1.6rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
   border-radius: 26px;
+  padding: 6px 0px;
   cursor: pointer;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   transition: background-color 0.4s;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  transition: box-shadow 0.3s;
+  transition: all 0.4s;
 
   &:hover {
-    background-color: #dfdada;
+    background-color: #0995ad;
+    color: #122529;
+    box-shadow: 0 0px 4px 1px rgba(243, 252, 252, 0.9);
   }
 `;
 
@@ -66,23 +96,23 @@ function LoginForm() {
   }
 
   return (
-    <>
-      <Label>User Name</Label>
+    <FormContainer>
+      <Label>user name</Label>
       <Input
         value={email}
         type="email"
         placeholder="Enter Your User Name..."
         onChange={(e) => setEmail(e.target.value)}
       />
-      <Label>Password</Label>
+      <Label>password</Label>
       <Input
         value={password}
         type="password"
         placeholder="Enter Your User Password..."
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button onClick={handleLoginClick}>Login</Button>
-    </>
+      <Button onClick={handleLoginClick}>login</Button>
+    </FormContainer>
   );
 }
 

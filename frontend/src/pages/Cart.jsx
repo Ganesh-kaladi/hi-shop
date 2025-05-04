@@ -2,19 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import CartList from "../components/cart/CartList";
 import CheckOut from "../components/cart/CheckOut";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  margin: var(--container-margin);
-  width: var(--container-width);
-  margin-top: 100px;
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 60px;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 68% 32%;
   gap: 20px;
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 `;
 
 const EmptyContainer = styled.div`

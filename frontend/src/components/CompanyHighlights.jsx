@@ -13,10 +13,9 @@ const Section = styled.section`
 
 const Block = styled.div`
   flex: 1 1 250px;
-  background-color: #ffffffcc;
-  border-radius: 16px;
+  background-color: #cfdce4;
   padding: 2rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.9); */
   transition: transform 0.3s ease;
   backdrop-filter: blur(4px);
   text-align: center;
@@ -28,26 +27,23 @@ const Block = styled.div`
 
 const IconWrapper = styled.div`
   font-size: 2.5rem;
-  margin-bottom: 1rem;
   color: #7163f0;
 `;
 
 const Title = styled.h3`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
   color: #1f2937;
-  font-family: "Gabarito", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
   font-style: normal;
 `;
 
 const Description = styled.p`
   font-size: 1rem;
   color: #374151;
-  line-height: 1.6;
-  font-family: "Raleway", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;

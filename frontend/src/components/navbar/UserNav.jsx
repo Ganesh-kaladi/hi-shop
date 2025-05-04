@@ -1,22 +1,62 @@
 import styled from "styled-components";
-import Style from "./UserNav.module.css";
 import { NavLink } from "react-router-dom";
+
+const UserNavigate = styled.div`
+  padding: 1.5rem;
+  border: 1px solid #cecacaa4;
+  background-color: #f0f0f076;
+  height: 520px;
+`;
+
+const UserNavigateContainer = styled.div``;
+
+const H3 = styled.h3`
+  font-weight: lighter;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+`;
+
+const UserNavigateBlock = styled.div`
+  /* padding: 0.8rem; */
+`;
+
+const H5 = styled.h5`
+  font-weight: lighter;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+`;
 
 const List = styled.ul`
   list-style: none;
-  margin-left: 16px;
-  padding: 4px 12px;
+  margin-bottom: 24px;
+  margin-left: 8px;
 `;
 
 const ListItem = styled.li`
-  margin-bottom: 4px;
-  padding: 2px 12px;
+  background-color: #cff0d1;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 6px 8px;
+  border-left: 4px solid #5c858b;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #a7c4a9;
+  }
 `;
 
 const Anchor = styled(NavLink)`
   color: #2e2d2d;
   text-decoration: none;
   font-size: 0.9rem;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 
   &:active {
     color: #25678d;
@@ -40,17 +80,19 @@ const aboutUser = [
 
 function UserNav() {
   return (
-    <div className={Style.user__nav}>
-      <h3>My account</h3>
-      <div>
-        <h5>about shopping</h5>
-        <UserLinks links={myAcc} />
-      </div>
-      <div>
-        <h5>About User</h5>
-        <UserLinks links={aboutUser} />
-      </div>
-    </div>
+    <UserNavigate>
+      <UserNavigateContainer>
+        {/* <H3>My account</H3> */}
+        <UserNavigateBlock>
+          <H5>About Shopping</H5>
+          <UserLinks links={myAcc} />
+        </UserNavigateBlock>
+        <UserNavigateBlock>
+          <H5>About User</H5>
+          <UserLinks links={aboutUser} />
+        </UserNavigateBlock>
+      </UserNavigateContainer>
+    </UserNavigate>
   );
 }
 

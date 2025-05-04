@@ -1,70 +1,98 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { signinUser } from "../slice/authSlice";
-import { useNavigate } from "react-router-dom";
 
 const Section = styled.section`
-  margin-top: 120px;
+  margin-top: 60px;
+`;
+
+const Container = styled.div`
+  width: 420px;
+  margin: 0 auto;
+  background-color: #ced9db65;
 `;
 
 const Row = styled.div`
+  padding: 2rem 3rem;
   display: flex;
-
-  margin: 20px auto auto;
-  width: 380px;
   flex-direction: column;
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: #e9e9e996;
 `;
 
 const Title = styled.h1`
-  margin-bottom: 1.2rem;
-  font-size: 1.8rem;
-  background-color: aqua;
-  padding: 1.4rem 2rem;
+  font-size: 1.6rem;
+  background-color: #5a8383;
+  color: #ffffff;
+  padding: 1.2rem;
   text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
 `;
 
 export const Label = styled.label`
-  margin-bottom: 0.9rem;
-  font-size: 1.1rem;
+  display: block;
+  width: 100%;
+  margin-bottom: 0.2rem;
   letter-spacing: 1px;
-  padding: 0 2.5rem;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  padding-left: 7px;
 `;
 
 export const Input = styled.input`
+  display: block;
+  width: 100%;
   margin-bottom: 0.9rem;
   border: none;
-  background-color: #ffffff;
+  outline: none;
+  background-color: #f8f9fa;
+  border: 1px solid #bfc9ca;
+  color: #2c3e50;
   border-radius: 20px;
-  padding: 0.6rem;
-  margin-bottom: 10px;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  padding: 0.6rem 0.6rem 0.6rem 1rem;
   outline: none;
   font-size: 0.9rem;
   letter-spacing: 1px;
-  border: 1px solid rgb(124, 124, 124);
+  transition: all 0.4s;
+
+  &:hover,
+  &:active {
+    box-shadow: 0 0px 4px 1px rgba(150, 224, 224, 0.9);
+  }
+  &:focus {
+    box-shadow: 0 0px 4px 1px rgba(150, 224, 224, 0.9);
+  }
 `;
 
 const Button = styled.button`
-  background-color: #d4d4d4;
-  border: 1px solid rgb(124, 124, 124);
-  padding: 0.6rem;
+  width: 100%;
+  border: 1px solid #0995ad;
+  background-color: #f8f9fa;
+  color: #0995ad;
   margin-top: 1.6rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
   border-radius: 26px;
+  padding: 6px 0px;
   cursor: pointer;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   transition: background-color 0.4s;
-  margin-bottom: 1.6rem;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  transition: box-shadow 0.3s;
+  transition: all 0.4s;
 
   &:hover {
-    background-color: #3f3f3f;
-    color: #fff;
+    background-color: #0995ad;
+    color: #122529;
+    box-shadow: 0 0px 4px 1px rgba(243, 252, 252, 0.9);
   }
 `;
 
@@ -75,17 +103,6 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { token } = useSelector((state) => state.user);
-
-  useEffect(
-    function () {
-      const localToken = localStorage.getItem("token");
-      if (!localToken) return;
-      navigate("/");
-    },
-    [token, navigate]
-  );
 
   function handleSigninClick() {
     if (password !== confirmPassword) return alert("passwords are not match");
@@ -98,38 +115,40 @@ function SignUp() {
 
   return (
     <Section>
-      <Row>
+      <Container>
         <Title>Sing in</Title>
-        <Label>username </Label>
-        <Input
-          type="text"
-          required
-          placeholder="Enter your name..."
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Label>Email </Label>
-        <Input
-          type="email"
-          required
-          placeholder="Enter your email..."
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Label>Password </Label>
-        <Input
-          type="password"
-          required
-          placeholder="Enter  password..."
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Label>Conform Password </Label>
-        <Input
-          type="password"
-          required
-          placeholder="Conform Password..."
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <Button onClick={handleSigninClick}>Sing in</Button>
-      </Row>
+        <Row>
+          <Label>user name </Label>
+          <Input
+            type="text"
+            required
+            placeholder="Enter your name..."
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Label>email </Label>
+          <Input
+            type="email"
+            required
+            placeholder="Enter your email..."
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Label>password </Label>
+          <Input
+            type="password"
+            required
+            placeholder="Enter  password..."
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Label>conform password </Label>
+          <Input
+            type="password"
+            required
+            placeholder="Conform Password..."
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Button onClick={handleSigninClick}>Sing in</Button>
+        </Row>
+      </Container>
     </Section>
   );
 }

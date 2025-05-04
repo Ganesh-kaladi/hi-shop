@@ -8,6 +8,18 @@ import banner3 from "../../assets/banner/banner-3.jpeg";
 const Section = styled.section`
   margin-top: 1.6rem;
   padding: 1.4rem;
+  /* 
+  @media (max-width: 1024px) {
+    background-color: yellow;
+  }
+
+  @media (max-width: 768px) {
+    background-color: orange;
+  }
+
+  @media (max-width: 480px) {
+    background-color: red;
+  } */
 `;
 
 const Title = styled.h2`
@@ -31,40 +43,51 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0px 20px;
-  height: 500px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 24px 0px;
+  }
 `;
 
 const ImageContainer = styled.div`
-  background: linear-gradient(0deg, #0000008f 50%, #00000037 100%),
+  background: linear-gradient(0deg, #0000005e 50%, #00000024 100%),
     url(${(props) => props.image}) no-repeat center center;
   background-size: cover;
   height: 480px;
   width: 100%;
-  border-radius: 12px;
   position: relative;
+
+  @media (max-width: 480px) {
+    height: 380px;
+  }
 `;
 
 const TextContainer = styled.div`
   width: 100%;
-  padding: 0 20px;
   position: absolute;
-  bottom: 10%;
+  bottom: 0%;
   color: #fff;
   text-align: center;
 `;
 
+const TextBlock = styled.div`
+  background-color: #5e4d3860;
+  padding-bottom: 14px;
+`;
+
 const CategoryTitle = styled.h1`
+  padding: 1rem;
   font-size: 1.6rem;
-  margin-bottom: 0.3rem;
-  font-family: "Gabarito", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
+  margin-bottom: -8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
   font-style: normal;
 `;
 
 const Description = styled.p`
   letter-spacing: 1px;
-  font-family: "Raleway", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -99,42 +122,48 @@ function Banner() {
         <div>
           <ImageContainer image={banner3}>
             <TextContainer>
-              <CategoryTitle>Men's 👞</CategoryTitle>
-              <Description>
-                Step up your game with premium shoes, watches & chains. Curated
-                for modern men who value both style and comfort.
-              </Description>
-              <StyledButton onClick={() => navigate("/products")}>
-                Shop Now
-              </StyledButton>
+              <TextBlock>
+                <CategoryTitle>Men's</CategoryTitle>
+                <Description>
+                  Step up your game with premium shoes, watches & chains.
+                  Curated for modern men who value both style and comfort.
+                </Description>
+                <StyledButton onClick={() => navigate("/products")}>
+                  Shop Now
+                </StyledButton>
+              </TextBlock>
             </TextContainer>
           </ImageContainer>
         </div>
         <div>
           <ImageContainer image={banner2}>
             <TextContainer>
-              <CategoryTitle>Women's 👠</CategoryTitle>
-              <Description>
-                Elegant footwear, chic watches, and stunning
-                accessories—everything a woman needs to shine at every moment.
-              </Description>
-              <StyledButton onClick={() => navigate("/products")}>
-                Shop Now
-              </StyledButton>
+              <TextBlock>
+                <CategoryTitle>Women's</CategoryTitle>
+                <Description>
+                  Elegant footwear, chic watches, and stunning
+                  accessories—everything a woman needs to shine at every moment.
+                </Description>
+                <StyledButton onClick={() => navigate("/products")}>
+                  Shop Now
+                </StyledButton>
+              </TextBlock>
             </TextContainer>
           </ImageContainer>
         </div>
         <div>
           <ImageContainer image={banner1}>
             <TextContainer>
-              <CategoryTitle>Kids' 🎒</CategoryTitle>
-              <Description>
-                Playful and comfy! Shoes, watches, and more that match your
-                little one's big personality.
-              </Description>
-              <StyledButton onClick={() => navigate("/products")}>
-                Shop Now
-              </StyledButton>
+              <TextBlock>
+                <CategoryTitle>Kids'</CategoryTitle>
+                <Description>
+                  Playful and comfy! Shoes, watches, and more that match your
+                  little one's big personality. kid's special cloths.
+                </Description>
+                <StyledButton onClick={() => navigate("/products")}>
+                  Shop Now
+                </StyledButton>
+              </TextBlock>
             </TextContainer>
           </ImageContainer>
         </div>

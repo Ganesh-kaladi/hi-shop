@@ -1,16 +1,50 @@
-import { useEffect, useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { addQuery } from "../../slice/allProductSlice";
+import {
+  useCollectionFields,
+  useDiscountFields,
+  usePriceFields,
+  useQueryString,
+  useSortFields,
+} from "../../assets/logics/advanceFiltering";
 
-const Input = styled.input`
-  cursor: pointer;
-  margin-right: 12px;
+const AsideContainer = styled.aside`
+  background-color: #fff;
+  border-radius: 16px;
+  border: 1px solid #948e8e89;
 `;
 
-const Label = styled.label`
+const Heading1 = styled.h1`
+  text-align: center;
+  padding: 12px 10px;
+  background-color: #a5c9e0;
+  color: #2e2d2d;
+  letter-spacing: 1px;
+  font-size: 1.4rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  border-top: 4px solid #557deb;
+`;
+
+const InputBox = styled.div`
+  padding: 14px 18px;
+`;
+
+const InputContainer = styled.div`
+  background-color: #fff;
   cursor: pointer;
+`;
+
+const Heading5 = styled.h6`
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 0.9rem;
 `;
 
 const List = styled.ul`
@@ -22,201 +56,97 @@ const ListItem = styled.li`
   margin-top: 10px;
   margin-left: 22px;
 `;
-const Span = styled.span`
-  margin-right: 12px;
+
+const Input = styled.input`
   cursor: pointer;
+  margin-right: 12px;
 `;
 
-const InputContainer = styled.div`
-  background-color: var(--color-grey-0);
-  padding: 10px 12px;
+const Label = styled.label`
   cursor: pointer;
+  letter-spacing: 1px;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.8rem;
+`;
 
-  ${(prop) =>
-    prop.type === true &&
-    css`
-      border: 1px solid var(--color-grey-200);
-    `}
+const SortingContainer = styled.div`
+  margin-top: 18px;
+`;
+
+const Heading6 = styled.h6`
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+`;
+
+const SortList = styled.div`
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Select = styled.select`
+  flex-basis: 60%;
+  width: 100%;
+  appearance: none;
+  padding: 3px 4px;
+  list-style: none;
+  border-radius: 2px;
+  outline: none;
+  text-align: center;
+  letter-spacing: 1px;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.8rem;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Option = styled.option`
+  padding: 14px 18px;
 `;
 
 function AsideBar() {
-  // const [sortBy, setSortBy] = useState([]);
-  // const [isClicked, setIsClicked] = useState({
-  //   0: true,
-  //   1: true,
-  //   2: true,
-  //   3: false,
-  //   4: false,
-  //   5: false,
-  //   6: false,
-  //   7: false,
-  // })
-  // function handleChechBox(index) {
-  //   setIsClicked((prop) => ({
-  //     ...prop,
-  //     [index]: !prop[index],
-  //   }));
-  // }
-
   const dispatch = useDispatch();
 
-  const [collectionField, setCollectionField] = useState({
-    productCollection: "",
-    menChecked: false,
-    womenChecked: false,
-  });
+  const { collectionField, handleCollectionClick } = useCollectionFields();
+  const { priceField, handlePriceClick } = usePriceFields();
+  const { discountField, handleDiscountClick } = useDiscountFields();
+  const { sortFields, handleSortFields } = useSortFields();
 
-  const [priceField, setPriceField] = useState({
-    price: "",
-    below_30: false,
-    between_31_50: false,
-    between_51_70: false,
-    between_71_100: false,
-    between_101: false,
-  });
-
-  function handleCollectionClick(e) {
-    const { name, value, checked } = e.target;
-
-    if (name === "menCollection") {
-      setCollectionField(
-        checked
-          ? {
-              ...collectionField,
-              productCollection: value,
-              menChecked: true,
-              womenChecked: false,
-            }
-          : { ...collectionField, productCollection: "", menChecked: false }
-      );
-    }
-
-    if (name === "womenCollection") {
-      setCollectionField(
-        checked
-          ? {
-              ...collectionField,
-              productCollection: value,
-              menChecked: false,
-              womenChecked: true,
-            }
-          : { ...collectionField, productCollection: "", womenChecked: false }
-      );
-    }
-  }
-
-  function handlePriceClick(e) {
-    const { name, value, checked } = e.target;
-    if (name === "price[lt]=30") {
-      setPriceField(
-        checked
-          ? {
-              ...priceField,
-              price: value,
-              below_30: true,
-              between_31_50: false,
-              between_51_70: false,
-              between_71_100: false,
-              between_101: false,
-            }
-          : { ...priceField, price: "", below_30: false }
-      );
-    }
-
-    if (name === "between-31-and-50") {
-      setPriceField(
-        checked
-          ? {
-              ...priceField,
-              price: value,
-              below_30: false,
-              between_31_50: true,
-              between_51_70: false,
-              between_71_100: false,
-              between_101: false,
-            }
-          : { ...priceField, price: "", between_31_50: false }
-      );
-    }
-
-    if (name === "between-51-and-70") {
-      setPriceField(
-        checked
-          ? {
-              ...priceField,
-              price: value,
-              below_30: false,
-              between_31_50: false,
-              between_51_70: true,
-              between_71_100: false,
-              between_101: false,
-            }
-          : { ...priceField, price: "", between_51_70: false }
-      );
-    }
-
-    if (name === "between-71-and-100") {
-      setPriceField(
-        checked
-          ? {
-              ...priceField,
-              price: value,
-              below_30: false,
-              between_31_50: false,
-              between_51_70: false,
-              between_71_100: true,
-              between_101: false,
-            }
-          : { ...priceField, price: "", between_71_100: false }
-      );
-    }
-
-    if (name === "between-101+") {
-      setPriceField(
-        checked
-          ? {
-              ...priceField,
-              price: value,
-              below_30: false,
-              between_31_50: false,
-              between_51_70: false,
-              between_71_100: false,
-              between_101: true,
-            }
-          : { ...priceField, price: "", between_101: false }
-      );
-    }
-  }
-
-  let fields = "";
-  if (!(collectionField.productCollection === "")) {
-    fields = fields + collectionField.productCollection;
-  }
-
-  if (!(priceField.price === "")) {
-    fields = `${fields}&${priceField.price}`;
-  }
-
-  console.log(fields);
+  const queryFields = useQueryString(
+    collectionField,
+    priceField,
+    discountField,
+    sortFields
+  );
 
   useEffect(
     function () {
-      if (collectionField.productCollection === "") return;
-      const fields = `${collectionField.productCollection}`;
+      if (queryFields === "") return;
+      const fields = `${queryFields}`;
       dispatch(addQuery({ fields }));
     },
-    [collectionField, dispatch]
+    [dispatch, queryFields]
   );
 
   return (
     <aside>
-      <div>
-        <h1>Heading</h1>
-        <div>
+      <AsideContainer>
+        <Heading1>Heading</Heading1>
+        <InputBox>
           <InputContainer>
-            <Span>
-              <FaPlus /> Collection
-            </Span>
+            <Heading5>Collection</Heading5>
             <List>
               <ListItem>
                 <Input
@@ -243,9 +173,7 @@ function AsideBar() {
             </List>
           </InputContainer>
           <InputContainer>
-            <Span>
-              <FaPlus /> Price
-            </Span>
+            <Heading5>Price</Heading5>
             <List>
               <ListItem>
                 <Input
@@ -304,65 +232,74 @@ function AsideBar() {
               </ListItem>
             </List>
           </InputContainer>
-          {/*  <InputContainer>
-            <Span>
-              <FaPlus /> Size
-            </Span>
-            <SortListItem fields={size} />
-          </InputContainer>
           <InputContainer>
-            <Span>
-              <FaPlus /> Discount
-            </Span>
-            <SortListItem fields={discount} />
-          </InputContainer> */}
-        </div>
-        <div>
-          <h6>Sorting</h6>
-          <div>
-            <h6>Ratings</h6>
-            <select>
-              <option value="sort=ratings">low to high</option>
-            </select>
-          </div>
-          <div>
-            <h6>Price</h6>
-            <select>
-              <option value="sort=ratings">low to high</option>
-            </select>
-          </div>
-          <div>
-            <h6>Discount</h6>
-            <select>
-              <option value="sort=ratings">low to high</option>
-            </select>
-          </div>
-        </div>
-      </div>
+            <Heading5>Price</Heading5>
+            <List>
+              <ListItem>
+                <Input
+                  id="per-lte-10"
+                  type="checkbox"
+                  value="percentage[lte]=10"
+                  name="per-lte-10"
+                  checked={discountField.per_lte_10}
+                  onChange={handleDiscountClick}
+                />
+                <Label htmlFor="per-lte-10">0-10%</Label>
+              </ListItem>
+              <ListItem>
+                <Input
+                  id="per-gte-21"
+                  type="checkbox"
+                  value="percentage[gte]=21&percentage[lte]=40"
+                  name="per-gte-21"
+                  checked={discountField.per_gte_21}
+                  onChange={handleDiscountClick}
+                />
+                <Label htmlFor="per-gte-21">21-40%</Label>
+              </ListItem>
+              <ListItem>
+                <Input
+                  id="per-gte-41"
+                  type="checkbox"
+                  value="percentage[gte]=41&percentage[lte]=50"
+                  name="per-gte-41"
+                  checked={discountField.per_gte_41}
+                  onChange={handleDiscountClick}
+                />
+                <Label htmlFor="per-gte-41">41-50%</Label>
+              </ListItem>
+              <ListItem>
+                <Input
+                  id="per-gte-51"
+                  type="checkbox"
+                  value="percentage[gte]=51"
+                  name="per-gte-51"
+                  checked={discountField.per_gte_51}
+                  onChange={handleDiscountClick}
+                />
+                <Label htmlFor="per-gte-51">51-80%</Label>
+              </ListItem>
+            </List>
+          </InputContainer>
+
+          <SortingContainer>
+            <Heading6>Sorting</Heading6>
+            <SortList>
+              <Select onChange={handleSortFields} name="sort_ratings">
+                <Option value="">--select--</Option>
+                <Option value="ratings">ratings low to high</Option>
+                <Option value="-ratings">ratings high to low</Option>
+                <Option value="price">price low to high</Option>
+                <Option value="-price">price high to low</Option>
+                <Option value="percentage">discount low to high</Option>
+                <Option value="-percentage">discount high to low</Option>
+              </Select>
+            </SortList>
+          </SortingContainer>
+        </InputBox>
+      </AsideContainer>
     </aside>
   );
 }
-
-// function SortListItem({ fields, setCollectionField }) {
-//   function handleFieldClick(e) {
-//     const { value } = e.target;
-//     setCollectionField(value);
-//   }
-//   return (
-//     <>
-//       <List>
-//         {fields.map((el) => {
-//           return (
-//             <ListItem>
-//               <Button value={el.value} onClick={handleFieldClick}>
-//                 {el.uiField}
-//               </Button>
-//             </ListItem>
-//           );
-//         })}
-//       </List>
-//     </>
-//   );
-// }
 
 export default AsideBar;
