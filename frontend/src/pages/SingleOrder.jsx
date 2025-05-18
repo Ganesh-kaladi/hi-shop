@@ -2,6 +2,7 @@ import styled from "styled-components";
 import OrderDelivered from "../components/orders/OrderDelivered";
 import OrderReturned from "../components/orders/OrderReturned";
 import OrderPayment from "../components/orders/OrderPayment";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 80%;
@@ -24,6 +25,8 @@ const List = styled.div`
 `;
 
 function SingleOrder() {
+  const { singleOrder } = useSelector((state) => state.order);
+  console.log(singleOrder);
   return (
     <Container>
       <Grid>

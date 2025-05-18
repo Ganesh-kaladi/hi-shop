@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { FaArrowRight } from "react-icons/fa6";
 import image from "../../assets/product/shirt-2.jpg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleOrder } from "../../slice/orderSlice";
 
 const Container = styled.div`
   border: 1px solid #d3ceced6;
@@ -148,29 +150,51 @@ const NavIcon = styled.span`
 `;
 
 function Order() {
+  const { orders } = useSelector((state) => state.order);
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  function handleSingleOrder(id) {
+    dispatch(getSingleOrder({ id, token }));
+  }
   return (
-    <Container>
-      <H5>order id</H5>
-      <List>
-        <ListItem>
-          <Row>
-            <ImageContainer>
-              <Image src={image} alt="..." />
-            </ImageContainer>
-            <ProductDetails>
-              <H6>Product Title</H6>
-              <DelivaryStatus>Delivery Status</DelivaryStatus>
-              <DelivaryTime>mon 01/01/2025-12:00 pm</DelivaryTime>
-              <div>⭐⭐⭐⭐⭐</div>
-            </ProductDetails>
-            <NavIcon onClick={() => navigate("/orders/1")}>
-              <FaArrowRight />
-            </NavIcon>
-          </Row>
-        </ListItem>
-      </List>
-    </Container>
+    <>
+      {orders?.length < 0 && <p>No Orders</p>}
+      {orders?.length > 0 &&
+        orders?.map((el) => {
+          return (
+            <Container>
+              <H5>order id:{el.orderId}</H5>
+              <List>
+                <ListItem>
+                  <Row>
+                    {/* <ImageContainer>
+                      <Image src={image} alt="..." />
+                    </ImageContainer> */}
+                    <ProductDetails>
+                      <H6>{el.products.length} - Product</H6>
+                      <DelivaryStatus>{el.status}</DelivaryStatus>
+                      <DelivaryTime>
+                        {new Date(el.createdAt).toLocaleString()}
+                      </DelivaryTime>
+                      <div>⭐⭐⭐⭐⭐</div>
+                    </ProductDetails>
+                    <NavIcon
+                      onClick={() => {
+                        navigate(`/orders/${el._id}`);
+                        handleSingleOrder(el._id);
+                      }}
+                    >
+                      <FaArrowRight />
+                    </NavIcon>
+                  </Row>
+                </ListItem>
+              </List>
+            </Container>
+          );
+        })}
+    </>
   );
 }
 

@@ -8,6 +8,7 @@ import { FaTimes } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { motion } from "framer-motion";
 import { addWidth } from "../../slice/pageWidthSlice";
+import { getCartItems } from "../../slice/cartSlice";
 
 const NavbarBox = styled.div`
   width: 100%;
@@ -122,9 +123,7 @@ function useHandleWindowWidth() {
         width = window.innerWidth;
         dispatch(addWidth(width));
       }
-
       setWindowWidth();
-
       window.addEventListener("resize", setWindowWidth);
       return () => window.removeEventListener("resize", setWindowWidth);
     },
@@ -143,8 +142,6 @@ function Navbar() {
   const { token } = useSelector((state) => state.auth);
   const { width } = useSelector((state) => state.pageWidth);
 
-  console.log(width);
-
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -160,6 +157,10 @@ function Navbar() {
 
   function handleNavTogglerClick() {
     setOpen(false);
+  }
+
+  function handleGetCartItems() {
+    dispatch(getCartItems(token));
   }
 
   return (
@@ -184,7 +185,7 @@ function Navbar() {
                 <li>
                   <Anchor to="/">Home</Anchor>
                 </li>
-                <li>
+                <li onClick={handleGetCartItems}>
                   <Anchor to="cart">Cart</Anchor>
                 </li>
                 <li>

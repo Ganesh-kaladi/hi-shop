@@ -8,6 +8,8 @@ const {
   signUp,
   login,
   getMe,
+  addAddress,
+  getAddress,
 } = require("../controllers/authController");
 const {
   getAllUser,
@@ -20,6 +22,8 @@ const {
 router.post("/sign-up", signUp);
 router.post("/login", login);
 router.get("/get-me/", authentication, getMe);
+router.post("/add-address", authentication, addAddress);
+router.get("/get-address", authentication, getAddress);
 
 router.route("/").get(getAllUser).post(createUser);
 router

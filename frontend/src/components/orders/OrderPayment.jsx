@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Payment = styled.div`
@@ -135,12 +136,27 @@ const H6 = styled.h6`
 `;
 
 function OrderPayment() {
+  const { singleOrder } = useSelector((state) => state.order);
   return (
     <Payment>
       <PaymentContainer>
         <OrderDetails>
-          <H3>Order# FN9742609454(4 Items)</H3>
-          <OrderDate>Order placed on 10th January 2025</OrderDate>
+          <H3>
+            {singleOrder?.orderId}&nbsp;&nbsp;(
+            {singleOrder?.products?.length} Items)
+          </H3>
+          <OrderDate>
+            Order placed on{" "}
+            {new Date(singleOrder?.createdAt).toLocaleString("en-US", {
+              timeZone: "Asia/Kolkata",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            })}
+          </OrderDate>
           <OrderMode>Paid by Cash on Delivery</OrderMode>
         </OrderDetails>
         <PaymentDetails>
@@ -148,29 +164,29 @@ function OrderPayment() {
           <div>
             <Row>
               <PriceName>Order Amount</PriceName>
-              <Price>₹7,388.00</Price>
+              <Price>₹ {singleOrder?.bagTotal} /-</Price>
             </Row>
             <Row>
               <PriceName>Order Savings</PriceName>
-              <Price>₹3,215.00</Price>
+              <Price>₹ {singleOrder?.discount} /-</Price>
             </Row>
-            <Row>
+            {/* <Row>
               <PriceName>Coupon savings</PriceName>
-              <Price>₹500.00</Price>
-            </Row>
+              <Price>₹{singleOrder?.bagTotal}/-</Price>
+            </Row> */}
             <Row>
               <PriceName>Convenience Fee</PriceName>
-              <Price>₹48</Price>
+              <Price>₹ {singleOrder?.shippingCharge} /-</Price>
             </Row>
             <Row>
               <PriceName>Order Total</PriceName>
-              <Price>₹3,721.00</Price>
+              <Price>₹ {singleOrder?.totalAmt} /-</Price>
             </Row>
             <PaymentMode>
               <H5>Payment Mode</H5>
               <Row>
                 <PriceName>Cash on Delivery</PriceName>
-                <Price>₹3721.00</Price>
+                <Price>₹ {singleOrder?.totalAmt} /-</Price>
               </Row>
             </PaymentMode>
           </div>
@@ -179,14 +195,17 @@ function OrderPayment() {
           <H5>Deliver to</H5>
           <ul>
             <ListItem>
-              <H6>siva ganesh</H6>
+              <H6>
+                {singleOrder?.deliveryAddress?.firstName}{" "}
+                {singleOrder?.deliveryAddress?.lastName}
+              </H6>
             </ListItem>
-            <ListItem>dhanammagudi street, Prejar peta GGH Kakinada,</ListItem>
-            <ListItem>Ambedkar function hall GGH,</ListItem>
-            <ListItem>EAST GODAVARI, ANDHRA PRADESH</ListItem>
-            <ListItem>ndia - 533001</ListItem>
+            <ListItem>{singleOrder?.deliveryAddress?.street},</ListItem>
+            <ListItem>{singleOrder?.deliveryAddress?.landmark},</ListItem>
+            <ListItem>{singleOrder?.deliveryAddress?.city}</ListItem>
+            <ListItem>{singleOrder?.deliveryAddress?.pinncode}</ListItem>
             <ListItem>
-              Phone : <b>9701129109</b>
+              contact : <b>{singleOrder?.deliveryAddress?.phone}</b>
             </ListItem>
           </ul>
         </ShippingDetails>

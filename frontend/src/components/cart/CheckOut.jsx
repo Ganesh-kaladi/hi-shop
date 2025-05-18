@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { checkOut } from "../../assets/logics/checkOut";
+import { useDispatch, useSelector } from "react-redux";
+import { useCheckOut } from "../../assets/logics/checkOut";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { getUserAddress } from "../../slice/authSlice";
 
 const Container = styled.div`
   background-color: #ffffff;
@@ -147,9 +150,19 @@ const Btn = styled.button`
 `;
 
 function CheckOut() {
-  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+  const { bagTotal, discount, shippingCharge, gstAmt, totalAmt } = useSelector(
+    (state) => state.checkOut
+  );
+  const navigate = useNavigate();
 
-  const checkOutAmt = checkOut(cart, 59, 0.12);
+  useCheckOut();
+
+  function handleCheckOutBtn() {
+    dispatch(getUserAddress(token));
+    navigate("/place-order");
+  }
 
   return (
     <Container>
@@ -157,26 +170,30 @@ function CheckOut() {
         <H1>Summery</H1>
         <CartPrice>
           <Row>
-            <PriceName>Products</PriceName>
-            <Price>₹{checkOutAmt.subTotal}/-</Price>
+            <PriceName>Bag Total</PriceName>
+            <Price>₹{bagTotal}/-</Price>
+          </Row>
+          <Row>
+            <PriceName>Discount</PriceName>
+            <Price>-₹{discount}/-</Price>
           </Row>
           <Row>
             <PriceName>Shiping charges</PriceName>
-            <Price>₹{checkOutAmt.shippingCharge}/-</Price>
+            <Price>₹{shippingCharge}/-</Price>
           </Row>
           <Row>
             <PriceName>Gst</PriceName>
-            <Price>₹{checkOutAmt.gstAmt}/-</Price>
+            <Price>₹{gstAmt}/-</Price>
           </Row>
         </CartPrice>
         <TotalPrice>
           <RowTotal>
             <TotalPriceName>total price</TotalPriceName>
-            <Total>₹{checkOutAmt.totalAmt}/-</Total>
+            <Total>₹{totalAmt}/-</Total>
           </RowTotal>
         </TotalPrice>
         <BtnContainer>
-          <Btn>Check Out</Btn>
+          <Btn onClick={handleCheckOutBtn}>Check Out</Btn>
         </BtnContainer>
       </CheckOutBlock>
     </Container>

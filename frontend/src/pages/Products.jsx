@@ -11,6 +11,7 @@ import {
 } from "../slice/allProductSlice";
 import Spinner from "../components/spinner/Spinner";
 import Arrange from "../components/navbar/Arrange";
+import { getCartItems } from "../slice/cartSlice";
 
 const Container = styled.div`
   margin: auto;
@@ -43,6 +44,7 @@ const Grid = styled.div`
 
 function Products() {
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
   const { isPending, products, query } = useSelector(
     (state) => state.allProduct
   );
@@ -62,6 +64,12 @@ function Products() {
     },
     [query, dispatch]
   );
+
+  useEffect(function () {
+    if (token) {
+      dispatch(getCartItems(token));
+    }
+  }, []);
 
   return (
     <>

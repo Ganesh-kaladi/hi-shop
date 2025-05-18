@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, removeProduct } from "../slice/singleProductSlice";
 import { addToCart } from "../slice/cartSlice";
@@ -112,18 +112,31 @@ const H4 = styled.h4`
 `;
 
 const Color = styled.span`
-  width: 1.6rem;
-  height: 1.6rem;
-  padding: 0.35rem 0.8rem;
-  margin-right: 10px;
-  border-radius: 12px;
-  border: 3px solid #bebaba;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 12px;
+  border-radius: 50%;
   cursor: pointer;
-  ${(prop) =>
-    prop.color &&
+  display: inline-block;
+  transition: all 0.2s ease-in-out;
+
+  ${({ color }) =>
+    color &&
     css`
-      background-color: ${prop.color};
+      background-color: ${color};
+      border: 1px solid ${color};
     `};
+
+  ${({ isClickedColor }) =>
+    isClickedColor &&
+    css`
+      box-shadow: 0 0 2px 3px #1a0117d7;
+    `};
+`;
+
+const P = styled.p`
+  color: red;
+  padding: 0.6rem;
 `;
 
 const SizeContainer = styled.div`
@@ -143,9 +156,16 @@ const Size = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #686868;
+    background-color: #4b4a4a;
     color: #fff;
   }
+
+  ${(prop) =>
+    prop.isClickedSize &&
+    css`
+      background-color: #686868;
+      color: #fff;
+    `}
 `;
 
 const QuantityContainer = styled.div`
@@ -199,7 +219,6 @@ const WishListBtn = styled.button`
   cursor: pointer;
   border: 1px solid #777676;
   background-color: #f04babb3;
-
   transition: background-color 0.3s, color 0.3s;
 
   &:hover {
@@ -275,6 +294,20 @@ function SingleProduct() {
   const dispatch = useDispatch();
   const { isLoading, singleDoc } = useSelector((state) => state.singleProduct);
   const { cart } = useSelector((state) => state.cart);
+  const { token } = useSelector((state) => state.auth);
+
+  const [pColor, setPColor] = useState({
+    color: "",
+    isSelectColor: false,
+    id: "",
+  });
+  const [pSize, setPSize] = useState({
+    size: "",
+    isSelectSize: false,
+    id: "",
+  });
+  const [pQuntity, setPQuantity] = useState(1);
+  const [errMessage, setErrMessage] = useState({});
 
   const id = useParams();
   useEffect(
@@ -288,26 +321,72 @@ function SingleProduct() {
     [dispatch, id]
   );
 
+  function handleColor(i, el) {
+    setPColor((cur) =>
+      cur.id === i || ""
+        ? {
+            ...cur,
+            color: "",
+            isSelectColor: false,
+            id: "",
+          }
+        : {
+            ...cur,
+            color: el,
+            isSelectColor: true,
+            id: i,
+          }
+    );
+  }
+
+  function handleSize(i, el) {
+    setPSize((cur) =>
+      cur.id === i || ""
+        ? { ...cur, size: "", isSelectSize: false, id: "" }
+        : { ...cur, size: el, isSelectSize: true, id: i }
+    );
+  }
+
+  function validateErr() {
+    let er = {};
+    if (pSize.size === "") er.sizeErr = "please select size";
+    if (pColor.color === "") er.colorErr = "please select color";
+
+    return er;
+  }
+
+  function handleQuntityInc() {
+    setPQuantity((cur) => cur + 1);
+  }
+
+  function handleQuntityDec() {
+    setPQuantity((cur) => (cur > 1 ? cur - 1 : cur));
+  }
+
   function handleAddToCart() {
+    const erValidate = validateErr();
+
+    if (Object.keys(erValidate).length > 0) {
+      setErrMessage(erValidate);
+      return;
+    }
+    setErrMessage({});
     dispatch(
       addToCart({
-        title: singleDoc.title,
-        image: singleDoc.image[1],
-        size: singleDoc.size,
-        brand: singleDoc.brand,
-        collection: singleDoc.productCollection,
-        category: singleDoc.category,
-        quantity: 1,
-        price: singleDoc.discountPrice,
-        id: singleDoc._id,
-        stock: singleDoc.stock,
+        data: {
+          product: singleDoc._id,
+          quantity: pQuntity,
+          size: pSize.size,
+          color: pColor.color,
+        },
+        token,
       })
     );
   }
 
   let val = false;
-  val = CheckIsInCart(singleDoc?._id, cart);
-
+  // const val = CheckIsInCart(singleDoc?._id, cart);
+  // console.log(val);
   return (
     <>
       {isLoading && <Spinner />}
@@ -331,25 +410,38 @@ function SingleProduct() {
                 <ColorContainer>
                   <H4>color</H4>
                   <div>
-                    {singleDoc.color?.map((el) => (
-                      <Color color={el}></Color>
+                    {singleDoc.color?.map((el, i) => (
+                      <Color
+                        key={i}
+                        color={el}
+                        onClick={() => handleColor(i, el)}
+                        isClickedColor={pColor.id === i && pColor.isSelectColor}
+                      ></Color>
                     ))}
+                    {errMessage.colorErr && <P>{errMessage.colorErr}</P>}
                   </div>
                 </ColorContainer>
                 <SizeContainer>
                   <H4>size</H4>
                   <div>
-                    {singleDoc.size?.map((el) => (
-                      <Size>{el}</Size>
+                    {singleDoc.size?.map((el, i) => (
+                      <Size
+                        key={i}
+                        onClick={() => handleSize(i, el)}
+                        isClickedSize={pSize.id === i && pSize.isSelectSize}
+                      >
+                        {el}
+                      </Size>
                     ))}
+                    {errMessage.sizeErr && <P>{errMessage.sizeErr}</P>}
                   </div>
                 </SizeContainer>
                 <QuantityContainer>
                   <H4>quantity</H4>
                   <div>
-                    <QuantityBtn>-</QuantityBtn>
-                    <QuantityBtn>1</QuantityBtn>
-                    <QuantityBtn>+</QuantityBtn>
+                    <QuantityBtn onClick={handleQuntityDec}>-</QuantityBtn>
+                    <QuantityBtn>{pQuntity}</QuantityBtn>
+                    <QuantityBtn onClick={handleQuntityInc}>+</QuantityBtn>
                   </div>
                 </QuantityContainer>
                 <CartContainer>

@@ -4,6 +4,7 @@ import CartList from "../components/cart/CartList";
 import CheckOut from "../components/cart/CheckOut";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/spinner/Spinner";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -67,28 +68,31 @@ const Button = styled.button`
 `;
 
 function Cart() {
-  const { cart } = useSelector((state) => state.cart);
+  const { cart, isLoadingCart } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   return (
-    <Container>
-      {cart?.length > 0 ? (
-        <Grid>
-          <CartList />
-          <CheckOut />
-        </Grid>
-      ) : (
-        <EmptyContainer>
-          <Empty>
-            <H4>🛒 Your Cart is Currently Empty</H4>
-            <Para>Looks like you haven't added anything yet.</Para>
-            <Para>
-              <b>Start shopping now and discover something amazing! 🤩</b>
-            </Para>
-            <Button onClick={() => navigate("/products")}>Shop Now</Button>
-          </Empty>
-        </EmptyContainer>
-      )}
-    </Container>
+    <>
+      {isLoadingCart && <Spinner />}
+      <Container>
+        {cart?.length > 0 ? (
+          <Grid>
+            <CartList />
+            <CheckOut />
+          </Grid>
+        ) : (
+          <EmptyContainer>
+            <Empty>
+              <H4>🛒 Your Cart is Currently Empty</H4>
+              <Para>Looks like you haven't added anything yet.</Para>
+              <Para>
+                <b>Start shopping now and discover something amazing! 🤩</b>
+              </Para>
+              <Button onClick={() => navigate("/products")}>Shop Now</Button>
+            </Empty>
+          </EmptyContainer>
+        )}
+      </Container>
+    </>
   );
 }
 

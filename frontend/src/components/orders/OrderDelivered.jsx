@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FaCartShopping } from "react-icons/fa6";
 import image from "../../assets/product/shirt-2.jpg";
+import { useSelector } from "react-redux";
 
 const ListItem = styled.div`
   margin-bottom: 28px;
@@ -168,34 +169,57 @@ const Rating = styled.div`
 `;
 
 function OrderDelivered() {
+  const { singleOrder } = useSelector((state) => state.order);
   return (
-    <ListItem>
-      <Container>
-        <DateBlock>
-          <H4>
-            <FaCartShopping /> Delivered
-          </H4>
-          <DeliveryDate>Delivered on Monday, 11 January </DeliveryDate>
-        </DateBlock>
-        <ShipBlock>
-          <Span>shipping to</Span>
-          <Name>siva ganesh</Name>
-          <Row>
-            <ImageContainer>
-              <Image src={image} alt="..." />
-            </ImageContainer>
-            <ProductDetails>
-              <H5>title</H5>
-              <Price>₹ 120/-</Price>
-              <SizeBlock>
-                size <Size>34</Size>
-              </SizeBlock>
-              <Rating>rating : ⭐⭐⭐⭐⭐</Rating>
-            </ProductDetails>
-          </Row>
-        </ShipBlock>
-      </Container>
-    </ListItem>
+    <div>
+      {singleOrder?.products.length > 0 &&
+        singleOrder?.products?.map((el) => {
+          return (
+            <ListItem>
+              <Container>
+                <DateBlock>
+                  <H4>
+                    <FaCartShopping /> {singleOrder?.status}
+                  </H4>
+                  <DeliveryDate>
+                    {singleOrder?.status === "pending" && "Order placed"}
+                    {singleOrder?.status === "delivered" && "Delivered"} on{" "}
+                    {new Date(singleOrder?.createdAt).toLocaleString("en-US", {
+                      timeZone: "Asia/Kolkata",
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })}
+                  </DeliveryDate>
+                </DateBlock>
+                <ShipBlock>
+                  <Span>shipping to</Span>
+                  <Name>
+                    {singleOrder?.deliveryAddress.firstName}&nbsp;
+                    {singleOrder?.deliveryAddress.lastName}
+                  </Name>
+                  <Row>
+                    <ImageContainer>
+                      <Image src={el.product.image[1]} alt="..." />
+                    </ImageContainer>
+                    <ProductDetails>
+                      <H5>{el.product.title}</H5>
+                      <Price>₹ {el.product.price} /-</Price>
+                      <SizeBlock>
+                        size <Size>{el.size}</Size>
+                      </SizeBlock>
+                      <Rating>rating : {el.product.ratings}</Rating>
+                    </ProductDetails>
+                  </Row>
+                </ShipBlock>
+              </Container>
+            </ListItem>
+          );
+        })}
+    </div>
   );
 }
 

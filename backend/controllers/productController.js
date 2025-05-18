@@ -23,7 +23,6 @@ exports.getAllProduct = async (req, res, next) => {
   }
 
   if (req.query.size) {
-    console.log(req.query.size);
     const size = req.query.size;
     query = query.where({ size });
   }

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Cart from "./pages/Cart";
@@ -24,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { setToken } from "./slice/authSlice";
 import SignUp from "./pages/SignUp";
 import AdminPRoduct from "./pages/admin/AdminPRoduct";
+import PlaceOrder from "./pages/PlaceOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +57,15 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            <Route
+              path="place-order"
+              element={
+                <ProtectedRoute>
+                  <PlaceOrder />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="orders/:id"
               element={
@@ -72,7 +82,8 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              <Route index element={<Orders />} />
+              <Route index element={<Navigate to="orders" replace />} />
+              <Route path="orders" element={<Orders />} />
               <Route path="rewards" element={<Rewards />} />
               <Route path="invite-friend" element={<Invite />} />
               <Route path="custmorecare" element={<Customercare />} />

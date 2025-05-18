@@ -3,9 +3,12 @@ import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decQuantity,
+  getCartItems,
   incQunatity,
   removeFromCart,
 } from "../../slice/cartSlice";
+import Spinner from "../spinner/Spinner";
+import { useState } from "react";
 
 const Container = styled.div`
   background-color: #ffffff;
@@ -256,13 +259,37 @@ const DelIcon = styled.button`
 
 function CartList() {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state.cart);
+  const { cart, isLoadingCart } = useSelector((state) => state.cart);
+  const { token } = useSelector((state) => state.auth);
+
+  async function handleRemoveCart(id) {
+    const res = await dispatch(removeFromCart({ id, token }));
+    if (res.meta.requestStatus === "fulfilled") {
+      dispatch(getCartItems(token));
+    }
+  }
+
+  async function handleDecQuantity(quantity, id) {
+    if (quantity <= 0) return;
+    const res = await dispatch(decQuantity({ quantity, id, token }));
+    if (res.meta.requestStatus === "fulfilled") {
+      dispatch(getCartItems(token));
+    }
+  }
+
+  async function handleIncQuantity(quantity, id) {
+    const res = await dispatch(incQunatity({ quantity, id, token }));
+    if (res.meta.requestStatus === "fulfilled") {
+      dispatch(getCartItems(token));
+    }
+  }
 
   return (
-    <Container>
-      <H1>Cart Items</H1>
-      <CartListContainer>
-        {/* <Grid>
+    <>
+      <Container>
+        <H1>Cart Items</H1>
+        <CartListContainer>
+          {/* <Grid>
           <List>
             <h3>product</h3>
           </List>
@@ -280,57 +307,66 @@ function CartList() {
           </List>
           <List></List>
         </Grid> */}
-        {cart?.map((el) => {
-          return (
-            <div key={el.id}>
-              <Grid>
-                <ImageBox className="list-1">
-                  <Image src={el.image} />
-                </ImageBox>
-                <CustomAlignedItem
-                  style={{ justifySelf: "start", alignSelf: "start" }}
-                >
-                  <TextContainer className="list-2">
-                    <Title>{el.title}</Title>
-                    <Brand>{el.brand}</Brand>
-                    <Collection>
-                      {el.collection}'s&nbsp; {el.category}
-                    </Collection>
-                    <Stock>avaialable: {el.stock}</Stock>
-                    <Icon>
-                      <FaHeart color="red" size={18} />
-                    </Icon>
-                  </TextContainer>
-                </CustomAlignedItem>
-                <SizeBox className="list-3">
-                  <Size>xl</Size>
-                </SizeBox>
-                <PriceBox className="list-4">
-                  <Price>₹{el.price}/-</Price>
-                </PriceBox>
-                <QuantityBox className="list-5">
-                  <Button onClick={() => dispatch(decQuantity(el.id))}>
-                    -
-                  </Button>
-                  &nbsp;{el.quantity}&nbsp;
-                  <Button onClick={() => dispatch(incQunatity(el.id))}>
-                    +
-                  </Button>
-                </QuantityBox>
-                <TotalPriceBox className="list-6">
-                  <Price>₹120/-</Price>
-                </TotalPriceBox>
-              </Grid>
-              <DeleBox className="list-7">
-                <DelIcon onClick={() => dispatch(removeFromCart(el.id))}>
-                  remove
-                </DelIcon>
-              </DeleBox>
-            </div>
-          );
-        })}
-      </CartListContainer>
-    </Container>
+          {cart?.map((el) => {
+            return (
+              <div key={el._id}>
+                <Grid>
+                  <ImageBox className="list-1">
+                    <Image src={el.product.image[1]} />
+                  </ImageBox>
+                  <CustomAlignedItem
+                    style={{ justifySelf: "start", alignSelf: "start" }}
+                  >
+                    <TextContainer className="list-2">
+                      <Title>{el.product.title}</Title>
+                      <Brand>{el.product.brand}</Brand>
+                      <Collection>
+                        {el.product.collection}'s&nbsp; {el.product.category}
+                      </Collection>
+                      <Stock>avaialable: {el.product.stock}</Stock>
+                      <Icon>
+                        <FaHeart color="red" size={18} />
+                      </Icon>
+                    </TextContainer>
+                  </CustomAlignedItem>
+                  <SizeBox className="list-3">
+                    <Size>{el.size}</Size>
+                  </SizeBox>
+                  <PriceBox className="list-4">
+                    <Price>₹{el.product.price}/-</Price>
+                  </PriceBox>
+                  <QuantityBox className="list-5">
+                    <Button
+                      onClick={async () => {
+                        handleDecQuantity(el.quantity * 1 - 1, el._id);
+                      }}
+                    >
+                      -
+                    </Button>
+                    &nbsp;{el.quantity}&nbsp;
+                    <Button
+                      onClick={async () => {
+                        handleIncQuantity(el.quantity * 1 + 1, el._id);
+                      }}
+                    >
+                      +
+                    </Button>
+                  </QuantityBox>
+                  <TotalPriceBox className="list-6">
+                    <Price>₹{el.totalPrice}/-</Price>
+                  </TotalPriceBox>
+                </Grid>
+                <DeleBox className="list-7">
+                  <DelIcon onClick={() => handleRemoveCart(el._id)}>
+                    remove
+                  </DelIcon>
+                </DeleBox>
+              </div>
+            );
+          })}
+        </CartListContainer>
+      </Container>
+    </>
   );
 }
 

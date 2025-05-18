@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const loginUser = createAsyncThunk(
   "user/login",
-  async function (form, thunkAPI) {
+  async function (form, thunkApi) {
     try {
       const res = await axios.post(
         "http://127.0.0.1:5050/api/v1/user/login",
@@ -12,14 +12,14 @@ export const loginUser = createAsyncThunk(
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
 
 export const signinUser = createAsyncThunk(
   "user/signin",
-  async function (form, thunkAPI) {
+  async function (form, thunkApi) {
     try {
       const res = await axios.post(
         "http://127.0.0.1:5050/api/v1/user/sign-up",
@@ -28,7 +28,48 @@ export const signinUser = createAsyncThunk(
       return res.data;
     } catch (err) {
       console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+
+export const getUserAddress = createAsyncThunk(
+  "user/getAddress",
+  async function (token, thunkApi) {
+    try {
+      const res = await axios.get(
+        "http://127.0.0.1:5050/api/v1/user/get-address",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);
+
+export const addUserAddress = createAsyncThunk(
+  "user/addAddress",
+  async function ({ data, token }, thunkApi) {
+    try {
+      const res = await axios.post(
+        "http://127.0.0.1:5050/api/v1/user/add-address",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
@@ -40,6 +81,7 @@ const authSlice = createSlice({
     isAuthenticated: false,
     error: null,
     isPending: false,
+    address: [],
   },
   reducers: {
     logoutUser(state, action) {
@@ -83,6 +125,31 @@ const authSlice = createSlice({
       })
       .addCase(signinUser.rejected, function (state, action) {
         state.error = action.payload.response.data;
+        state.isPending = false;
+      })
+
+      //get address
+      .addCase(getUserAddress.pending, function (state) {
+        state.isPending = true;
+      })
+      .addCase(getUserAddress.fulfilled, function (state, action) {
+        state.address = action.payload.data.user.address;
+        state.isPending = false;
+      })
+      .addCase(getUserAddress.rejected, function (state, action) {
+        state.error = action.payload;
+        state.isPending = false;
+      })
+
+      //add address
+      .addCase(addUserAddress.pending, function (state) {
+        state.isPending = true;
+      })
+      .addCase(addUserAddress.fulfilled, function (state, action) {
+        state.isPending = false;
+      })
+      .addCase(addUserAddress.rejected, function (state, action) {
+        state.error = action.payload;
         state.isPending = false;
       });
   },
