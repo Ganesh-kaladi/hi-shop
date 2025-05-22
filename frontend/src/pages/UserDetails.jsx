@@ -1,9 +1,7 @@
+import NoContent from "../NoContent";
+
 function UserDetails() {
-  return (
-    <div>
-      <h1>UserDetails</h1>
-    </div>
-  );
+  return <NoContent>User Details content</NoContent>;
 }
 
 export default UserDetails;

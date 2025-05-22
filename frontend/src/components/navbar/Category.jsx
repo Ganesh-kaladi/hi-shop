@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useQueryFields } from "../../assets/logics/advanceFiltering";
 
 const Section = styled.section`
-  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const Nav = styled.ul`
@@ -11,6 +11,10 @@ const Nav = styled.ul`
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    gap: 0.8rem;
+  }
 `;
 
 const NavItem = styled.li`
@@ -27,6 +31,15 @@ const NavItem = styled.li`
 
   &:hover {
     background-color: var(--color-green-600);
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    padding: 0.6rem;
+    font-size: 0.7555rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.81rem;
   }
 `;
 

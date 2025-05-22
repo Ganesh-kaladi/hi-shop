@@ -2,17 +2,58 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useCheckOut } from "../../assets/logics/checkOut";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { getUserAddress } from "../../slice/authSlice";
 
 const Container = styled.div`
   background-color: #ffffff;
   min-height: 340px;
   max-height: 420px;
+  border: 1px solid #6363636a;
+  padding: 1rem;
+  height: 340px;
+
+  @media (max-width: 486px) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    margin-top: 32px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-top: 40px;
+    grid-column: 2/3;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    margin-top: 40px;
+    grid-column: 2/3;
+  }
 `;
 
 const CheckOutBlock = styled.div`
   padding: 0 1rem;
+
+  @media (max-width: 486px) {
+    padding: 0;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    padding: 0rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+  }
 `;
 
 const H1 = styled.h1`
@@ -20,8 +61,8 @@ const H1 = styled.h1`
   font-size: 1.1rem;
   margin-bottom: 12px;
   text-align: center;
-  background-color: rgb(20, 89, 192);
-  color: #fff;
+  background-color: #d3d3d3;
+  color: #4b4949;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -45,7 +86,7 @@ const CartPrice = styled.div`
 
 const Row = styled.div`
   margin-bottom: 1.2rem;
-  padding: 0 12px;
+  /* padding: 0 12px; */
   display: flex;
   justify-content: space-between;
 `;
@@ -81,11 +122,24 @@ const Price = styled.span`
 
 const TotalPrice = styled.div`
   /* margin-bottom: 1.2rem; */
-  padding: 0 18px;
+  /* padding: 0 18px; */
+  padding: 0rem;
 
   @media (max-width: 480px) {
     font-size: 0.9rem;
-    padding: 0rem 0.4rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    padding: 0rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
   }
 `;
 
@@ -105,6 +159,8 @@ const TotalPriceName = styled.span`
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
+
+  padding: 0rem 0.4rem;
 `;
 
 const Total = styled.span`
@@ -114,7 +170,6 @@ const Total = styled.span`
   color: #7e7878;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 700;
   font-style: normal;
 
   @media (max-width: 480px) {
@@ -123,7 +178,10 @@ const Total = styled.span`
   }
 `;
 const BtnContainer = styled.div`
-  padding: 2rem 1rem;
+  /* padding: 2rem 1rem; */
+
+  margin-top: 0.8rem;
+  text-align: right;
 
   @media (max-width: 480px) {
     text-align: right;
@@ -131,16 +189,19 @@ const BtnContainer = styled.div`
 `;
 
 const Btn = styled.button`
-  width: 100%;
-  padding: 8px;
+  padding: 0.8rem 1rem;
   cursor: pointer;
   border-radius: 0px;
-  background-color: #e2e1e18f;
-  border: none;
+  background-color: #fff;
+  border: 1px solid #8886865a;
   font-size: 0.9rem;
+  box-shadow: 0px 0px 8px 0px #423d4138;
+  letter-spacing: 1px;
+  color: #535151;
 
   &:hover {
-    background-color: #cececec6;
+    background-color: #474646c5;
+    color: #fff;
   }
 
   @media (max-width: 480px) {
@@ -193,7 +254,7 @@ function CheckOut() {
           </RowTotal>
         </TotalPrice>
         <BtnContainer>
-          <Btn onClick={handleCheckOutBtn}>Check Out</Btn>
+          <Btn onClick={handleCheckOutBtn}>check out</Btn>
         </BtnContainer>
       </CheckOutBlock>
     </Container>

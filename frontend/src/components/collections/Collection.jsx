@@ -4,38 +4,125 @@ import { useNavigate } from "react-router-dom";
 
 const Section = styled.section`
   margin-top: 1.8rem;
-  padding-bottom: 1.8rem;
+  padding-bottom: 1.4rem;
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    padding-bottom: 0.788rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    padding-bottom: 0.8rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    padding-bottom: 1rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    padding-bottom: 1.2rem;
+  }
 `;
 
 const Img = styled.img`
-  width: 25px;
-  height: 25px;
+  width: 1.722rem;
+  height: 1.722rem;
+
+  @media (max-width: 486px) {
+    width: 0.855rem;
+    height: 0.855rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    width: 0.999rem;
+    height: 0.999rem;
+    padding-top: 2px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    width: 1.122rem;
+    height: 1.122rem;
+    padding-top: 4px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    width: 1.3rem;
+    height: 1.3rem;
+    padding-top: 4px;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    width: 1.555rem;
+    height: 1.555rem;
+    padding-top: 4px;
+  }
 `;
 
 const Heading = styled.h1`
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin-bottom: 0.8rem;
   color: #1f2937;
   text-align: start;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
+
+  @media (max-width: 486px) {
+    font-size: 0.956rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.999rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 1.111rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1.266rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const Grid = styled.div`
   display: grid;
-  gap: 1.5rem;
+  gap: 1.2rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     grid-template-columns: 1fr 1fr;
     gap: 24px 20px;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 20px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 20px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    gap: 0.6rem;
   }
 `;
 
 const CollectionContainer = styled.div`
   border: 1px solid #9b9b9b;
   padding: 1rem;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    padding: 0.6rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    padding: 0.8rem;
+  }
 `;
 
 const Block = styled.div`
@@ -60,22 +147,37 @@ const Image = styled.img`
 const Description = styled.p`
   padding: 0rem 1rem;
   color: #3c424b;
-  font-size: 0.8rem;
+  font-size: 0.888rem;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     font-weight: 600;
-    font-size: 0.7rem;
-    letter-spacing: 1px;
+    font-size: 0.678rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.711rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.811rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.711rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.844rem;
   }
 `;
 
 const BtnContainer = styled.div`
   width: 100%;
-  padding: 0.8rem 0.9rem;
+  padding: 0.8rem 0 0;
 `;
 
 const Button = styled.button`
@@ -102,8 +204,24 @@ const Button = styled.button`
     transform: scale(0.97);
   }
 
-  @media (max-width: 480px) {
-    font-size: 0.85rem;
+  @media (max-width: 486px) {
+    font-size: 0.687rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.766rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.888rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.666rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.901rem;
   }
 `;
 

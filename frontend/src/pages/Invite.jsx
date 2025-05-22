@@ -1,9 +1,7 @@
+import NoContent from "../NoContent";
+
 function Invite() {
-  return (
-    <div>
-      <h1>Invite</h1>
-    </div>
-  );
+  return <NoContent>Invite content</NoContent>;
 }
 
 export default Invite;

@@ -1,9 +1,7 @@
+import NoContent from "../NoContent";
+
 function ResetPassword() {
-  return (
-    <div>
-      <h1>ResetPassword Page</h1>
-    </div>
-  );
+  return <NoContent>Reset Password</NoContent>;
 }
 
 export default ResetPassword;

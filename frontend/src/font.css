@@ -35,3 +35,23 @@
     font-weight: 500;
     font-style: normal;
   } */
+
+/* color: #3d3d3d; */
+
+/* 
+  border: 1px solid #9b9b9b; */
+
+@media (max-width: 486px) {
+}
+
+@media (min-width: 487px) and (max-width: 576px) {
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+}

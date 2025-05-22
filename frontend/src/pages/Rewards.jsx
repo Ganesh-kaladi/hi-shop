@@ -1,9 +1,7 @@
+import NoContent from "../NoContent";
+
 function Rewards() {
-  return (
-    <div>
-      <h1>Rewards page</h1>
-    </div>
-  );
+  return <NoContent>Rewards content</NoContent>;
 }
 
 export default Rewards;

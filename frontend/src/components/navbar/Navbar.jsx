@@ -172,14 +172,14 @@ function Navbar() {
               <Image src={Logo} alt="..." />
             </Link>
           </div>
-          {width <= 800 &&
+          {width <= 769 &&
             (open ? (
               <FaTimes size={24} onClick={() => setOpen((cur) => !cur)} />
             ) : (
               <MdMenu size={28} onClick={() => setOpen((cur) => !cur)} />
             ))}
 
-          {width > 800 && (
+          {width > 769 && (
             <nav>
               <NavRow>
                 <li>
@@ -211,7 +211,7 @@ function Navbar() {
           )}
         </Row>
       </Container>
-      {width < 800 && open && (
+      {width < 769 && open && (
         <nav>
           <NavColoumn>
             <NavColumnList>

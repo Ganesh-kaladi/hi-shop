@@ -1,14 +1,28 @@
-import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import heroImage from "../assets/banner/hreo-img-1.jpg";
 import { FaArrowRight } from "react-icons/fa";
 
 const Container = styled.div`
-  margin-top: 60px;
+  margin-top: 58px;
   @media (max-width: 480px) {
     margin-top: 40px;
-    background-color: #032849;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    margin-top: 40px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    margin-top: 40px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-top: 48px;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    margin-top: 52px;
   }
 `;
 
@@ -18,27 +32,48 @@ const Hero = styled.section`
   justify-content: center;
   background-image: linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.3),
-      rgba(0, 0, 0, 0.4),
-      rgba(0, 0, 0, 0.4),
-      rgba(0, 0, 0, 0.477),
-      rgba(0, 0, 0, 0.477),
-      rgba(0, 0, 0, 0.477)
+      rgba(0, 0, 0, 0.266),
+      rgba(0, 0, 0, 0.266),
+      rgba(0, 0, 0, 0.266),
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
     ),
     url(${heroImage});
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
-  /* height: 60vh; */
+  background-position: center center;
+  height: 60vh;
+  margin: 0;
   position: relative;
   top: 0;
   color: white;
   text-align: center;
   padding: 3rem 2rem;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     padding: 1rem;
-    background-size: cover;
+    height: 40vh;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    padding: 1rem;
+    height: 46vh;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    padding: 1.111rem;
+    height: 48vh;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    padding: 1.4rem;
+    height: 52vh;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    padding: 1.4rem;
+    height: 56vh;
   }
 `;
 
@@ -52,13 +87,33 @@ const Content = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
-  margin-bottom: -12px;
+  margin-bottom: -8px;
   @media (max-width: 480px) {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 1.155rem;
+    margin-bottom: -0.2rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 1.211rem;
+    margin-bottom: -0.2rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1.311rem;
+    margin-bottom: -0.2rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 1.477rem;
+    margin-bottom: -0.2rem;
   }
 `;
 
@@ -67,10 +122,26 @@ const Span = styled.span`
   font-size: 1.1rem;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.755rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
     font-size: 0.8rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.867rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.94rem;
   }
 `;
 
@@ -86,6 +157,26 @@ const Subtitle = styled.p`
     font-size: 0.7rem;
     margin-bottom: 1rem;
   }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.755rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.867rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.945rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Para = styled.p`
@@ -98,6 +189,26 @@ const Para = styled.p`
   text-align: start;
   @media (max-width: 480px) {
     font-size: 0.7rem;
+    width: 60%;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.755rem;
+    width: 60%;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.8rem;
+    width: 60%;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.867rem;
+    width: 60%;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.945rem;
     width: 60%;
   }
 `;
@@ -119,8 +230,24 @@ const Button = styled.button`
     background-color: #b3aaaa49;
   }
   @media (max-width: 480px) {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     padding: 2px 14px;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.677rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.777rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.844rem;
   }
 `;
 

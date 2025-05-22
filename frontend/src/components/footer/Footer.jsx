@@ -20,9 +20,23 @@ const Grid = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     grid-template-columns: 1fr;
     gap: 8px 0px;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    grid-template-columns: 1fr;
+    gap: 8px 0px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 0px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
@@ -39,7 +53,7 @@ const RowLogo = styled.div`
   padding: 0;
   /* gap: 16px; */
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     padding: 0 2rem;
     gap: 10px;
   }
@@ -48,7 +62,7 @@ const RowLogo = styled.div`
 const ImageContainer = styled.div`
   width: 32%;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     width: 20%;
   }
 `;
@@ -60,7 +74,7 @@ const Image = styled.img`
 const Links = styled(NavLink)`
   text-decoration: none;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.966rem;
   padding: 6px 20px;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
@@ -71,8 +85,24 @@ const Links = styled(NavLink)`
     color: #a1a1a1;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     font-size: 0.7rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.777rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.821rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.899rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.933rem;
   }
 `;
 
@@ -86,7 +116,7 @@ const Para = styled.p`
   font-weight: 400;
   font-style: normal;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     width: 80%;
   }
 `;
@@ -98,7 +128,7 @@ const Row = styled.ul`
   justify-content: space-evenly;
   gap: 20px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     justify-content: center;
   }
 `;
@@ -131,8 +161,24 @@ const Span = styled.span`
   display: inline-block;
   font-size: 1.2rem;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     font-size: 0.9rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.9233rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.978rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 1.123rem;
   }
 `;
 

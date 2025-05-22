@@ -2,7 +2,27 @@ import styled, { css } from "styled-components";
 import { FaArrowRight } from "react-icons/fa";
 
 const Section = styled.section`
-  margin-top: 60px;
+  margin-top: 56px;
+
+  @media (max-width: 486px) {
+    margin-top: 30px;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    margin-top: 38px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    margin-top: 42px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-top: 48px;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    margin-top: 52px;
+  }
 `;
 
 const Title = styled.div`
@@ -14,48 +34,99 @@ const Title = styled.div`
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
+
+  @media (max-width: 486px) {
+    font-size: 0.911rem;
+    margin-left: 14px;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.977rem;
+    margin-left: 14px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 1.133rem;
+    margin-left: 14px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1.53rem;
+    margin-left: 14px;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 1.677rem;
+    margin-left: 14px;
+  }
 `;
 
 const Grid = styled.div`
   display: grid;
   position: relative;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
 
-  ${(props) =>
-    props.type === "main" &&
-    css`
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 18px;
+  @media (max-width: 486px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 
-      @media (max-width: 480px) {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-    `}
+  @media (min-width: 487px) and (max-width: 576px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 
-  ${(props) =>
-    props.type === "child" &&
-    css`
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      /* background-color: var(--color-grey-50); */
-      padding: 16px 12px;
-    `}
+  @media (min-width: 577px) and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    gap: 0rem;
+  }
+`;
+
+const SmallGrid = styled.div`
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 1rem;
+  display: grid;
+  position: relative;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    gap: 0.6rem;
+  }
 `;
 
 const Card = styled.div`
-  padding: 12px;
   border: 1px solid #9b9b9b;
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    padding: 6px;
+  }
 `;
 
 const Image = styled.img`
   width: 100%;
+  padding: 1rem;
 `;
 
 const Span = styled.span`
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-bottom: 8px;
   color: #1c6e48;
   text-align: center;
 `;
@@ -71,7 +142,26 @@ const Discount = styled.span`
   font-family: "Lato", sans-serif;
   font-weight: 800;
   font-style: normal;
-  font-size: 0.8rem;
+
+  @media (max-width: 486px) {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.856rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.911rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const ProductName = styled.p`
@@ -83,7 +173,39 @@ const ProductName = styled.p`
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
-  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.844rem;
+  margin-bottom: 0.8rem;
+
+  @media (max-width: 486px) {
+    font-size: 0.745rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.7989rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.845rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.722rem;
+    gap: 5px;
+  }
+
+  @media (min-width: 993px) and (max-width: 1058px) {
+    font-size: 0.722rem;
+    gap: 2px;
+  }
+
+  @media (min-width: 1059px) and (max-width: 1200px) {
+    font-size: 0.8rem;
+    gap: 2px;
+  }
 `;
 
 const Button = styled.button`
@@ -95,9 +217,6 @@ const Button = styled.button`
   outline: none;
   background-color: unset;
   border: 1px solid #9b9b9b;
-  display: inline-block;
-  padding-top: 4px;
-  margin-left: 6px;
   border-radius: 6px;
   color: #2e2c2c;
   font-weight: 300;
@@ -195,8 +314,8 @@ function Deals() {
   return (
     <Section>
       <Title>Offers</Title>
-      <Grid type="main">
-        <Grid type="child">
+      <Grid>
+        <SmallGrid>
           {menDeals.map((el, index) => (
             <Card key={index}>
               <Image src={el.deal_img} alt="..." />
@@ -264,8 +383,8 @@ function Deals() {
               </ProductName>
             </Card>
           ))}
-        </Grid>
-        <Grid type="child">
+        </SmallGrid>
+        <SmallGrid>
           {womenDeals.map((el, index) => (
             <Card key={index}>
               <Image src={el.deal_img} alt="..." />
@@ -333,8 +452,8 @@ function Deals() {
               </ProductName>
             </Card>
           ))}
-        </Grid>
-        <Grid type="child">
+        </SmallGrid>
+        <SmallGrid>
           {kidsDeals.map((el, index) => (
             <Card key={index}>
               <Image src={el.deal_img} alt="..." />
@@ -402,7 +521,7 @@ function Deals() {
               </ProductName>
             </Card>
           ))}
-        </Grid>
+        </SmallGrid>
       </Grid>
     </Section>
   );

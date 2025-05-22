@@ -4,13 +4,37 @@ import { useDispatch } from "react-redux";
 import { signinUser } from "../slice/authSlice";
 
 const Section = styled.section`
-  margin-top: 60px;
+  margin-top: 56px;
+
+  @media (max-width: 486px) {
+    margin-top: 40px;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    margin-top: 44px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    margin-top: 46px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-top: 48px;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    margin-top: 52px;
+  }
 `;
 
 const Container = styled.div`
   width: 420px;
   margin: 0 auto;
   background-color: #ced9db65;
+
+  @media (max-width: 486px) {
+    width: 360px;
+  }
 `;
 
 const Row = styled.div`

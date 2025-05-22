@@ -1,9 +1,7 @@
+import NoContent from "../NoContent";
+
 function UpdateUser() {
-  return (
-    <div>
-      <h1>UpdateUser Page</h1>
-    </div>
-  );
+  return <NoContent>User Update content</NoContent>;
 }
 
 export default UpdateUser;

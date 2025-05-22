@@ -1,9 +1,7 @@
+import NoContent from "../NoContent";
+
 function Address() {
-  return (
-    <div>
-      <h1>Address</h1>
-    </div>
-  );
+  return <NoContent>Address</NoContent>;
 }
 
 export default Address;

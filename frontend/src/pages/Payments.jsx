@@ -1,9 +1,7 @@
+import NoContent from "../NoContent";
+
 function Payments() {
-  return (
-    <div>
-      <h1>Payments Page</h1>
-    </div>
-  );
+  return <NoContent>Payments</NoContent>;
 }
 
 export default Payments;

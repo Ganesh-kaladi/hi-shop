@@ -10,10 +10,26 @@ import Spinner from "../components/spinner/Spinner";
 const Container = styled.div`
   margin: 0 auto;
   width: 80%;
-  margin-top: 60px;
+  margin-top: 56px;
 
-  @media (max-width: 480px) {
-    margin-top: 80px;
+  @media (max-width: 486px) {
+    margin-top: 40px;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    margin-top: 44px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    margin-top: 46px;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-top: 48px;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    margin-top: 52px;
   }
 `;
 
@@ -21,14 +37,37 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 420px 1fr;
   background-color: #fff;
+  gap: 5rem;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(380px) 1fr;
+    gap: 0.6rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    gap: 3rem;
   }
 `;
 
-const ImageContainer = styled.div``;
+const ImageContainer = styled.div`
+  @media (min-width: 577px) and (max-width: 768px) {
+  }
+`;
 
 const Image = styled.img`
   width: 100%;
@@ -37,30 +76,77 @@ const Image = styled.img`
   border-bottom-right-radius: 1.8rem;
   box-shadow: 4px 0px 8px -1px #000000a7;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     border-radius: 0px;
     box-shadow: 0px 0px 8px -1px #000000a7;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    border-radius: 0px;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    border-radius: 0px;
   }
 `;
 
 const TextContainer = styled.div`
-  margin: 0 2rem;
-  padding: 2rem 3.5rem;
+  margin: 0;
+  padding: 0;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     padding: 0px;
-    margin-top: 2.6rem;
+    margin: 0;
+    margin-top: 1.2rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    padding: 0px;
+    margin: 0;
+    margin-top: 1.278rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    padding: 0px;
+    margin: 0;
+    margin-top: 1.278rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    padding: 0px;
+    margin: 0;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    padding: 0px;
+    margin: 0;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 1.4rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
     font-size: 1.6rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 1.8rem;
   }
 `;
 
@@ -72,15 +158,52 @@ const PriceContainer = styled.div`
   gap: 20px;
   margin-bottom: 2rem;
   font-family: "Lato", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
+
+  @media (max-width: 486px) {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-bottom: 1.4rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    margin-bottom: 1.8rem;
+  }
 `;
 
 const Price = styled.h3`
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 400;
-  @media (max-width: 480px) {
+
+  @media (max-width: 486px) {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
     font-size: 1.2rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 1.4rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1.4rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 1.6rem;
   }
 `;
 
@@ -88,50 +211,103 @@ const ActualPrice = styled.span`
   display: block;
   align-self: self-end;
   color: #727272;
-  font-size: 0.8rem;
+  font-size: 0.945rem;
   text-decoration: line-through;
+
+  @media (max-width: 486px) {
+    font-size: 0.677rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.777rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.822rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.822rem;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 0.911rem;
+  }
 `;
 
 const ColorContainer = styled.div`
   display: flex;
+  align-items: center;
   gap: 20px;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.6rem;
 `;
 
 const H4 = styled.h4`
-  font-size: 1.2rem;
-  padding-left: 1rem;
+  font-size: 1.2999rem;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
+  flex: 0 0 23%;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
     font-size: 0.9rem;
+    padding: 0;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.956rem;
+    padding: 0;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 1.111rem;
+    padding: 0;
+  }
+
+  @media (min-width: 993px) and (max-width: 1200px) {
+    font-size: 1.222rem;
+    padding: 0;
   }
 `;
 
 const Color = styled.span`
   width: 1.8rem;
   height: 1.8rem;
-  margin-right: 12px;
   border-radius: 50%;
   cursor: pointer;
   display: inline-block;
   transition: all 0.2s ease-in-out;
+  border: 1px solid #302f2f50;
+  margin-right: 0.8rem;
 
   ${({ color }) =>
     color &&
     css`
       background-color: ${color};
-      border: 1px solid ${color};
     `};
 
   ${({ isClickedColor }) =>
     isClickedColor &&
     css`
       box-shadow: 0 0 2px 3px #1a0117d7;
+      border: none;
     `};
+
+  @media (max-width: 486px) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
 `;
 
 const P = styled.p`
@@ -142,18 +318,18 @@ const P = styled.p`
 const SizeContainer = styled.div`
   display: flex;
   gap: 20px;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.6rem;
 `;
 
 const Size = styled.button`
-  border: 1px solid #757474;
-  margin-left: 0.8rem;
+  border: 1px solid #757474a4;
   width: 1.6rem;
   height: 1.6rem;
   background-color: unset;
   color: #464242;
   font-weight: 1.9rem;
   cursor: pointer;
+  margin-right: 0.6rem;
 
   &:hover {
     background-color: #4b4a4a;
@@ -171,11 +347,19 @@ const Size = styled.button`
 const QuantityContainer = styled.div`
   display: flex;
   gap: 20px;
-  margin-bottom: 2.4rem;
+  margin-bottom: 2rem;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-bottom: 1.6rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-bottom: 1.8rem;
+  }
 `;
 
 const QuantityBtn = styled.button`
-  border: 1px solid #757474;
+  border: 1px solid #757474a4;
   width: 1.6rem;
   height: 1.6rem;
   background-color: unset;
@@ -188,15 +372,19 @@ const QuantityBtn = styled.button`
 `;
 
 const CartContainer = styled.div`
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const CartBtn = styled.button`
-  width: 100%;
+  width: 60%;
   border: none;
   background-color: #000;
   color: #fff;
-  height: 2.5rem;
+  padding: 0.6rem 0;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1.2rem;
@@ -205,6 +393,10 @@ const CartBtn = styled.button`
   &:hover {
     background-color: #363636;
   }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const WhislistContainer = styled.div`
@@ -212,58 +404,147 @@ const WhislistContainer = styled.div`
 `;
 
 const WishListBtn = styled.button`
-  width: 100%;
+  width: 60%;
   border: none;
-  height: 2.4rem;
+  padding: 0.6rem 0;
   border-radius: 8px;
   cursor: pointer;
   border: 1px solid #777676;
   background-color: #f04babb3;
+  font-size: 0.9111rem;
   transition: background-color 0.3s, color 0.3s;
 
   &:hover {
     background-color: #e41464b3;
     color: #fff;
   }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const ProductDetails = styled.div`
   margin-bottom: 1rem;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    margin-top: 1rem;
+  }
 `;
 
 const DescriptionContainer = styled.div`
   padding: 1rem;
+
+  @media (max-width: 486px) {
+    padding: 0;
+    margin-bottom: 0.8rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    padding: 0;
+    margin-bottom: 0.8rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    padding: 0;
+    margin-bottom: 0.9rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    padding: 0;
+    margin-bottom: 0.978rem;
+  }
 `;
 
 const H3 = styled.h3`
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
-  font-size: 0.9rem;
+  font-size: 1.444rem;
+
+  @media (max-width: 486px) {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.911rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.9888rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1.122rem;
+  }
 `;
 
 const DescriptionPara = styled.p`
-  font-size: 0.9rem;
+  font-size: 1.111rem;
   padding-left: 1rem;
   font-family: "Lato", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   font-style: normal;
+
+  @media (max-width: 486px) {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.855rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.9118rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.999rem;
+  }
 `;
 
 const FeaturesContainer = styled.div`
   padding: 1rem;
+
+  @media (max-width: 486px) {
+    padding: 0;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    padding: 0;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    padding: 0;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    padding: 0;
+  }
 `;
 
 const FeatureH4 = styled.h4`
   font-size: 1.4rem;
   padding-left: 0rem;
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-style: normal;
 
-  @media (max-width: 480px) {
+  @media (max-width: 486px) {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
     font-size: 0.9rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.978rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 1.111rem;
   }
 `;
 
@@ -273,6 +554,22 @@ const Features = styled.ul`
   font-weight: 400;
   font-style: normal;
   font-size: 0.9rem;
+
+  @media (max-width: 486px) {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    font-size: 0.9338rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.9899rem;
+  }
 `;
 
 const SimilarProductsContainer = styled.div``;
@@ -282,12 +579,6 @@ const H1 = styled.h1`
   padding-left: 10px;
   margin-bottom: 1.1rem;
 `;
-
-// const SProducts = styled.div`
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-//   gap: 12px;
-// `;
 
 function SingleProduct() {
   const navigate = useNavigate();
@@ -472,15 +763,15 @@ function SingleProduct() {
               </FeaturesContainer>
             </ProductDetails>
 
-            <SimilarProductsContainer>
+            {/* <SimilarProductsContainer>
               <H1>similar products</H1>
-              <p>similar products api not completed...</p>
-              {/* <SProducts>
+              <p>similar products api not completed...</p> */}
+            {/* <SProducts>
               {arrImage.map((el) => (
                 <Product image={el} />
               ))}
             </SProducts> */}
-            </SimilarProductsContainer>
+            {/* </SimilarProductsContainer> */}
           </section>
         )}
       </Container>

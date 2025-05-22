@@ -4,10 +4,28 @@ import styled, { css } from "styled-components";
 import { addUserAddress, getUserAddress } from "../../slice/authSlice";
 
 const FormContainer = styled.div`
-  max-width: 520px;
+  width: 520px;
   padding: 1rem;
   border: 1px solid #b1abab88;
   margin-bottom: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(129, 126, 126, 0.322);
+
+  @media (max-width: 486px) {
+    width: 100%;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    width: 100%;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    width: 100%;
+  }
 `;
 
 const FormGroup = styled.div`

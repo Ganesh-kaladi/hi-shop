@@ -12,7 +12,6 @@ import {
 
 const AsideContainer = styled.aside`
   background-color: #fff;
-  border-radius: 16px;
   border: 1px solid #948e8e89;
 `;
 
@@ -22,17 +21,22 @@ const Heading1 = styled.h1`
   background-color: #a5c9e0;
   color: #2e2d2d;
   letter-spacing: 1px;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
-  border-top-right-radius: 16px;
-  border-top-left-radius: 16px;
-  border-top: 4px solid #557deb;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.988rem;
+  }
 `;
 
 const InputBox = styled.div`
-  padding: 14px 18px;
+  padding: 0.8rem 1rem;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    padding: 0.6rem;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -45,6 +49,10 @@ const Heading5 = styled.h6`
   font-weight: 600;
   font-style: normal;
   font-size: 0.9rem;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const List = styled.ul`
@@ -70,6 +78,10 @@ const Label = styled.label`
   font-weight: 500;
   font-style: normal;
   font-size: 0.8rem;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.788rem;
+  }
 `;
 
 const SortingContainer = styled.div`
@@ -82,6 +94,10 @@ const Heading6 = styled.h6`
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const SortList = styled.div`
@@ -97,7 +113,6 @@ const Select = styled.select`
   appearance: none;
   padding: 3px 4px;
   list-style: none;
-  border-radius: 2px;
   outline: none;
   text-align: center;
   letter-spacing: 1px;

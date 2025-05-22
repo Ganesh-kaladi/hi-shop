@@ -1,9 +1,7 @@
+import NoContent from "../NoContent";
+
 function Customercare() {
-  return (
-    <div>
-      <h1>Customercare Page</h1>
-    </div>
-  );
+  return <NoContent>Customercare content</NoContent>;
 }
 
 export default Customercare;
