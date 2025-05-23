@@ -4,12 +4,10 @@ const catchAsync = require("../utils/catchAsync");
 const jwt = require("jsonwebtoken");
 
 exports.authentication = catchAsync(async (req, res, next) => {
-  // console.log(`req.headers.authorization:${req.headers.authorization}`);
   if (!req.headers.authorization)
     return next(new AppError("user must be login for this action"));
 
   const token = req.headers.authorization.split(" ");
-  // console.log(`token: ${token}`);
   if (!token[0] === "Bearer")
     return next(new AppError("unauthorized request.", 401));
 
@@ -35,7 +33,7 @@ exports.authorizationRole = (role) => {
 
 const sendJwtToken = catchAsync(async (id, statusCode, res) => {
   const token = await jwt.sign({ id }, process.env.JWT_PASSWORD, {
-    expiresIn: 24 * 60 * 60,
+    expiresIn: 60 * 60,
   });
   res.status(statusCode).json({
     status: "success",

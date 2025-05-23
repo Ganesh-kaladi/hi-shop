@@ -68,7 +68,6 @@ export const addUserAddress = createAsyncThunk(
       );
       return res.data;
     } catch (err) {
-      console.log(err);
       return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
@@ -77,8 +76,8 @@ export const addUserAddress = createAsyncThunk(
 const authSlice = createSlice({
   name: "user",
   initialState: {
-    token: null,
-    isAuthenticated: false,
+    token: localStorage.getItem("hi-shop-token") || null,
+    isAuthenticated: !!localStorage.getItem("hi-shop-token"),
     error: null,
     isPending: false,
     address: [],
@@ -87,11 +86,15 @@ const authSlice = createSlice({
     logoutUser(state, action) {
       state.token = null;
       state.isAuthenticated = false;
-      localStorage.removeItem("token");
+      localStorage.removeItem("hi-shop-token");
     },
-    setToken(state, action) {
-      state.token = action.payload;
-      state.isAuthenticated = true;
+    clearAuth(state, action) {
+      state.token = null;
+      state.isAuthenticated = false;
+      state.error = null;
+      state.isPending = false;
+      state.address = [];
+      localStorage.removeItem("hi-shop-token");
     },
   },
 
@@ -103,7 +106,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, function (state, action) {
         state.token = action.payload.token;
-        localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("hi-shop-token", action.payload.token);
         state.isAuthenticated = true;
         state.isPending = false;
       })
@@ -121,7 +124,8 @@ const authSlice = createSlice({
       .addCase(signinUser.fulfilled, function (state, action) {
         state.token = action.payload.token;
         state.isPending = false;
-        localStorage.setItem("token", action.payload.token);
+        state.isAuthenticated = true;
+        localStorage.setItem("hi-shop-token", action.payload.token);
       })
       .addCase(signinUser.rejected, function (state, action) {
         state.error = action.payload.response.data;
@@ -155,6 +159,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logoutUser, setToken } = authSlice.actions;
+export const { logoutUser, clearAuth } = authSlice.actions;
 
 export default authSlice.reducer;

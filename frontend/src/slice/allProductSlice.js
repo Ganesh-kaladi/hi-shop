@@ -3,44 +3,26 @@ import axios from "axios";
 
 export const getAllProducts = createAsyncThunk(
   "allproducts/getAllProducts",
-  async function (thunkAPI) {
+  async function (thunkApi) {
     try {
       const res = await axios.get(`http://127.0.0.1:5050/api/v1/product`);
       return res.data;
     } catch (err) {
-      console.log(err);
-      return err;
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
 
 export const getAllProductsBasedOnQuery = createAsyncThunk(
   "allproducts/getAllProductsBasedOnQuery",
-  async function (query, thunkAPI) {
-    // const cat = category;
-    // const fie = fields;
-    // console.log(cat);
+  async function (query, thunkApi) {
     try {
-      // let query;
-      // if (category === "") {
-      //   return;
-      // } else {
-      //   query = category;
-      // }
-
-      // if (fields === "") {
-      //   return;
-      // } else {
-      //   query = query + fields;
-      // }
-      // console.log(query);
       const res = await axios.get(
         `http://127.0.0.1:5050/api/v1/product${query}`
       );
       return res.data;
     } catch (err) {
-      console.log(err);
-      return thunkAPI.rejectWithValue(err);
+      return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
 );
@@ -74,12 +56,16 @@ const allProductSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //all products
       .addCase(getAllProducts.pending, function (state, action) {
         state.isPending = true;
         state.error = null;
       })
       .addCase(getAllProducts.fulfilled, function (state, action) {
-        state.products = action.payload.data.doc;
+        state.products =
+          action.payload.data === undefined
+            ? undefined
+            : action.payload.data.doc;
         state.isPending = false;
       })
       .addCase(getAllProducts.rejected, function (state, action) {

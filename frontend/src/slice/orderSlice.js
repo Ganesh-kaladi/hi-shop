@@ -58,50 +58,70 @@ const orderSlice = createSlice({
     orderError: null,
     statusOrder: null,
   },
+  reducers: {
+    removeOrderError(state, action) {
+      state.orderError = "";
+    },
+    clearOrder(state, action) {
+      state.orders = [];
+      state.isLoadingOrder = false;
+      state.orderError = null;
+      state.statusOrder = null;
+      state.singleOrder = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
 
       //create order
       .addCase(createOrder.pending, function (state, action) {
         state.isLoadingOrder = true;
+        state.orderError = "";
       })
       .addCase(createOrder.fulfilled, function (state, action) {
         state.isLoadingOrder = false;
         state.statusOrder = action.payload.data.status;
+        state.orderError = "";
       })
       .addCase(createOrder.rejected, function (state, action) {
         state.isLoadingOrder = false;
-        state.orderError = action.payload;
+        state.orderError = action.payload.error.name;
       })
 
       //get all orders
       .addCase(getAllOrders.pending, function (state, action) {
         state.isLoadingOrder = true;
+        state.orderError = "";
       })
       .addCase(getAllOrders.fulfilled, function (state, action) {
         state.isLoadingOrder = false;
         state.statusOrder = action.payload.status;
         state.orders = action.payload.data.order;
+        state.orderError = "";
       })
       .addCase(getAllOrders.rejected, function (state, action) {
         state.isLoadingOrder = false;
-        state.orderError = action.payload;
+        state.orderError = action.payload?.error?.name;
       })
 
       //get single orders
       .addCase(getSingleOrder.pending, function (state, action) {
         state.isLoadingOrder = true;
+        state.orderError = "";
       })
       .addCase(getSingleOrder.fulfilled, function (state, action) {
         state.isLoadingOrder = false;
         state.statusOrder = action.payload.status;
         state.singleOrder = action.payload.data.order;
+        state.orderError = "";
       })
       .addCase(getSingleOrder.rejected, function (state, action) {
         state.isLoadingOrder = false;
-        state.orderError = action.payload;
+        state.orderError = action.payload.error.name;
       });
   },
 });
+
+export const { removeOrderError, clearOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;

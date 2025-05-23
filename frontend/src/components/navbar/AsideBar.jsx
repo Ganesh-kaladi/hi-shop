@@ -13,6 +13,18 @@ import {
 const AsideContainer = styled.aside`
   background-color: #fff;
   border: 1px solid #948e8e89;
+
+  @media (max-width: 486px) {
+    display: none;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    display: none;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Heading1 = styled.h1`

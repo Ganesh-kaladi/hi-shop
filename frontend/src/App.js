@@ -19,24 +19,11 @@ import ResetPassword from "./pages/ResetPassword";
 import UpdateUser from "./pages/UpdateUser";
 import UserDetails from "./pages/UserDetails";
 import Customercare from "./pages/Customercare";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setToken } from "./slice/authSlice";
 import SignUp from "./pages/SignUp";
 import AdminPRoduct from "./pages/admin/AdminPRoduct";
 import PlaceOrder from "./pages/PlaceOrder";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(
-    function () {
-      const localToken = localStorage.getItem("token");
-      if (!localToken) return;
-      dispatch(setToken(localToken));
-    },
-    [dispatch]
-  );
   return (
     <>
       <GlobalStyles />

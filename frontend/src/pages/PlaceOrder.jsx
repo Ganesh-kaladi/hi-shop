@@ -506,6 +506,11 @@ function PlaceOrder() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // console.log(cart?.length <= 0);
+  // if (cart?.length <= 0) {
+  //   navigate("/products");
+  // }
+
   function handleAdd(e) {
     const { value } = e.target;
     const flteredAddress = address.find((el) => el._id === value);

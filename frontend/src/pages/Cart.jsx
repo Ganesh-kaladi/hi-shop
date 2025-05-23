@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CartList from "../components/cart/CartList";
 import CheckOut from "../components/cart/CheckOut";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/spinner/Spinner";
+import { getCartItems } from "../slice/cartSlice";
+import { clearAuth } from "../slice/authSlice";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -172,8 +174,31 @@ const Button = styled.button`
 `;
 
 function Cart() {
-  const { cart, isLoadingCart } = useSelector((state) => state.cart);
+  const { cart, isLoadingCart, cartError } = useSelector((state) => state.cart);
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(
+    function () {
+      if (!token) {
+        navigate("/login");
+      }
+      dispatch(getCartItems(token));
+    },
+    [navigate, token, dispatch]
+  );
+
+  useEffect(
+    function () {
+      if (cartError === "TokenExpiredError") {
+        dispatch(clearAuth());
+        navigate("/login");
+      }
+    },
+    [navigate, cartError, dispatch]
+  );
+
   return (
     <>
       {isLoadingCart && <Spinner />}

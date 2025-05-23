@@ -3,6 +3,18 @@ import { useQueryFields } from "../../assets/logics/advanceFiltering";
 
 const Section = styled.section`
   margin-bottom: 20px;
+
+  @media (max-width: 486px) {
+    display: none;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    display: none;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Nav = styled.ul`

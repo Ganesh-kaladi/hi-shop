@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import OrderDelivered from "../components/orders/OrderDelivered";
-import OrderReturned from "../components/orders/OrderReturned";
+// import OrderReturned from "../components/orders/OrderReturned";
 import OrderPayment from "../components/orders/OrderPayment";
-import { useSelector } from "react-redux";
 
 const Container = styled.div`
   width: 80%;

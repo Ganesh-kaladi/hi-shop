@@ -1,14 +1,14 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../slice/authSlice";
+import { clearAuth, logoutUser } from "../../slice/authSlice";
 import Logo from "../../assets/logo/logo.png";
 import { FaTimes } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
-import { motion } from "framer-motion";
-import { addWidth } from "../../slice/pageWidthSlice";
-import { getCartItems } from "../../slice/cartSlice";
+import { clearCart } from "../../slice/cartSlice";
+import { clearOrder } from "../../slice/orderSlice";
+import { clearCheckOut } from "../../slice/checkOutSlice";
 
 const NavbarBox = styled.div`
   width: 100%;
@@ -16,14 +16,7 @@ const NavbarBox = styled.div`
   top: 0;
   z-index: 5;
   transition: background-color 0.6s;
-  ${(props) =>
-    props.type
-      ? css`
-          background-color: rgb(48, 48, 48);
-        `
-      : css`
-          background-color: rgb(44, 44, 44);
-        `};
+  background-color: rgb(82, 79, 79);
 `;
 
 const Container = styled.div`
@@ -70,14 +63,14 @@ const Anchor = styled(NavLink)`
   }
 `;
 
-const Button = styled.button`
-  background-color: unset;
-  font-size: 1.1rem;
-  border: none;
-  color: #808080;
-  font-weight: lighter;
-  cursor: pointer;
-`;
+// const Button = styled.button`
+//   background-color: unset;
+//   font-size: 1.1rem;
+//   border: none;
+//   color: #808080;
+//   font-weight: lighter;
+//   cursor: pointer;
+// `;
 
 const Ani = keyframes`
   0% {transform: translateY(-16px);}
@@ -94,6 +87,7 @@ const NavColoumn = styled.ul`
   background-color: #ffffff;
   padding: 1rem 2rem;
   animation: ${Ani} 0.4s ease;
+  transition: all 0.4s;
 `;
 
 const NavColumnList = styled.li`
@@ -114,57 +108,59 @@ const ColAnchor = styled(NavLink)`
   font-size: 0.8rem;
 `;
 
-function useHandleWindowWidth() {
-  const dispatch = useDispatch();
-  let width = null;
-  useEffect(
-    function () {
-      function setWindowWidth() {
-        width = window.innerWidth;
-        dispatch(addWidth(width));
-      }
-      setWindowWidth();
-      window.addEventListener("resize", setWindowWidth);
-      return () => window.removeEventListener("resize", setWindowWidth);
-    },
-    [width, dispatch]
-  );
+const ToggelContainer = styled.div``;
 
-  return width;
-}
+const ToggelIcon = styled.div`
+  display: none;
+
+  @media (max-width: 486px) {
+    display: block;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    display: block;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const Nav = styled.nav`
+  display: block;
+
+  @media (max-width: 486px) {
+    display: none;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    display: none;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    display: none;
+  }
+`;
 
 function Navbar() {
-  useHandleWindowWidth();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.auth);
-  const { width } = useSelector((state) => state.pageWidth);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 72) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   function handleNavTogglerClick() {
-    setOpen(false);
+    setOpen((cur) => !cur);
   }
 
-  function handleGetCartItems() {
-    dispatch(getCartItems(token));
+  function handleLogOut() {
+    dispatch(clearAuth());
+    dispatch(clearCart());
+    dispatch(clearOrder());
+    dispatch(clearCheckOut());
   }
 
   return (
-    <NavbarBox type={scrolled}>
+    <NavbarBox>
       <Container>
         <Row>
           <div>
@@ -172,20 +168,21 @@ function Navbar() {
               <Image src={Logo} alt="..." />
             </Link>
           </div>
-          {width <= 769 &&
-            (open ? (
-              <FaTimes size={24} onClick={() => setOpen((cur) => !cur)} />
-            ) : (
-              <MdMenu size={28} onClick={() => setOpen((cur) => !cur)} />
-            ))}
+          <ToggelContainer>
+            <ToggelIcon>
+              {open ? (
+                <FaTimes size={24} onClick={() => setOpen((cur) => !cur)} />
+              ) : (
+                <MdMenu size={28} onClick={() => setOpen((cur) => !cur)} />
+              )}
+            </ToggelIcon>
 
-          {width > 769 && (
-            <nav>
+            <Nav>
               <NavRow>
                 <li>
                   <Anchor to="/">Home</Anchor>
                 </li>
-                <li onClick={handleGetCartItems}>
+                <li>
                   <Anchor to="cart">Cart</Anchor>
                 </li>
                 <li>
@@ -207,11 +204,12 @@ function Navbar() {
                   )}
                 </li>
               </NavRow>
-            </nav>
-          )}
+            </Nav>
+          </ToggelContainer>
         </Row>
       </Container>
-      {width < 769 && open && (
+      {/* toggeler nav */}
+      {open && (
         <nav>
           <NavColoumn>
             <NavColumnList>
@@ -240,18 +238,12 @@ function Navbar() {
               </ColAnchor>
             </NavColumnList>
             <NavColumnList>
-              {token === null ? (
+              {token === null || "" ? (
                 <ColAnchor to="/login" onClick={handleNavTogglerClick}>
                   Login
                 </ColAnchor>
               ) : (
-                <Anchor
-                  to="/login"
-                  onClick={() => {
-                    dispatch(logoutUser());
-                    handleNavTogglerClick();
-                  }}
-                >
+                <Anchor to="/home" onClick={handleLogOut}>
                   Log Out
                 </Anchor>
               )}

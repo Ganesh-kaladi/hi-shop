@@ -19,11 +19,16 @@ const singleProductSlice = createSlice({
   initialState: {
     isLoading: false,
     singleDoc: null,
-    error: null,
+    singleProductError: null,
   },
   reducers: {
     removeProduct(state, action) {
       state.singleDoc = null;
+    },
+    clearSidleProduct(state, action) {
+      state.isLoading = false;
+      state.singleDoc = null;
+      state.singleProductError = null;
     },
   },
   extraReducers: (builder) => {

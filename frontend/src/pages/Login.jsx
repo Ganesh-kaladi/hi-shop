@@ -1,4 +1,3 @@
-import React from "react";
 import styled, { css } from "styled-components";
 import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -110,6 +109,7 @@ const Anchor = styled.span`
 
 function Login() {
   const { isPending } = useSelector((state) => state.auth);
+
   return (
     <>
       {isPending && <Spinner />}

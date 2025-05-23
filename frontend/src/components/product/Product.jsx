@@ -47,10 +47,10 @@ const Title = styled.h4`
   text-align: center;
 `;
 
-const Price = styled.h4`
-  padding: auto 0.9rem;
-  color: #ef4444;
-`;
+// const Price = styled.h4`
+//   padding: auto 0.9rem;
+//   color: #ef4444;
+// `;
 
 const RateingDiv = styled.div`
   padding: 0 0.8rem;

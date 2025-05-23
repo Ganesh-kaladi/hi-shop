@@ -1,4 +1,4 @@
-import { FaArrowRight, FaTags, FaShoppingBag } from "react-icons/fa";
+import { FaArrowRight, FaShoppingBag } from "react-icons/fa";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 

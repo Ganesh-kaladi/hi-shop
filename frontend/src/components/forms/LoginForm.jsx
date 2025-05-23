@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slice/authSlice";
 import { useNavigate } from "react-router-dom";
+import { removeCartError } from "../../slice/cartSlice";
+import { removeOrderError } from "../../slice/orderSlice";
 
 const FormContainer = styled.div`
   width: 100%;
@@ -80,15 +82,31 @@ function LoginForm() {
 
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
+  const { cartError } = useSelector((state) => state.cart);
+  const { orderError } = useSelector((state) => state.order);
   const navigate = useNavigate();
 
   useEffect(
     function () {
-      const localToken = localStorage.getItem("token");
-      if (!localToken) return;
+      if (!token) {
+        return;
+      }
       navigate("/");
     },
     [token, navigate]
+  );
+
+  useDispatch(
+    function () {
+      if (cartError === "TokenExpiredError") {
+        dispatch(removeCartError());
+      }
+
+      if (orderError === "TokenExpiredError") {
+        dispatch(removeOrderError());
+      }
+    },
+    [dispatch, cartError, orderError]
   );
 
   function handleLoginClick() {

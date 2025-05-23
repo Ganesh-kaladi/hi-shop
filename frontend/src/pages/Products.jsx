@@ -1,5 +1,5 @@
 import Category from "../components/navbar/Category";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Product from "../components/product/Product";
 
 import AsideBar from "../components/navbar/AsideBar";
@@ -11,7 +11,7 @@ import {
 } from "../slice/allProductSlice";
 import Spinner from "../components/spinner/Spinner";
 import Arrange from "../components/navbar/Arrange";
-import { getCartItems } from "../slice/cartSlice";
+import ErrorMessage from "../ErrorMessage";
 
 const Container = styled.div`
   margin: auto;
@@ -91,13 +91,20 @@ const ProductGrid = styled.div`
   }
 `;
 
+const P = styled.p`
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  text-align: center;
+  width: 100%;
+  font-family: sans-serif;
+  color: #2d2e30;
+`;
+
 function Products() {
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
   const { isPending, products, query } = useSelector(
     (state) => state.allProduct
   );
-  const { width } = useSelector((state) => state.pageWidth);
 
   useEffect(
     function () {
@@ -114,33 +121,30 @@ function Products() {
     [query, dispatch]
   );
 
-  useEffect(function () {
-    if (token) {
-      dispatch(getCartItems(token));
-    }
-  }, []);
-
   return (
     <>
       {isPending && <Spinner />}
       <Container>
-        {width > 769 && <Category />}
-
+        <Category />
         <Grid>
-          {width > 769 && <AsideBar />}
+          <AsideBar />
           <div>
+            {isPending === false && (products === null || undefined) && (
+              <ErrorMessage />
+            )}
+            {isPending === false && products?.length <= 0 && (
+              <P>No products based your condition.</P>
+            )}
             <ProductGrid type="product">
-              {isPending === false && products === null && (
-                <p>Check Youn internet connection</p>
-              )}
-              {products?.map((el) => (
-                <Product key={el._id} product={el} id={el._id} />
-              ))}
+              {isPending === false &&
+                products?.map((el) => (
+                  <Product key={el._id} product={el} id={el._id} />
+                ))}
             </ProductGrid>
           </div>
         </Grid>
       </Container>
-      {width <= 769 && <Arrange />}
+      <Arrange />
     </>
   );
 }

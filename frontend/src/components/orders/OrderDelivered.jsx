@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { FaCartShopping } from "react-icons/fa6";
-import image from "../../assets/product/shirt-2.jpg";
 import { useSelector } from "react-redux";
 
 const ListItem = styled.div`

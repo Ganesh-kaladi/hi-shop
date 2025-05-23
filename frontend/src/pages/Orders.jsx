@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import Style from "./Orders.module.css";
 import Order from "../components/orders/Order";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../slice/orderSlice";
 import NoOrders from "../components/orders/NoOrders";
+import { clearAuth } from "../slice/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Block = styled.div`
   padding: 1rem;
@@ -63,13 +64,31 @@ const H3 = styled.h3`
 `;
 
 function Orders() {
-  const { orders } = useSelector((state) => state.order);
+  const { orders, orderError } = useSelector((state) => state.order);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(function () {
-    dispatch(getAllOrders(token));
-  }, []);
+  useEffect(
+    function () {
+      if (!token) {
+        navigate("/login");
+      }
+      dispatch(getAllOrders(token));
+    },
+    [dispatch, navigate, token]
+  );
+
+  useEffect(
+    function () {
+      if (orderError === "TokenExpiredError") {
+        dispatch(clearAuth());
+        navigate("/login");
+      }
+    },
+    [dispatch, navigate, orderError]
+  );
+
   return (
     <Block>
       {orders?.length > 0 ? (

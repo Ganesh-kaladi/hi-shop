@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { FaArrowRight } from "react-icons/fa";
 
 const Section = styled.section`

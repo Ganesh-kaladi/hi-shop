@@ -14,9 +14,22 @@ import { useDispatch } from "react-redux";
 const ArrangeDiv = styled.div`
   position: fixed;
   bottom: 0px;
-  background-color: #000;
+  background-color: #555353;
   width: 100%;
   height: 3rem;
+  display: none;
+
+  @media (max-width: 486px) {
+    display: block;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    display: block;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    display: block;
+  }
 `;
 const ArrangeBlock = styled.div`
   display: flex;

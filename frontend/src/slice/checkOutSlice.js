@@ -11,16 +11,20 @@ const checkOutSlice = createSlice({
   },
   reducers: {
     checkOutAmt(state, action) {
-      console.log(action);
-
       state.bagTotal = action.payload.bagTotal;
       state.discount = action.payload.discount;
       state.gstAmt = action.payload.gstAmt;
       state.totalAmt = action.payload.totalAmt;
     },
+    clearCheckOut(state, action) {
+      state.bagTotal = null;
+      state.discount = null;
+      state.gstAmt = null;
+      state.totalAmt = null;
+    },
   },
 });
 
-export const { checkOutAmt } = checkOutSlice.actions;
+export const { checkOutAmt, clearCheckOut } = checkOutSlice.actions;
 
 export default checkOutSlice.reducer;
