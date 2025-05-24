@@ -11,7 +11,6 @@ export const loginUser = createAsyncThunk(
       );
       return res.data;
     } catch (err) {
-      console.log(err);
       return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
@@ -27,7 +26,6 @@ export const signinUser = createAsyncThunk(
       );
       return res.data;
     } catch (err) {
-      console.log(err);
       return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
@@ -47,7 +45,6 @@ export const getUserAddress = createAsyncThunk(
       );
       return res.data;
     } catch (err) {
-      console.log(err);
       return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
@@ -78,9 +75,10 @@ const authSlice = createSlice({
   initialState: {
     token: localStorage.getItem("hi-shop-token") || null,
     isAuthenticated: !!localStorage.getItem("hi-shop-token"),
-    error: null,
-    isPending: false,
+    authError: null,
+    isAuthPending: false,
     address: [],
+    authValidationError: [],
   },
   reducers: {
     logoutUser(state, action) {
@@ -91,9 +89,10 @@ const authSlice = createSlice({
     clearAuth(state, action) {
       state.token = null;
       state.isAuthenticated = false;
-      state.error = null;
-      state.isPending = false;
+      state.authError = null;
+      // state.isAuthPending = false;
       state.address = [];
+      state.authValidationError = null;
       localStorage.removeItem("hi-shop-token");
     },
   },
@@ -102,59 +101,58 @@ const authSlice = createSlice({
     builder
       //login
       .addCase(loginUser.pending, function (state) {
-        state.isPending = true;
+        state.isAuthPending = true;
       })
       .addCase(loginUser.fulfilled, function (state, action) {
         state.token = action.payload.token;
         localStorage.setItem("hi-shop-token", action.payload.token);
         state.isAuthenticated = true;
-        state.isPending = false;
+        state.isAuthPending = false;
       })
       .addCase(loginUser.rejected, function (state, action) {
-        console.log(state.error);
-        state.error = action.payload;
+        state.authError = action.payload.error;
         state.isAuthenticated = false;
-        state.isPending = false;
+        state.isAuthPending = false;
       })
 
       //sign in
       .addCase(signinUser.pending, function (state, action) {
-        state.isPending = true;
+        state.isAuthPending = true;
       })
       .addCase(signinUser.fulfilled, function (state, action) {
         state.token = action.payload.token;
-        state.isPending = false;
+        state.isAuthPending = false;
         state.isAuthenticated = true;
         localStorage.setItem("hi-shop-token", action.payload.token);
       })
       .addCase(signinUser.rejected, function (state, action) {
-        state.error = action.payload.response.data;
-        state.isPending = false;
+        state.authValidationError = action.payload.error.split(".");
+        state.isAuthPending = false;
       })
 
       //get address
       .addCase(getUserAddress.pending, function (state) {
-        state.isPending = true;
+        state.isAuthPending = true;
       })
       .addCase(getUserAddress.fulfilled, function (state, action) {
         state.address = action.payload.data.user.address;
-        state.isPending = false;
+        state.isAuthPending = false;
       })
       .addCase(getUserAddress.rejected, function (state, action) {
-        state.error = action.payload;
-        state.isPending = false;
+        state.authError = action.payload;
+        state.isAuthPending = false;
       })
 
       //add address
       .addCase(addUserAddress.pending, function (state) {
-        state.isPending = true;
+        state.isAuthPending = true;
       })
       .addCase(addUserAddress.fulfilled, function (state, action) {
-        state.isPending = false;
+        state.isAuthPending = false;
       })
       .addCase(addUserAddress.rejected, function (state, action) {
-        state.error = action.payload;
-        state.isPending = false;
+        state.authError = action.payload;
+        state.isAuthPending = false;
       });
   },
 });

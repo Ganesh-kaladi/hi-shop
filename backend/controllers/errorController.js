@@ -13,11 +13,12 @@ const handleDupilcateFieldError = (err) => {
 
 const handleValidationError = (err) => {
   const value = Object.values(err.errors).map((el) => el.message);
-  const message = `Invalis input data.  ${value.join(". ")}`;
+  const message = `Invalid input data.  ${value.join(". ")}`;
   return new AppError(message, 400);
 };
 
 const sendProductionErr = (err, res) => {
+  console.log(`----------${err}`);
   //operational error
   if (err.isOperational) {
     res.status(err.statusCode).json({
@@ -30,7 +31,7 @@ const sendProductionErr = (err, res) => {
     console.log("ERROR 💥", err);
     res.status(500).json({
       status: "fail",
-      message: "something went wrong",
+      message: err,
     });
   }
 };

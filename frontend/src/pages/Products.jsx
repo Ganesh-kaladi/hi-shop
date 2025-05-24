@@ -108,6 +108,9 @@ function Products() {
 
   useEffect(
     function () {
+      if (products?.length > 0) {
+        return;
+      }
       dispatch(getAllProducts());
     },
     [dispatch]

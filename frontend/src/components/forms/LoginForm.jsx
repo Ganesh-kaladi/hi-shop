@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../slice/authSlice";
+import { clearAuth, loginUser } from "../../slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import { removeCartError } from "../../slice/cartSlice";
 import { removeOrderError } from "../../slice/orderSlice";
+import { toast } from "react-toastify";
 
 const FormContainer = styled.div`
   width: 100%;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.7rem;
 `;
 
 export const Label = styled.label`
@@ -27,7 +28,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   display: block;
   width: 100%;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.7rem;
   border: none;
   outline: none;
   background-color: #f8f9fa;
@@ -81,7 +82,7 @@ function LoginForm() {
   const [password, setPassword] = useState("test1234");
 
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, authError } = useSelector((state) => state.auth);
   const { cartError } = useSelector((state) => state.cart);
   const { orderError } = useSelector((state) => state.order);
   const navigate = useNavigate();
@@ -101,12 +102,21 @@ function LoginForm() {
       if (cartError === "TokenExpiredError") {
         dispatch(removeCartError());
       }
-
       if (orderError === "TokenExpiredError") {
         dispatch(removeOrderError());
       }
     },
     [dispatch, cartError, orderError]
+  );
+
+  useEffect(
+    function () {
+      if (authError) {
+        toast.error(authError);
+        dispatch(clearAuth());
+      }
+    },
+    [authError]
   );
 
   function handleLoginClick() {

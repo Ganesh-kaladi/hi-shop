@@ -120,6 +120,7 @@ const cartSlie = createSlice({
     message: "",
     status: null,
     cartError: "",
+    cartJWT: null,
   },
   reducers: {
     removeCartError(state, action) {
@@ -131,6 +132,7 @@ const cartSlie = createSlice({
       state.message = "";
       state.status = null;
       state.cartError = "";
+      state.cartJWT = null;
     },
   },
   extraReducers: (builder) => {
@@ -147,7 +149,8 @@ const cartSlie = createSlice({
       })
       .addCase(addToCart.rejected, function (state, action) {
         state.isLoadingCart = false;
-        state.cartError = action.payload.error?.name;
+        // state.cartError = action.payload.error?.name;
+        state.cartJWT = action.payload?.message?.name;
       })
 
       //get cart items
@@ -162,7 +165,7 @@ const cartSlie = createSlice({
       })
       .addCase(getCartItems.rejected, function (state, action) {
         state.isLoadingCart = false;
-        state.cartError = action.payload.error?.name;
+        state.cartJWT = action.payload?.message?.name;
       })
 
       //inc quantity
@@ -177,7 +180,8 @@ const cartSlie = createSlice({
       })
       .addCase(incQunatity.rejected, function (state, action) {
         state.isLoadingCart = false;
-        state.cartError = action.payload.error?.name;
+        // state.cartError = action.payload.error?.name;
+        state.cartJWT = action.payload?.message?.name;
       })
 
       //dec quantity
@@ -192,7 +196,8 @@ const cartSlie = createSlice({
       })
       .addCase(decQuantity.rejected, function (state, action) {
         state.isLoadingCart = false;
-        state.cartError = action.payload.error?.name;
+        // state.cartError = action.payload.error?.name;
+        state.cartJWT = action.payload?.message?.name;
       })
 
       //remove Cart item
@@ -206,7 +211,8 @@ const cartSlie = createSlice({
       })
       .addCase(removeFromCart.rejected, function (state, action) {
         state.isLoadingCart = false;
-        state.cartError = action.payload.error?.name;
+        // state.cartError = action.payload.error?.name;
+        state.cartJWT = action.payload?.message?.name;
       })
 
       //remove all items
@@ -221,7 +227,8 @@ const cartSlie = createSlice({
       })
       .addCase(removeAllCart.rejected, function (state, action) {
         state.isLoadingCart = false;
-        state.cartError = action.payload.error?.name;
+        // state.cartError = action.payload.error?.name;
+        state.cartJWT = action.payload?.message?.name;
       });
   },
 });

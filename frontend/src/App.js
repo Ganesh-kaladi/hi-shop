@@ -22,6 +22,7 @@ import Customercare from "./pages/Customercare";
 import SignUp from "./pages/SignUp";
 import AdminPRoduct from "./pages/admin/AdminPRoduct";
 import PlaceOrder from "./pages/PlaceOrder";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -86,6 +87,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer autoClose={3000} />
     </>
   );
 }

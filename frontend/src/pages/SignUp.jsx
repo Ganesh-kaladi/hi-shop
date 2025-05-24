@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { signinUser } from "../slice/authSlice";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearAuth, signinUser } from "../slice/authSlice";
+import { toast } from "react-toastify";
 
 const Section = styled.section`
   margin-top: 56px;
@@ -30,31 +31,39 @@ const Section = styled.section`
 const Container = styled.div`
   width: 420px;
   margin: 0 auto;
-  background-color: #ced9db65;
+  background-color: #f3f3f3;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 12px 1px #47474758;
 
   @media (max-width: 486px) {
     width: 360px;
   }
 `;
 
-const Row = styled.div`
+const Form = styled.form`
   padding: 2rem 3rem;
+`;
+
+const Row = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  background-color: #e9e9e996;
+  margin-bottom: 0.4rem;
+  position: relative;
 `;
 
 const Title = styled.h1`
-  font-size: 1.6rem;
-  background-color: #5a8383;
+  font-size: 1.4rem;
+  background-color: #8f8f8f;
   color: #ffffff;
-  padding: 1.2rem;
+  padding: 0.9rem;
   text-align: center;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
 `;
 
 export const Label = styled.label`
@@ -62,7 +71,7 @@ export const Label = styled.label`
   width: 100%;
   margin-bottom: 0.2rem;
   letter-spacing: 1px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
@@ -95,6 +104,16 @@ export const Input = styled.input`
   }
 `;
 
+const P = styled.p`
+  letter-spacing: 1px;
+  width: 100%;
+  font-family: sans-serif;
+  position: absolute;
+  top: 45%;
+  left: 120%;
+  color: red;
+`;
+
 const Button = styled.button`
   width: 100%;
   border: 1px solid #0995ad;
@@ -121,57 +140,147 @@ const Button = styled.button`
 `;
 
 function SignUp() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { authValidationError } = useSelector((state) => state.auth);
+  console.log(authValidationError);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [errMessage, setErrMessage] = useState({});
 
   const dispatch = useDispatch();
 
-  function handleSigninClick() {
-    if (password !== confirmPassword) return alert("passwords are not match");
-    dispatch(signinUser({ name, email, password, confirmPassword }));
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+  function handleFormData(e) {
+    const { name, value } = e.target;
+    setFormData((cur) => ({ ...cur, [name]: value }));
   }
+
+  function validateFields() {
+    let errMsg = {};
+    if (formData.name === "") errMsg.nameErr = "name is required";
+    if (formData.email === "") errMsg.emailErr = "email is required";
+    if (formData.password === "") errMsg.passwordErr = "password is required";
+    if (formData.confirmPassword === "")
+      errMsg.confirmPasswordErr = "confirm password is required";
+    if (formData.password !== formData.confirmPassword) {
+      errMsg.passwordErr = "password and confirm password is not matching";
+      errMsg.confirmPasswordErr =
+        "password and confirm password is not matching";
+    }
+
+    return errMsg;
+  }
+
+  function handleSigninClick(e) {
+    e.preventDefault();
+    const errObj = validateFields();
+    if (Object.keys(errObj).length > 0) {
+      setErrMessage(errObj);
+      return;
+    }
+    setErrMessage({});
+    console.log(formData);
+    dispatch(
+      signinUser({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+      })
+    );
+  }
+
+  useEffect(
+    function () {
+      let serverErr = {};
+      if (
+        authValidationError?.length > 0 &&
+        authValidationError[0] === "Invalid input data"
+      ) {
+        authValidationError.forEach((el) => {
+          const err = el.trim().toLowerCase();
+          if (err.includes("email")) {
+            serverErr.emailErr = el;
+          } else if (err.includes("password")) {
+            serverErr.passwordErr = el;
+          } else if (err.includes("confirmPassword")) {
+            serverErr.confirmPasswordErr = el;
+          } else if (err.includes("name")) {
+            serverErr.nameErr = el;
+          }
+        });
+        toast.error(authValidationError[0].trim());
+        setErrMessage(serverErr);
+      }
+
+      if (
+        authValidationError?.length > 0 &&
+        authValidationError[0].includes("Duplicate field value")
+      ) {
+        toast.error("email address already registered");
+        dispatch(clearAuth());
+      }
+    },
+    [authValidationError]
+  );
 
   return (
     <Section>
       <Container>
         <Title>Sing in</Title>
-        <Row>
-          <Label>user name </Label>
-          <Input
-            type="text"
-            required
-            placeholder="Enter your name..."
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Label>email </Label>
-          <Input
-            type="email"
-            required
-            placeholder="Enter your email..."
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Label>password </Label>
-          <Input
-            type="password"
-            required
-            placeholder="Enter  password..."
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Label>conform password </Label>
-          <Input
-            type="password"
-            required
-            placeholder="Conform Password..."
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <Button onClick={handleSigninClick}>Sing in</Button>
-        </Row>
+        <Form onSubmit={handleSigninClick} noValidate>
+          <Row>
+            <Label>user name </Label>
+            <Input
+              type="text"
+              name="name"
+              required
+              placeholder="Enter your name..."
+              onChange={handleFormData}
+            />
+            <P>{errMessage.nameErr && errMessage.nameErr}</P>
+          </Row>
+          <Row>
+            <Label>email </Label>
+            <Input
+              type="email"
+              name="email"
+              required
+              placeholder="Enter your email..."
+              onChange={handleFormData}
+            />
+            <P>{errMessage.emailErr && errMessage.emailErr}</P>
+          </Row>
+          <Row>
+            <Label>password </Label>
+            <Input
+              type="password"
+              name="password"
+              required
+              placeholder="Enter  password..."
+              onChange={handleFormData}
+            />
+            <P>{errMessage.passwordErr && errMessage.passwordErr}</P>
+          </Row>
+          <Row>
+            <Label>conform password </Label>
+            <Input
+              type="password"
+              name="confirmPassword"
+              required
+              placeholder="Conform Password..."
+              onChange={handleFormData}
+            />
+            <P>
+              {errMessage.confirmPasswordErr && errMessage.confirmPasswordErr}
+            </P>
+          </Row>
+          <Button>Sing in</Button>
+        </Form>
       </Container>
     </Section>
   );

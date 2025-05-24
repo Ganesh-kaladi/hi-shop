@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import LoginForm from "../components/forms/LoginForm";
 import { useSelector } from "react-redux";
 import Spinner from "../components/spinner/Spinner";
+import { toast } from "react-toastify";
 
 const Section = styled.section`
-  margin-top: 56px;
+  margin-top: 52px;
 
   @media (max-width: 486px) {
     margin-top: 40px;
@@ -32,7 +33,9 @@ const Section = styled.section`
 const Container = styled.div`
   width: 420px;
   margin: 0 auto;
-  background-color: #ced9db65;
+  background-color: #f3f3f3;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 12px 1px #47474758;
 
   @media (max-width: 486px) {
     width: 360px;
@@ -40,15 +43,17 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 1.6rem;
-  background-color: #5a8383;
-  padding: 1.2rem;
+  font-size: 1.4rem;
+  background-color: #8f8f8f;
+  padding: 0.9rem;
   text-align: center;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
   color: #fff;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
 `;
 
 const Row = styled.div`
@@ -71,7 +76,7 @@ const Row = styled.div`
 
 const LoginBody = styled.div`
   width: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 1rem;
 `;
 
 const Span = styled.span`
@@ -90,6 +95,10 @@ const List = styled.ul`
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+`;
+
+const ListItem = styled.li`
+  font-size: 0.9rem;
 `;
 
 const Navigation = styled(Link)`
@@ -121,12 +130,12 @@ function Login() {
               <LoginForm />
               <Span>or</Span>
               <Row type="icon-box">
-                <FaFacebook size={32} color=" #0ddbff" />
-                <FaTwitter size={32} color=" #0995ad" />
-                <FaGoogle size={32} color=" #ee291a" />
+                <FaFacebook size={30} color=" #0ddbff" />
+                <FaTwitter size={30} color=" #0995ad" />
+                <FaGoogle size={30} color=" #ee291a" />
               </Row>
               <List>
-                <li>
+                <ListItem>
                   Forget &nbsp;
                   <Navigation to="/username-find">
                     <Anchor>Username</Anchor>
@@ -135,13 +144,13 @@ function Login() {
                   <Navigation to="/forget-password">
                     <Anchor> Password</Anchor>
                   </Navigation>
-                </li>
-                <li>
+                </ListItem>
+                <ListItem>
                   Don't have an account?
                   <Navigation to="/sign-up">
                     <Anchor>&nbsp;Sign Up</Anchor>
                   </Navigation>
-                </li>
+                </ListItem>
               </List>
             </LoginBody>
           </Row>

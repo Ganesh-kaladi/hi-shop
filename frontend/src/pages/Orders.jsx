@@ -2,10 +2,13 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import Order from "../components/orders/Order";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrders } from "../slice/orderSlice";
+import { clearOrder, getAllOrders } from "../slice/orderSlice";
 import NoOrders from "../components/orders/NoOrders";
 import { clearAuth } from "../slice/authSlice";
 import { useNavigate } from "react-router-dom";
+import Spinner, { Loading } from "../components/spinner/Spinner";
+import { clearCart } from "../slice/cartSlice";
+import { clearCheckOut } from "../slice/checkOutSlice";
 
 const Block = styled.div`
   padding: 1rem;
@@ -64,7 +67,9 @@ const H3 = styled.h3`
 `;
 
 function Orders() {
-  const { orders, orderError } = useSelector((state) => state.order);
+  const { orders, isLoadingOrder, orderJWT } = useSelector(
+    (state) => state.order
+  );
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -81,24 +86,27 @@ function Orders() {
 
   useEffect(
     function () {
-      if (orderError === "TokenExpiredError") {
+      if (orderJWT === "TokenExpiredError") {
         dispatch(clearAuth());
+        dispatch(clearCart());
+        dispatch(clearOrder());
+        dispatch(clearCheckOut());
         navigate("/login");
       }
     },
-    [dispatch, navigate, orderError]
+    [dispatch, navigate, orderJWT]
   );
 
   return (
     <Block>
-      {orders?.length > 0 ? (
+      {isLoadingOrder && <Loading />}
+      {!isLoadingOrder && orders?.length > 0 && (
         <div>
           <H3>Orders</H3>
           <Order />
         </div>
-      ) : (
-        <NoOrders />
       )}
+      {!isLoadingOrder && orders?.length < 0 && <NoOrders />}
     </Block>
   );
 }

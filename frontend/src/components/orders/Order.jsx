@@ -302,9 +302,9 @@ function Order() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  function handleSingleOrder(id) {
-    dispatch(getSingleOrder({ id, token }));
-  }
+  // function handleSingleOrder(id) {
+  //   dispatch(getSingleOrder({ id, token }));
+  // }
   return (
     <>
       {orders?.length < 0 && <p>No Orders</p>}
@@ -330,7 +330,7 @@ function Order() {
                     <NavIcon
                       onClick={() => {
                         navigate(`/orders/${el._id}`);
-                        handleSingleOrder(el._id);
+                        // handleSingleOrder(el._id);
                       }}
                     >
                       <FaArrowRight />

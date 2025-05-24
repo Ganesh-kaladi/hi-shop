@@ -57,6 +57,7 @@ const orderSlice = createSlice({
     isLoadingOrder: false,
     orderError: null,
     statusOrder: null,
+    orderJWT: null,
   },
   reducers: {
     removeOrderError(state, action) {
@@ -67,6 +68,10 @@ const orderSlice = createSlice({
       state.isLoadingOrder = false;
       state.orderError = null;
       state.statusOrder = null;
+      state.singleOrder = null;
+      state.orderJWT = null;
+    },
+    clearSingleOrder(state, action) {
       state.singleOrder = null;
     },
   },
@@ -85,7 +90,8 @@ const orderSlice = createSlice({
       })
       .addCase(createOrder.rejected, function (state, action) {
         state.isLoadingOrder = false;
-        state.orderError = action.payload.error.name;
+        // state.orderError = action.payload.error.name;
+        state.orderJWT = action.payload?.message?.name;
       })
 
       //get all orders
@@ -101,7 +107,8 @@ const orderSlice = createSlice({
       })
       .addCase(getAllOrders.rejected, function (state, action) {
         state.isLoadingOrder = false;
-        state.orderError = action.payload?.error?.name;
+        state.orderJWT = action.payload?.message?.name;
+        // state.orderError = action.payload?.error?.name;
       })
 
       //get single orders
@@ -117,11 +124,13 @@ const orderSlice = createSlice({
       })
       .addCase(getSingleOrder.rejected, function (state, action) {
         state.isLoadingOrder = false;
-        state.orderError = action.payload.error.name;
+        // state.orderError = action.payload?.error?.name;
+        state.orderJWT = action.payload?.message?.name;
       });
   },
 });
 
-export const { removeOrderError, clearOrder } = orderSlice.actions;
+export const { removeOrderError, clearOrder, clearSingleOrder } =
+  orderSlice.actions;
 
 export default orderSlice.reducer;

@@ -33,7 +33,7 @@ exports.authorizationRole = (role) => {
 
 const sendJwtToken = catchAsync(async (id, statusCode, res) => {
   const token = await jwt.sign({ id }, process.env.JWT_PASSWORD, {
-    expiresIn: 60 * 60,
+    expiresIn: 24 * 60 * 60,
   });
   res.status(statusCode).json({
     status: "success",

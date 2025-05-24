@@ -2,6 +2,13 @@ import styled from "styled-components";
 import OrderDelivered from "../components/orders/OrderDelivered";
 // import OrderReturned from "../components/orders/OrderReturned";
 import OrderPayment from "../components/orders/OrderPayment";
+import ErrorMessage from "../ErrorMessage";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { Loading } from "../components/spinner/Spinner";
+import { useEffect } from "react";
+import { clearSingleOrder, getSingleOrder } from "../slice/orderSlice";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
   width: 80%;
@@ -63,16 +70,40 @@ const List = styled.div`
 `;
 
 function SingleOrder() {
-  // const { singleOrder } = useSelector((state) => state.order);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { singleOrder, isLoadingOrder } = useSelector((state) => state.order);
+  const { token } = useSelector((state) => state.auth);
+
+  useEffect(
+    function () {
+      if (!id) return;
+      dispatch(getSingleOrder({ id, token }));
+      return () => dispatch(clearSingleOrder());
+    },
+    [id, dispatch, token]
+  );
+
+  // useEffect(function () {
+  //   return () => {
+  //     dispatch(clearSingleOrder());
+  //   };
+  // }, []);
   return (
     <Container>
-      <Grid>
-        <List>
-          <OrderDelivered />
-          {/* <OrderReturned /> */}
-        </List>
-        <OrderPayment />
-      </Grid>
+      {!singleOrder && isLoadingOrder && <Loading />}
+      {!isLoadingOrder && singleOrder && (
+        <Grid>
+          <List>
+            <OrderDelivered />
+            {/* <OrderReturned /> */}
+          </List>
+          <OrderPayment />
+        </Grid>
+      )}
+      {(singleOrder === null || undefined) && !isLoadingOrder && (
+        <ErrorMessage />
+      )}
     </Container>
   );
 }

@@ -4,9 +4,11 @@ import CartList from "../components/cart/CartList";
 import CheckOut from "../components/cart/CheckOut";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../components/spinner/Spinner";
-import { getCartItems } from "../slice/cartSlice";
+import Spinner, { Loading } from "../components/spinner/Spinner";
+import { clearCart, getCartItems } from "../slice/cartSlice";
 import { clearAuth } from "../slice/authSlice";
+import { clearOrder } from "../slice/orderSlice";
+import { clearCheckOut } from "../slice/checkOutSlice";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -174,7 +176,7 @@ const Button = styled.button`
 `;
 
 function Cart() {
-  const { cart, isLoadingCart, cartError } = useSelector((state) => state.cart);
+  const { cart, isLoadingCart, cartJWT } = useSelector((state) => state.cart);
   const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -191,24 +193,28 @@ function Cart() {
 
   useEffect(
     function () {
-      if (cartError === "TokenExpiredError") {
+      if (cartJWT === "TokenExpiredError") {
         dispatch(clearAuth());
+        dispatch(clearCart());
+        dispatch(clearOrder());
+        dispatch(clearCheckOut());
         navigate("/login");
       }
     },
-    [navigate, cartError, dispatch]
+    [navigate, cartJWT, dispatch]
   );
 
   return (
     <>
-      {isLoadingCart && <Spinner />}
+      {isLoadingCart && <Loading />}
       <Container>
-        {cart?.length > 0 ? (
+        {cart?.length > 0 && (
           <Grid>
             <CartList />
             <CheckOut />
           </Grid>
-        ) : (
+        )}
+        {cart?.length <= 0 && (
           <EmptyContainer>
             <Empty>
               <H4>🛒 Your Cart is Currently Empty</H4>

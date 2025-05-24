@@ -137,4 +137,65 @@ function Spinner() {
   );
 }
 
+// 🔁 Spinner animation
+const spin = keyframes`
+   0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+const spinColor = keyframes`
+  0%   { border-top:3px solid #2e2e2e; }   /* Indigo */
+  33%  { border-right:3px solid #2e2e2e; }   /* Green */
+  66%  { border-bottom:3px solid #2e2e2e;}   /* Amber */
+  100% { border-left:3px solid #2e2e2e; }   /* Back to Indigo */
+`;
+// 🌀 Styled spinner
+const SpinRotate = styled.div`
+  border-radius: 50%;
+  width: 1.8rem;
+  height: 1.8rem;
+  animation: ${spinColor} 0.3s linear infinite;
+  margin-right: 10px;
+  padding: 0.8rem;
+`;
+
+// 🔄 Container for spinner + text
+const LoadingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #333;
+  font-size: 2rem;
+  height: 5rem;
+`;
+
+const Division = styled.div`
+  width: 50%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 8px 0px #423d4138;
+  border-radius: 1rem;
+`;
+
+const LoadingText = styled.span`
+  font-weight: 500;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+`;
+
+export const Loading = () => {
+  return (
+    <LoadingWrapper>
+      <Division>
+        <SpinRotate />
+        <LoadingText>loading...</LoadingText>
+      </Division>
+    </LoadingWrapper>
+  );
+};
+
 export default Spinner;

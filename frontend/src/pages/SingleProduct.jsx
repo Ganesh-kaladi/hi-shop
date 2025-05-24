@@ -3,9 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, removeProduct } from "../slice/singleProductSlice";
-import { addToCart } from "../slice/cartSlice";
-import CheckIsInCart from "../assets/logics/checkIsInCart";
+import { addToCart, clearCart } from "../slice/cartSlice";
+import useCheckIsInCart from "../assets/logics/checkIsInCart";
 import Spinner from "../components/spinner/Spinner";
+import { clearAuth } from "../slice/authSlice";
+import { clearOrder } from "../slice/orderSlice";
+import { clearCheckOut } from "../slice/checkOutSlice";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -584,7 +588,7 @@ function SingleProduct() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, singleDoc } = useSelector((state) => state.singleProduct);
-  const { cart } = useSelector((state) => state.cart);
+  const { cartJWT, isLoadingCart } = useSelector((state) => state.cart);
   const { token } = useSelector((state) => state.auth);
 
   const [pColor, setPColor] = useState({
@@ -654,6 +658,7 @@ function SingleProduct() {
     setPQuantity((cur) => (cur > 1 ? cur - 1 : cur));
   }
 
+  let val = false;
   function handleAddToCart() {
     const erValidate = validateErr();
 
@@ -662,6 +667,9 @@ function SingleProduct() {
       return;
     }
     setErrMessage({});
+    if (!token) {
+      navigate("/login");
+    }
     dispatch(
       addToCart({
         data: {
@@ -672,12 +680,30 @@ function SingleProduct() {
         },
         token,
       })
-    );
+    ).then((res) => {
+      console.log(res);
+      if (res.payload.status === "success") {
+        toast.success("added to cart.");
+      }
+    });
   }
 
-  let val = false;
-  // const val = CheckIsInCart(singleDoc?._id, cart);
+  useEffect(
+    function () {
+      if (cartJWT === "TokenExpiredError") {
+        dispatch(clearAuth());
+        dispatch(clearCart());
+        dispatch(clearOrder());
+        dispatch(clearCheckOut());
+        navigate("/login");
+      }
+    },
+    [navigate, cartJWT, dispatch]
+  );
+
+  // const val = CheckIsInCart(singleDoc?._id);
   // console.log(val);
+  // val = useCheckIsInCart(singleDoc?._id);
   return (
     <>
       {isLoading && <Spinner />}
@@ -741,7 +767,9 @@ function SingleProduct() {
                       go to Cart
                     </CartBtn>
                   ) : (
-                    <CartBtn onClick={handleAddToCart}>Add to cart</CartBtn>
+                    <CartBtn onClick={handleAddToCart}>
+                      {isLoadingCart ? "adding..." : "Add to cart"}
+                    </CartBtn>
                   )}
                 </CartContainer>
                 <WhislistContainer>
