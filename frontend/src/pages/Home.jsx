@@ -1,20 +1,6 @@
 import Banner from "../components/banners/Banner";
 import Collection from "../components/collections/Collection";
 
-import men__col__1 from "../assets/feature/men-top.jpeg";
-import men__col__2 from "../assets/feature/men-bottom.jpeg";
-import men__col__3 from "../assets/feature/men-footware.jpeg";
-import men__col__4 from "../assets/feature/men-acc.jpeg";
-
-import women__col__1 from "../assets/feature/women-top.jpeg";
-import women__col__2 from "../assets/feature/women-bottom.jpeg";
-import women__col__3 from "../assets/feature/women-footer.jpeg";
-import women__col__4 from "../assets/feature/women-acc.jpeg";
-
-import kid__col__1 from "../assets/feature/kid-top.jpeg";
-import kid__col__2 from "../assets/feature/kid-bottomware.jpeg";
-import kid__col__3 from "../assets/feature/kid-footware.jpeg";
-import kid__col__4 from "../assets/feature/kid-acc.jpeg";
 import Deals from "../components/collections/Deals";
 // import PopularProduct from "../components/product/PopularProduct";
 import InfoBlocks from "../components/InfoBlock";
@@ -28,28 +14,32 @@ const menCollection = {
   col: [
     {
       id: 1,
-      image: men__col__1,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172076/men-top_hu4pps.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "TopWare",
     },
     {
       id: 2,
-      image: men__col__2,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172111/men-bottom_q6m46q.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "BottomWare",
     },
     {
       id: 3,
-      image: men__col__3,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172147/men-footware_qu5npt.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "Fottware",
     },
     {
       id: 4,
-      image: men__col__4,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172158/men-acc_jiqepn.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "Accessories",
@@ -63,28 +53,32 @@ const womenCollection = {
   col: [
     {
       id: 5,
-      image: women__col__1,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172152/women-top_wcawk9.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "TopWare",
     },
     {
       id: 6,
-      image: women__col__2,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172167/women-bottom_um2wm8.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "BottomWare",
     },
     {
       id: 7,
-      image: women__col__3,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172186/women-footer_xth2bg.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "Fottware",
     },
     {
       id: 8,
-      image: women__col__4,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172206/women-acc_rvpryc.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "Accessories",
@@ -98,28 +92,32 @@ const kidCollection = {
   col: [
     {
       id: 5,
-      image: kid__col__1,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172223/kid-top_pwytsp.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "TopWare",
     },
     {
       id: 6,
-      image: kid__col__2,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172230/kid-bottomware_apbbn8.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "BottomWare",
     },
     {
       id: 7,
-      image: kid__col__3,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172228/kid-footware_dfqg9q.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "Fottware",
     },
     {
       id: 8,
-      image: kid__col__4,
+      image:
+        "https://res.cloudinary.com/drbklccpt/image/upload/t_discount-images/v1748172240/kid-acc_hoomyy.jpg",
       description:
         "A variety of casual t-shirts, shirts, and jackets for every occasion.",
       category: "Accessories",
@@ -128,8 +126,8 @@ const kidCollection = {
 };
 
 const Container = styled.div`
-  margin: var(--container-margin);
-  width: var(--container-width);
+  margin: 0 auto;
+  width: 90%;
 `;
 
 function Home() {

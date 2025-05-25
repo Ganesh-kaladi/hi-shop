@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import UserNav from "../components/navbar/UserNav";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const Container = styled.div`
   margin: 0 auto;

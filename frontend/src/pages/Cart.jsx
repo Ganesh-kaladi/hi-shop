@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import CartList from "../components/cart/CartList";
 import CheckOut from "../components/cart/CheckOut";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Spinner, { Loading } from "../components/spinner/Spinner";
+import { Loading } from "../components/spinner/Spinner";
 import { clearCart, getCartItems } from "../slice/cartSlice";
 import { clearAuth } from "../slice/authSlice";
 import { clearOrder } from "../slice/orderSlice";
@@ -208,13 +208,13 @@ function Cart() {
     <>
       {isLoadingCart && <Loading />}
       <Container>
-        {cart?.length > 0 && (
+        {!isLoadingCart && cart?.length > 0 && (
           <Grid>
             <CartList />
             <CheckOut />
           </Grid>
         )}
-        {cart?.length <= 0 && (
+        {!isLoadingCart && cart?.length <= 0 && (
           <EmptyContainer>
             <Empty>
               <H4>🛒 Your Cart is Currently Empty</H4>

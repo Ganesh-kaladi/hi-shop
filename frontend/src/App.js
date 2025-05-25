@@ -23,6 +23,7 @@ import SignUp from "./pages/SignUp";
 import AdminPRoduct from "./pages/admin/AdminPRoduct";
 import PlaceOrder from "./pages/PlaceOrder";
 import { ToastContainer } from "react-toastify";
+import ScrollToTop from "./assets/logics/ScrollToTop";
 
 function App() {
   return (
@@ -86,6 +87,8 @@ function App() {
             <Route path="create-product" element={<AdminPRoduct />} />
           </Route>
         </Routes>
+
+        <ScrollToTop />
       </BrowserRouter>
       <ToastContainer autoClose={3000} />
     </>

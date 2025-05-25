@@ -9,7 +9,7 @@ import {
   getAllProducts,
   getAllProductsBasedOnQuery,
 } from "../slice/allProductSlice";
-import Spinner from "../components/spinner/Spinner";
+import { Loading } from "../components/spinner/Spinner";
 import Arrange from "../components/navbar/Arrange";
 import ErrorMessage from "../ErrorMessage";
 
@@ -102,18 +102,18 @@ const P = styled.p`
 
 function Products() {
   const dispatch = useDispatch();
-  const { isPending, products, query } = useSelector(
+  const { isPending, products, query, fecthing } = useSelector(
     (state) => state.allProduct
   );
 
   useEffect(
     function () {
-      if (products?.length > 0) {
+      if (fecthing) {
         return;
       }
       dispatch(getAllProducts());
     },
-    [dispatch]
+    [dispatch, fecthing]
   );
 
   useEffect(
@@ -126,20 +126,18 @@ function Products() {
 
   return (
     <>
-      {isPending && <Spinner />}
       <Container>
         <Category />
         <Grid>
           <AsideBar />
           <div>
-            {isPending === false && (products === null || undefined) && (
-              <ErrorMessage />
+            {!isPending && (products === null || undefined) && <ErrorMessage />}
+            {!isPending && products?.length <= 0 && (
+              <P>No products based on your condition.</P>
             )}
-            {isPending === false && products?.length <= 0 && (
-              <P>No products based your condition.</P>
-            )}
+            {isPending && <Loading />}
             <ProductGrid type="product">
-              {isPending === false &&
+              {!isPending &&
                 products?.map((el) => (
                   <Product key={el._id} product={el} id={el._id} />
                 ))}

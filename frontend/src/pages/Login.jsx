@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import LoginForm from "../components/forms/LoginForm";
 import { useSelector } from "react-redux";
 import Spinner from "../components/spinner/Spinner";
-import { toast } from "react-toastify";
 
 const Section = styled.section`
   margin-top: 52px;
@@ -117,11 +116,11 @@ const Anchor = styled.span`
 `;
 
 function Login() {
-  const { isPending } = useSelector((state) => state.auth);
+  const { isAuthLoading } = useSelector((state) => state.auth);
 
   return (
     <>
-      {isPending && <Spinner />}
+      {isAuthLoading && <Spinner />}
       <Section>
         <Container>
           <Title>Login</Title>

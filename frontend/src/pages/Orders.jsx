@@ -6,7 +6,7 @@ import { clearOrder, getAllOrders } from "../slice/orderSlice";
 import NoOrders from "../components/orders/NoOrders";
 import { clearAuth } from "../slice/authSlice";
 import { useNavigate } from "react-router-dom";
-import Spinner, { Loading } from "../components/spinner/Spinner";
+import { Loading } from "../components/spinner/Spinner";
 import { clearCart } from "../slice/cartSlice";
 import { clearCheckOut } from "../slice/checkOutSlice";
 

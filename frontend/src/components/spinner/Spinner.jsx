@@ -137,11 +137,10 @@ function Spinner() {
   );
 }
 
-// 🔁 Spinner animation
-const spin = keyframes`
-   0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-`;
+// const spin = keyframes`
+//    0% { transform: rotate(0deg); }
+//   100% { transform: rotate(360deg); }
+// `;
 
 const spinColor = keyframes`
   0%   { border-top:3px solid #2e2e2e; }   /* Indigo */
@@ -149,7 +148,7 @@ const spinColor = keyframes`
   66%  { border-bottom:3px solid #2e2e2e;}   /* Amber */
   100% { border-left:3px solid #2e2e2e; }   /* Back to Indigo */
 `;
-// 🌀 Styled spinner
+
 const SpinRotate = styled.div`
   border-radius: 50%;
   width: 1.8rem;
@@ -159,7 +158,6 @@ const SpinRotate = styled.div`
   padding: 0.8rem;
 `;
 
-// 🔄 Container for spinner + text
 const LoadingWrapper = styled.div`
   display: flex;
   align-items: center;

@@ -4,7 +4,6 @@ import OrderDelivered from "../components/orders/OrderDelivered";
 import OrderPayment from "../components/orders/OrderPayment";
 import ErrorMessage from "../ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { Loading } from "../components/spinner/Spinner";
 import { useEffect } from "react";
 import { clearSingleOrder, getSingleOrder } from "../slice/orderSlice";

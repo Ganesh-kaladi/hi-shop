@@ -225,7 +225,7 @@ function SignUp() {
         dispatch(clearAuth());
       }
     },
-    [authValidationError]
+    [authValidationError, dispatch]
   );
 
   return (

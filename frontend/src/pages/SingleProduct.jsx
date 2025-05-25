@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails, removeProduct } from "../slice/singleProductSlice";
 import { addToCart, clearCart } from "../slice/cartSlice";
-import useCheckIsInCart from "../assets/logics/checkIsInCart";
-import Spinner from "../components/spinner/Spinner";
+// import useCheckIsInCart from "../assets/logics/checkIsInCart";
+import { Loading } from "../components/spinner/Spinner";
 import { clearAuth } from "../slice/authSlice";
 import { clearOrder } from "../slice/orderSlice";
 import { clearCheckOut } from "../slice/checkOutSlice";
@@ -576,13 +576,13 @@ const Features = styled.ul`
   }
 `;
 
-const SimilarProductsContainer = styled.div``;
+// const SimilarProductsContainer = styled.div``;
 
-const H1 = styled.h1`
-  font-size: 2rem;
-  padding-left: 10px;
-  margin-bottom: 1.1rem;
-`;
+// const H1 = styled.h1`
+//   font-size: 2rem;
+//   padding-left: 10px;
+//   margin-bottom: 1.1rem;
+// `;
 
 function SingleProduct() {
   const navigate = useNavigate();
@@ -705,105 +705,104 @@ function SingleProduct() {
   // console.log(val);
   // val = useCheckIsInCart(singleDoc?._id);
   return (
-    <>
-      {isLoading && <Spinner />}
-      <Container>
-        {singleDoc && (
-          <section>
-            <Grid>
-              <ImageContainer>
-                <Image src={singleDoc.image[1]} alt="..." />
-              </ImageContainer>
-              <TextContainer>
-                <Title>{singleDoc.title}</Title>
-                <p>
-                  ⭐⭐⭐⭐⭐<b>{singleDoc.ratings}</b> <span>(343)</span>
-                </p>
-                <PriceContainer>
-                  <Price>₹{singleDoc.discountPrice}/-</Price>
-                  <ActualPrice>₹{singleDoc.price}/-</ActualPrice>
-                </PriceContainer>
+    <Container>
+      {" "}
+      {isLoading && <Loading />}
+      {singleDoc && (
+        <section>
+          <Grid>
+            <ImageContainer>
+              <Image src={singleDoc.image[1]} alt="..." />
+            </ImageContainer>
+            <TextContainer>
+              <Title>{singleDoc.title}</Title>
+              <p>
+                ⭐⭐⭐⭐⭐<b>{singleDoc.ratings}</b> <span>(343)</span>
+              </p>
+              <PriceContainer>
+                <Price>₹{singleDoc.discountPrice}/-</Price>
+                <ActualPrice>₹{singleDoc.price}/-</ActualPrice>
+              </PriceContainer>
 
-                <ColorContainer>
-                  <H4>color</H4>
-                  <div>
-                    {singleDoc.color?.map((el, i) => (
-                      <Color
-                        key={i}
-                        color={el}
-                        onClick={() => handleColor(i, el)}
-                        isClickedColor={pColor.id === i && pColor.isSelectColor}
-                      ></Color>
-                    ))}
-                    {errMessage.colorErr && <P>{errMessage.colorErr}</P>}
-                  </div>
-                </ColorContainer>
-                <SizeContainer>
-                  <H4>size</H4>
-                  <div>
-                    {singleDoc.size?.map((el, i) => (
-                      <Size
-                        key={i}
-                        onClick={() => handleSize(i, el)}
-                        isClickedSize={pSize.id === i && pSize.isSelectSize}
-                      >
-                        {el}
-                      </Size>
-                    ))}
-                    {errMessage.sizeErr && <P>{errMessage.sizeErr}</P>}
-                  </div>
-                </SizeContainer>
-                <QuantityContainer>
-                  <H4>quantity</H4>
-                  <div>
-                    <QuantityBtn onClick={handleQuntityDec}>-</QuantityBtn>
-                    <QuantityBtn>{pQuntity}</QuantityBtn>
-                    <QuantityBtn onClick={handleQuntityInc}>+</QuantityBtn>
-                  </div>
-                </QuantityContainer>
-                <CartContainer>
-                  {val ? (
-                    <CartBtn onClick={() => navigate("/cart")}>
-                      go to Cart
-                    </CartBtn>
-                  ) : (
-                    <CartBtn onClick={handleAddToCart}>
-                      {isLoadingCart ? "adding..." : "Add to cart"}
-                    </CartBtn>
-                  )}
-                </CartContainer>
-                <WhislistContainer>
-                  <WishListBtn>SAVE TO WISHLIST</WishListBtn>
-                </WhislistContainer>
-              </TextContainer>
-            </Grid>
-            <ProductDetails>
-              <DescriptionContainer>
-                <H3>Description</H3>
-                <DescriptionPara>{singleDoc.description}</DescriptionPara>
-              </DescriptionContainer>
-              <FeaturesContainer>
-                <FeatureH4>Features:</FeatureH4>
-                <Features>
-                  {singleDoc.highlights?.length > 0 &&
-                    singleDoc.highlights?.map((el, i) => <li key={i}>{el}</li>)}
-                </Features>
-              </FeaturesContainer>
-            </ProductDetails>
+              <ColorContainer>
+                <H4>color</H4>
+                <div>
+                  {singleDoc.color?.map((el, i) => (
+                    <Color
+                      key={i}
+                      color={el}
+                      onClick={() => handleColor(i, el)}
+                      isClickedColor={pColor.id === i && pColor.isSelectColor}
+                    ></Color>
+                  ))}
+                  {errMessage.colorErr && <P>{errMessage.colorErr}</P>}
+                </div>
+              </ColorContainer>
+              <SizeContainer>
+                <H4>size</H4>
+                <div>
+                  {singleDoc.size?.map((el, i) => (
+                    <Size
+                      key={i}
+                      onClick={() => handleSize(i, el)}
+                      isClickedSize={pSize.id === i && pSize.isSelectSize}
+                    >
+                      {el}
+                    </Size>
+                  ))}
+                  {errMessage.sizeErr && <P>{errMessage.sizeErr}</P>}
+                </div>
+              </SizeContainer>
+              <QuantityContainer>
+                <H4>quantity</H4>
+                <div>
+                  <QuantityBtn onClick={handleQuntityDec}>-</QuantityBtn>
+                  <QuantityBtn>{pQuntity}</QuantityBtn>
+                  <QuantityBtn onClick={handleQuntityInc}>+</QuantityBtn>
+                </div>
+              </QuantityContainer>
+              <CartContainer>
+                {val ? (
+                  <CartBtn onClick={() => navigate("/cart")}>
+                    go to Cart
+                  </CartBtn>
+                ) : (
+                  <CartBtn onClick={handleAddToCart}>
+                    {isLoadingCart ? "adding..." : "Add to cart"}
+                  </CartBtn>
+                )}
+              </CartContainer>
+              <WhislistContainer>
+                <WishListBtn>SAVE TO WISHLIST</WishListBtn>
+              </WhislistContainer>
+            </TextContainer>
+          </Grid>
+          <ProductDetails>
+            <DescriptionContainer>
+              <H3>Description</H3>
+              <DescriptionPara>{singleDoc.description}</DescriptionPara>
+            </DescriptionContainer>
+            <FeaturesContainer>
+              <FeatureH4>Features:</FeatureH4>
+              <Features>
+                {singleDoc.highlights?.length > 0 &&
+                  singleDoc.highlights?.map((el, i) => <li key={i}>{el}</li>)}
+              </Features>
+            </FeaturesContainer>
+          </ProductDetails>
 
-            {/* <SimilarProductsContainer>
+          {/* <SimilarProductsContainer>
               <H1>similar products</H1>
               <p>similar products api not completed...</p> */}
-            {/* <SProducts>
+          {/* <SProducts>
               {arrImage.map((el) => (
                 <Product image={el} />
               ))}
             </SProducts> */}
-            {/* </SimilarProductsContainer> */}
-          </section>
-        )}
-      </Container>
-    </>
+          {/* </SimilarProductsContainer> */}
+        </section>
+      )}
+    </Container>
   );
 }
 

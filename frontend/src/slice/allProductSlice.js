@@ -36,6 +36,7 @@ const allProductSlice = createSlice({
     category: "",
     fields: "",
     query: "",
+    fecthing: false,
   },
   reducers: {
     removeProducts(state, action) {
@@ -53,6 +54,15 @@ const allProductSlice = createSlice({
         state.fields
       }`;
     },
+    clearAllProducts(state, action) {
+      state.products = null;
+      state.isPending = false;
+      state.error = null;
+      state.category = "";
+      state.fields = "";
+      state.query = "";
+      state.fecthing = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -67,6 +77,7 @@ const allProductSlice = createSlice({
             ? undefined
             : action.payload.data.doc;
         state.isPending = false;
+        state.fecthing = true;
       })
       .addCase(getAllProducts.rejected, function (state, action) {
         state.isPending = false;
@@ -91,6 +102,7 @@ const allProductSlice = createSlice({
   },
 });
 
-export const { removeProducts, addQuery } = allProductSlice.actions;
+export const { removeProducts, addQuery, clearAllProducts } =
+  allProductSlice.actions;
 
 export default allProductSlice.reducer;

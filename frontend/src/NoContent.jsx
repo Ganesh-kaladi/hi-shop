@@ -1,4 +1,3 @@
-import { Children } from "react";
 import styled from "styled-components";
 
 const CenteredWrapper = styled.div`
@@ -24,26 +23,26 @@ const Title = styled.h2`
   margin-bottom: 1rem;
 `;
 
-const Message = styled.p`
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 1.5rem;
-`;
+// const Message = styled.p`
+//   font-size: 1rem;
+//   color: #666;
+//   margin-bottom: 1.5rem;
+// `;
 
-const ShopButton = styled.button`
-  background-color: #007bff;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
+// const ShopButton = styled.button`
+//   background-color: #007bff;
+//   color: white;
+//   padding: 0.75rem 1.5rem;
+//   border: none;
+//   border-radius: 8px;
+//   font-size: 1rem;
+//   cursor: pointer;
+//   transition: background 0.3s ease;
 
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
+//   &:hover {
+//     background-color: #0056b3;
+//   }
+// `;
 
 const NoContent = ({ children }) => {
   return (

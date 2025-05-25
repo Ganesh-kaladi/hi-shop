@@ -18,7 +18,6 @@ const handleValidationError = (err) => {
 };
 
 const sendProductionErr = (err, res) => {
-  console.log(`----------${err}`);
   //operational error
   if (err.isOperational) {
     res.status(err.statusCode).json({

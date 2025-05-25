@@ -10,8 +10,6 @@ const reviewRoutes = require("./routes/reviewRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
-// console.log(process.env.NODE_ENV);
-
 app.use(cors());
 
 app.use(express.json());

@@ -33,6 +33,6 @@ export function useCheckOut() {
         })
       );
     },
-    [cart]
+    [cart, dispatch, bagTotal, discount, gstAmt, totalAmt]
   );
 }

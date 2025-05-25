@@ -92,7 +92,7 @@ function LoginForm() {
       if (!token) {
         return;
       }
-      navigate("/");
+      navigate("/products");
     },
     [token, navigate]
   );
@@ -116,7 +116,7 @@ function LoginForm() {
         dispatch(clearAuth());
       }
     },
-    [authError]
+    [authError, dispatch]
   );
 
   function handleLoginClick() {

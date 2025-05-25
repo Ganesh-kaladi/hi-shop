@@ -76,7 +76,7 @@ const authSlice = createSlice({
     token: localStorage.getItem("hi-shop-token") || null,
     isAuthenticated: !!localStorage.getItem("hi-shop-token"),
     authError: null,
-    isAuthPending: false,
+    isAuthLoading: false,
     address: [],
     authValidationError: [],
   },
@@ -90,7 +90,7 @@ const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
       state.authError = null;
-      // state.isAuthPending = false;
+      // state.isAuthLoading = false;
       state.address = [];
       state.authValidationError = null;
       localStorage.removeItem("hi-shop-token");
@@ -101,58 +101,58 @@ const authSlice = createSlice({
     builder
       //login
       .addCase(loginUser.pending, function (state) {
-        state.isAuthPending = true;
+        state.isAuthLoading = true;
       })
       .addCase(loginUser.fulfilled, function (state, action) {
         state.token = action.payload.token;
         localStorage.setItem("hi-shop-token", action.payload.token);
         state.isAuthenticated = true;
-        state.isAuthPending = false;
+        state.isAuthLoading = false;
       })
       .addCase(loginUser.rejected, function (state, action) {
         state.authError = action.payload.error;
         state.isAuthenticated = false;
-        state.isAuthPending = false;
+        state.isAuthLoading = false;
       })
 
       //sign in
       .addCase(signinUser.pending, function (state, action) {
-        state.isAuthPending = true;
+        state.isAuthLoading = true;
       })
       .addCase(signinUser.fulfilled, function (state, action) {
         state.token = action.payload.token;
-        state.isAuthPending = false;
+        state.isAuthLoading = false;
         state.isAuthenticated = true;
         localStorage.setItem("hi-shop-token", action.payload.token);
       })
       .addCase(signinUser.rejected, function (state, action) {
         state.authValidationError = action.payload.error.split(".");
-        state.isAuthPending = false;
+        state.isAuthLoading = false;
       })
 
       //get address
       .addCase(getUserAddress.pending, function (state) {
-        state.isAuthPending = true;
+        state.isAuthLoading = true;
       })
       .addCase(getUserAddress.fulfilled, function (state, action) {
         state.address = action.payload.data.user.address;
-        state.isAuthPending = false;
+        state.isAuthLoading = false;
       })
       .addCase(getUserAddress.rejected, function (state, action) {
         state.authError = action.payload;
-        state.isAuthPending = false;
+        state.isAuthLoading = false;
       })
 
       //add address
       .addCase(addUserAddress.pending, function (state) {
-        state.isAuthPending = true;
+        state.isAuthLoading = true;
       })
       .addCase(addUserAddress.fulfilled, function (state, action) {
-        state.isAuthPending = false;
+        state.isAuthLoading = false;
       })
       .addCase(addUserAddress.rejected, function (state, action) {
         state.authError = action.payload;
-        state.isAuthPending = false;
+        state.isAuthLoading = false;
       });
   },
 });

@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { FaArrowRight } from "react-icons/fa6";
-import image from "../../assets/product/shirt-2.jpg";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getSingleOrder } from "../../slice/orderSlice";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   border: 1px solid #d3ceced6;
@@ -82,25 +80,6 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   padding: 0;
-  /* margin-bottom: 2rem; */
-
-  /* @media (max-width: 480px) {
-    padding: 0;
-  }
-
-  @media (min-width: 487px) and (max-width: 576px) {
-    padding: 0;
-  }
-
-  @media (min-width: 577px) and (max-width: 768px) {
-    padding: 0;
-  }
-
-  @media (min-width: 769px) and (max-width: 992px) {
-  }
-
-  @media (min-width: 993px) and (max-width: 1200px) {
-  } */
 `;
 
 const Row = styled.div`
@@ -111,26 +90,7 @@ const Row = styled.div`
 
 const ProductDetails = styled.div`
   padding: 0;
-  /* background-color: #ebe9e9; */
   width: 100%;
-
-  /* @media (max-width: 486px) {
-    padding: 0;
-  }
-
-  @media (min-width: 487px) and (max-width: 576px) {
-    padding: 0;
-  }
-
-  @media (min-width: 577px) and (max-width: 768px) {
-    padding: 0;
-  }
-
-  @media (min-width: 769px) and (max-width: 992px) {
-  }
-
-  @media (min-width: 993px) and (max-width: 1200px) {
-  } */
 `;
 
 const H6 = styled.h6`
@@ -298,13 +258,9 @@ const NavIcon = styled.span`
 
 function Order() {
   const { orders } = useSelector((state) => state.order);
-  const { token } = useSelector((state) => state.auth);
+  // const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  // function handleSingleOrder(id) {
-  //   dispatch(getSingleOrder({ id, token }));
-  // }
   return (
     <>
       {orders?.length < 0 && <p>No Orders</p>}
@@ -327,12 +283,7 @@ function Order() {
                       </DelivaryTime>
                       <Star>⭐⭐⭐⭐⭐</Star>
                     </ProductDetails>
-                    <NavIcon
-                      onClick={() => {
-                        navigate(`/orders/${el._id}`);
-                        // handleSingleOrder(el._id);
-                      }}
-                    >
+                    <NavIcon onClick={() => navigate(`/orders/${el._id}`)}>
                       <FaArrowRight />
                     </NavIcon>
                   </Row>

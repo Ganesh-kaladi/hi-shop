@@ -99,7 +99,6 @@ exports.createProduct = catchAsync(async (req, res, next) => {
       },
       (err, result) => {
         if (err) {
-          console.log(err);
           return reject(err);
         }
         resolve(result);
@@ -142,10 +141,3 @@ exports.updateProduct = async (req, res, next) => {
     },
   });
 };
-
-// const byteArrayBuffer = fs.readFileSync('shirt.jpg');
-// const uploadResult = await new Promise((resolve) => {
-//     cloudinary.v2.uploader.upload_stream((error, uploadResult) => {
-//         return resolve(uploadResult);
-//     }).end(byteArrayBuffer);
-// });

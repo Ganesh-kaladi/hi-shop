@@ -18,12 +18,6 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Title = styled.h2`
-  font-size: 1.4rem;
-  color: #333;
-  margin-bottom: 1rem;
-`;
-
 const Message = styled.p`
   font-size: 1rem;
   color: #666;
