@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import banner1 from "../../assets/banner/banner-1.jpeg";
-import banner2 from "../../assets/banner/banner-2.jpeg";
-import banner3 from "../../assets/banner/banner-3.jpeg";
-
 const Section = styled.section`
   margin-top: 1.6rem;
   padding: 1.4rem;
@@ -232,7 +228,11 @@ function Banner() {
       </Title>
       <Grid>
         <div>
-          <ImageContainer image={banner3}>
+          <ImageContainer
+            image={
+              "https://res.cloudinary.com/drbklccpt/image/upload/c_fill,w_420,h_520/v1748171912/banner-3_quxswn.jpg"
+            }
+          >
             <TextContainer>
               <TextBlock>
                 <CategoryTitle>Men's</CategoryTitle>
@@ -248,7 +248,11 @@ function Banner() {
           </ImageContainer>
         </div>
         <div>
-          <ImageContainer image={banner2}>
+          <ImageContainer
+            image={
+              "https://res.cloudinary.com/drbklccpt/image/upload/c_fill,w_420,h_520/v1748171897/banner-2_tycs64.jpg"
+            }
+          >
             <TextContainer>
               <TextBlock>
                 <CategoryTitle>Women's</CategoryTitle>
@@ -264,7 +268,11 @@ function Banner() {
           </ImageContainer>
         </div>
         <div>
-          <ImageContainer image={banner1}>
+          <ImageContainer
+            image={
+              "https://res.cloudinary.com/drbklccpt/image/upload/c_fill,w_420,h_520/v1748171874/banner-1_oriz1q.jpg"
+            }
+          >
             <TextContainer>
               <TextBlock>
                 <CategoryTitle>Kids'</CategoryTitle>

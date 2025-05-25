@@ -1,7 +1,7 @@
 **node_modules
 **node_modules
 
-backend/src/p.js
+backend/p.js
 frontend/src/font.css
 
 **/*.env

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import heroImage from "../assets/banner/hreo-img-1.jpg";
+import heroImage from "../assets/banner/hreo-img.jpg";
 import { FaArrowRight } from "react-icons/fa";
 
 const Container = styled.div`
