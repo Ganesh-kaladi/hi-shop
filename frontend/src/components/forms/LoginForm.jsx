@@ -78,8 +78,8 @@ const Button = styled.button`
 `;
 
 function LoginForm() {
-  const [email, setEmail] = useState("user-5@gmail.com");
-  const [password, setPassword] = useState("test1234");
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   const dispatch = useDispatch();
   const { token, authError } = useSelector((state) => state.auth);
