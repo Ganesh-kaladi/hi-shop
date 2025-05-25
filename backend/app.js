@@ -21,7 +21,7 @@ app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/order", orderRoutes);
 
 // handle all not existed routes
-app.use("*", (req, res, next) => {
+app.use("/*all", (req, res, next) => {
   next(new AppError(`doesn't exist the ${req.baseUrl}`, 400));
 });
 
