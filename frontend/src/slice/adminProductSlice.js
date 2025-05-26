@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const base = "http://127.0.0.1:5050";
-const base = "hi-shop.up.railway.app";
+const base = process.env.REACT_APP_BASE_URL;
 
 export const createProduct = createAsyncThunk(
   "admin/createProduct",
