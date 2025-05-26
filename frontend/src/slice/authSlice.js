@@ -10,7 +10,10 @@ export const loginUser = createAsyncThunk(
     try {
       const res = await axios.post(
         `hi-shop.up.railway.app/api/v1/user/login`,
-        form
+        form,
+        {
+          withCredentials: true,
+        }
       );
       return res.data;
     } catch (err) {
