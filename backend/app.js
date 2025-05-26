@@ -12,7 +12,7 @@ const orderRoutes = require("./routes/orderRoutes");
 
 app.use(
   cors({
-    origin: "https://ft.vercel.app",
+    origin: "https://hi-shop-lake.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
