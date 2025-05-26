@@ -12,13 +12,14 @@ const orderRoutes = require("./routes/orderRoutes");
 
 app.use(
   cors({
-    origin: "https://hi-shop-lake.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: "https://ft.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
+app.options("*", cors());
 app.use(express.json());
 
 app.use("/api/v1/user", userRoutes);
