@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+<<<<<<< HEAD
 const base = "http://127.0.0.1:5050";
+=======
+const base = "hi-shop.up.railway.app";
+>>>>>>> bdb2b8f9bda5a9c6eb173b67250c2b24c58f6321
 
 export const getAllProducts = createAsyncThunk(
   "allproducts/getAllProducts",
