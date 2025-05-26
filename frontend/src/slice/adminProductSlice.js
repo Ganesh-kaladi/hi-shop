@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const base = "hi-shop.up.railway.app";
 
 export const createProduct = createAsyncThunk(
   "admin/createProduct",
