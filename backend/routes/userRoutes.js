@@ -25,7 +25,10 @@ router.get("/get-me/", authentication, getMe);
 router.post("/add-address", authentication, addAddress);
 router.get("/get-address", authentication, getAddress);
 
-router.route("/").get(getAllUser).post(createUser);
+router
+  .route("/")
+  .get(authentication, authorizationRole("admin"), getAllUser)
+  .post(authentication, authorizationRole("admin"), createUser);
 router
   .route("/:id")
   .get(authentication, authorizationRole("admin"), getUser)

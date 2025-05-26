@@ -107,11 +107,11 @@ const Nav2 = styled.nav`
 
   @media (min-width: 577px) and (max-width: 768px) {
     display: block;
-    max-height: ${({ condition }) => (!condition ? "300px" : "0")};
-    opacity: ${({ condition }) => (!condition ? 1 : 0)};
+    max-height: ${({ condition }) => (condition ? "300px" : "0")};
+    opacity: ${({ condition }) => (condition ? 1 : 0)};
     transform: ${({ condition }) =>
-      !condition ? "translateY(0)" : "translateY(-16px)"};
-    visibility: ${({ condition }) => (!condition ? "visible" : "hidden")};
+      condition ? "translateY(0)" : "translateY(-16px)"};
+    visibility: ${({ condition }) => (condition ? "visible" : "hidden")};
     overflow: hidden;
     transition: all 0.3s ease;
   }
@@ -220,7 +220,7 @@ function Navbar() {
           </div>
 
           <ToggelIcon>
-            {!open ? (
+            {open ? (
               <FaTimes size={24} onClick={() => setOpen((cur) => !cur)} />
             ) : (
               <MdMenu size={28} onClick={() => setOpen((cur) => !cur)} />

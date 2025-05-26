@@ -77,14 +77,27 @@ const Button = styled.button`
   }
 `;
 
-function LoginForm() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+const P = styled.p`
+  color: red;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  margin-left: 6px;
+  margin-bottom: 6px;
+`;
 
-  const dispatch = useDispatch();
+function LoginForm() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errMessage, setErrMessage] = useState({});
+
   const { token, authError } = useSelector((state) => state.auth);
   const { cartError } = useSelector((state) => state.cart);
   const { orderError } = useSelector((state) => state.order);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(
@@ -119,26 +132,47 @@ function LoginForm() {
     [authError, dispatch]
   );
 
+  function handleInputValue(e) {
+    const { name, value } = e.target;
+    setFormData((cur) => ({ ...cur, [name]: value }));
+  }
+
+  function validate() {
+    let errObj = {};
+    if (formData.email === "")
+      errObj.emailErr = "enter your registered email address";
+    if (formData.password === "") errObj.passwordErr = "enter your password";
+
+    return errObj;
+  }
+
   function handleLoginClick() {
-    dispatch(loginUser({ email, password }));
+    const errMsg = validate();
+    if (Object.keys(errMsg).length > 0) {
+      setErrMessage(errMsg);
+      return;
+    }
+    dispatch(loginUser({ email: formData.email, password: formData.password }));
   }
 
   return (
     <FormContainer>
       <Label>user name</Label>
       <Input
-        value={email}
+        name="email"
         type="email"
         placeholder="Enter Your User Name..."
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={handleInputValue}
       />
+      {errMessage.emailErr && <P>{errMessage.emailErr}</P>}
       <Label>password</Label>
       <Input
-        value={password}
+        name="password"
         type="password"
         placeholder="Enter Your User Password..."
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={handleInputValue}
       />
+      {errMessage.passwordErr && <P>{errMessage.passwordErr}</P>}
       <Button onClick={handleLoginClick}>login</Button>
     </FormContainer>
   );
