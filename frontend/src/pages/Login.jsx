@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LoginForm from "../components/forms/LoginForm";
@@ -6,43 +6,27 @@ import { useSelector } from "react-redux";
 import Spinner from "../components/spinner/Spinner";
 
 const Section = styled.section`
-  margin-top: 52px;
-
-  @media (max-width: 486px) {
-    margin-top: 40px;
-  }
-
-  @media (min-width: 487px) and (max-width: 576px) {
-    margin-top: 44px;
-  }
-
-  @media (min-width: 577px) and (max-width: 768px) {
-    margin-top: 46px;
-  }
-
-  @media (min-width: 769px) and (max-width: 992px) {
-    margin-top: 48px;
-  }
-
-  @media (min-width: 993px) and (max-width: 1200px) {
-    margin-top: 52px;
-  }
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Container = styled.div`
-  width: 420px;
+  width: 360px;
+  height: 74%;
   margin: 0 auto;
   background-color: #f3f3f3;
   border-radius: 1rem;
   box-shadow: 0px 0px 12px 1px #47474758;
 
   @media (max-width: 486px) {
-    width: 360px;
+    width: 340px;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 1.4rem;
+  font-size: 1.1333rem;
   background-color: #8f8f8f;
   padding: 0.9rem;
   text-align: center;
@@ -56,26 +40,14 @@ const Title = styled.h1`
 `;
 
 const Row = styled.div`
-  padding: 2rem 3rem;
+  padding: 1rem 1.6rem;
   display: flex;
-  ${(props) =>
-    props.type === "login-box" &&
-    css`
-      flex-direction: column;
-      border-radius: 4px;
-    `}
-
-  ${(props) =>
-    props.type === "icon-box" &&
-    css`
-      justify-content: center;
-      gap: 10px;
-    `}
+  flex-direction: column;
+  border-radius: 4px;
 `;
 
 const LoginBody = styled.div`
   width: 100%;
-  margin-bottom: 1rem;
 `;
 
 const Span = styled.span`
@@ -83,7 +55,14 @@ const Span = styled.span`
   width: 100%;
   font-size: 1.1rem;
   text-align: center;
-  margin-bottom: -14px;
+  margin-bottom: 0.6rem;
+`;
+
+const IconBocRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 0.6rem;
 `;
 
 const List = styled.ul`
@@ -124,15 +103,15 @@ function Login() {
       <Section>
         <Container>
           <Title>Login</Title>
-          <Row type="login-box">
+          <Row>
             <LoginBody>
               <LoginForm />
               <Span>or</Span>
-              <Row type="icon-box">
+              <IconBocRow>
                 <FaFacebook size={30} color=" #0ddbff" />
                 <FaTwitter size={30} color=" #0995ad" />
                 <FaGoogle size={30} color=" #ee291a" />
-              </Row>
+              </IconBocRow>
               <List>
                 <ListItem>
                   Forget &nbsp;

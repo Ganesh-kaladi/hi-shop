@@ -12,7 +12,9 @@ import {
 
 const AsideContainer = styled.aside`
   background-color: #fff;
-  border: 1px solid #948e8e89;
+  /* border: 1px solid #948e8e89; */
+  border-radius: 1rem;
+  box-shadow: 0px 0px 10px 0px #42404058;
 
   @media (max-width: 486px) {
     display: none;
@@ -30,13 +32,15 @@ const AsideContainer = styled.aside`
 const Heading1 = styled.h1`
   text-align: center;
   padding: 12px 10px;
-  background-color: #a5c9e0;
-  color: #2e2d2d;
+  background-color: #797979;
+  color: #f1efef;
   letter-spacing: 1px;
   font-size: 1.2rem;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
 
   @media (min-width: 769px) and (max-width: 992px) {
     font-size: 0.988rem;
@@ -160,7 +164,7 @@ function AsideBar() {
 
   useEffect(
     function () {
-      if (queryFields === "") return;
+      // if (queryFields === "") return;
       const fields = `${queryFields}`;
       dispatch(addQuery({ fields }));
     },

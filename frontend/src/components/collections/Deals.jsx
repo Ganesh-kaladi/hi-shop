@@ -378,7 +378,7 @@ function Deals() {
               </Span>
               <ProductName>
                 {el.deal_name}
-                <Button>
+                <Button onClick={() => navigate("/products")}>
                   <FaArrowRight />
                 </Button>
               </ProductName>
@@ -516,7 +516,7 @@ function Deals() {
               </Span>
               <ProductName>
                 {el.deal_name}
-                <Button>
+                <Button onClick={() => navigate("/products")}>
                   <FaArrowRight />
                 </Button>
               </ProductName>

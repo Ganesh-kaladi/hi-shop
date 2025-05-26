@@ -17,6 +17,8 @@ const Container = styled.div`
   margin: auto;
   width: 90%;
   margin-top: 56px;
+  margin-bottom: 4rem;
+  min-height: 70vh;
 
   @media (max-width: 486px) {
     margin-top: 38px;
@@ -118,11 +120,15 @@ function Products() {
 
   useEffect(
     function () {
-      if (query === "") return;
+      if (query === "") {
+        dispatch(getAllProducts());
+        return;
+      }
       dispatch(getAllProductsBasedOnQuery(query));
     },
     [query, dispatch]
   );
+  console.log(query);
 
   return (
     <>

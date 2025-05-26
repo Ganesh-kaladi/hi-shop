@@ -5,12 +5,14 @@ import { useState } from "react";
 import AddAddress from "../components/forms/AddAddress";
 import { createOrder } from "../slice/orderSlice";
 import { removeAllCart } from "../slice/cartSlice";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   width: 90%;
   margin: 0 auto;
   margin-top: 2rem;
   font-family: "Segoe UI", sans-serif;
+  margin-bottom: 4rem;
 `;
 
 const Grid = styled.div`
@@ -262,7 +264,7 @@ const PaymentContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 520px;
+  height: 580px;
 `;
 
 const PaymentDetals = styled.div`
@@ -532,6 +534,11 @@ function PlaceOrder() {
       }));
       alert("select address");
       return;
+    } else {
+      setCheckError((cur) => ({
+        ...cur,
+        addressErr: "",
+      }));
     }
 
     if (MOP.mop === "") {
@@ -553,6 +560,7 @@ function PlaceOrder() {
     try {
       const orderRes = await dispatch(createOrder({ data, token }));
       if (orderRes.payload?.status === "success") {
+        toast.success("order placed");
         const ids = cart.map((el) => el._id);
         const removeRes = await dispatch(
           removeAllCart({ data: { ids }, token })
@@ -613,9 +621,9 @@ function PlaceOrder() {
 
           <CartProduct>
             {cart?.length > 0 &&
-              cart?.map((el) => {
+              cart?.map((el, i) => {
                 return (
-                  <Product>
+                  <Product key={i}>
                     <ImageBox>
                       <Image src={el.product.image[1]} />
                     </ImageBox>

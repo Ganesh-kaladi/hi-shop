@@ -3,9 +3,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAuth, signinUser } from "../slice/authSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Section = styled.section`
-  margin-top: 56px;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 56px;
 
   @media (max-width: 486px) {
     margin-top: 40px;
@@ -25,30 +30,30 @@ const Section = styled.section`
 
   @media (min-width: 993px) and (max-width: 1200px) {
     margin-top: 52px;
-  }
+  } */
 `;
 
 const Container = styled.div`
-  width: 420px;
+  width: 360px;
   margin: 0 auto;
   background-color: #f3f3f3;
   border-radius: 1rem;
   box-shadow: 0px 0px 12px 1px #47474758;
 
   @media (max-width: 486px) {
-    width: 360px;
+    width: 340px;
   }
 `;
 
 const Form = styled.form`
-  padding: 2rem 3rem;
+  padding: 1rem 2rem;
 `;
 
 const Row = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
   position: relative;
 `;
 
@@ -69,9 +74,9 @@ const Title = styled.h1`
 export const Label = styled.label`
   display: block;
   width: 100%;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.4222rem;
   letter-spacing: 1px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 600;
@@ -82,7 +87,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   display: block;
   width: 100%;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.699rem;
   border: none;
   outline: none;
   background-color: #f8f9fa;
@@ -105,13 +110,15 @@ export const Input = styled.input`
 `;
 
 const P = styled.p`
-  letter-spacing: 1px;
   width: 100%;
   font-family: sans-serif;
   position: absolute;
-  top: 45%;
-  left: 120%;
+  bottom: -8%;
+  left: 4%;
   color: red;
+  font-weight: lighter;
+  font-size: 0.888rem;
+  font-family: sans-serif;
 `;
 
 const Button = styled.button`
@@ -119,7 +126,8 @@ const Button = styled.button`
   border: 1px solid #0995ad;
   background-color: #f8f9fa;
   color: #0995ad;
-  margin-top: 1.6rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
   border-radius: 26px;
   padding: 6px 0px;
   cursor: pointer;
@@ -140,19 +148,18 @@ const Button = styled.button`
 `;
 
 function SignUp() {
-  const { authValidationError } = useSelector((state) => state.auth);
-  console.log(authValidationError);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const [errMessage, setErrMessage] = useState({});
 
+  const { authValidationError, token } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleFormData(e) {
     const { name, value } = e.target;
@@ -171,7 +178,6 @@ function SignUp() {
       errMsg.confirmPasswordErr =
         "password and confirm password is not matching";
     }
-
     return errMsg;
   }
 
@@ -183,7 +189,6 @@ function SignUp() {
       return;
     }
     setErrMessage({});
-    console.log(formData);
     dispatch(
       signinUser({
         name: formData.name,
@@ -191,7 +196,12 @@ function SignUp() {
         password: formData.password,
         confirmPassword: formData.confirmPassword,
       })
-    );
+    ).then((res) => {
+      console.log(res);
+      if (res.payload.status === "success" && !!res.payload.token) {
+        navigate("/products");
+      }
+    });
   }
 
   useEffect(
@@ -216,7 +226,6 @@ function SignUp() {
         toast.error(authValidationError[0].trim());
         setErrMessage(serverErr);
       }
-
       if (
         authValidationError?.length > 0 &&
         authValidationError[0].includes("Duplicate field value")
@@ -226,6 +235,15 @@ function SignUp() {
       }
     },
     [authValidationError, dispatch]
+  );
+
+  useEffect(
+    function () {
+      if (token) {
+        navigate("/products");
+      }
+    },
+    [navigate, token]
   );
 
   return (

@@ -14,6 +14,8 @@ const Container = styled.div`
   margin: 0 auto;
   width: 80%;
   margin-top: 56px;
+  margin-bottom: 4rem;
+  min-height: 74vh;
 
   @media (max-width: 486px) {
     margin-top: 38px;

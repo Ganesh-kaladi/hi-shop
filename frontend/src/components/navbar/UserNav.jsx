@@ -89,7 +89,7 @@ const UserNavigateContainer = styled.div`
     padding: 2rem;
 
     ${(props) =>
-      props.isOpen &&
+      props.isopen &&
       css`
         transform: translateX(0);
       `}
@@ -242,7 +242,7 @@ function UserNav() {
   const [open, setOpen] = useState(false);
   return (
     <UserNavigate>
-      <UserNavigateContainer isOpen={open}>
+      <UserNavigateContainer isopen={open}>
         {/* <H3>My account</H3> */}
         <UserNavigateBlock>
           <H5>About Shopping</H5>

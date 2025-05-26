@@ -4,9 +4,7 @@ import Navbar from "../components/navbar/Navbar";
 
 import styled from "styled-components";
 
-const Main = styled.main`
-  min-height: 80vh;
-`;
+const Main = styled.main``;
 
 function AppLayout() {
   return (

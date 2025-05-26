@@ -7,9 +7,12 @@ const streamifier = require("streamifier");
 
 exports.getAllProduct = async (req, res, next) => {
   const reqQuery = { ...req.query };
+
   const fixedFields = ["limit", "page", "fields", "sort", "productCollection"];
+
   fixedFields.forEach((el) => delete reqQuery[el]);
   let queryObj = JSON.stringify(reqQuery);
+
   queryObj = queryObj.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
   let query = Product.find(JSON.parse(queryObj));

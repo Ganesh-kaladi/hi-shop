@@ -7,7 +7,6 @@ const FooterBox = styled.footer`
   background-color: #575656;
   color: #ffffff;
   padding: 50px 0 30px;
-  margin-top: 70px;
 `;
 
 const Container = styled.div`

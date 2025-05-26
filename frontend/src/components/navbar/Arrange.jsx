@@ -60,6 +60,19 @@ const DynamicFliter = styled.div`
   width: 100%;
   bottom: 3rem;
   z-index: 10;
+  display: none;
+
+  @media (max-width: 486px) {
+    display: block;
+  }
+
+  @media (min-width: 487px) and (max-width: 576px) {
+    display: block;
+  }
+
+  @media (min-width: 577px) and (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const DynamicFliterContainer = styled.div`

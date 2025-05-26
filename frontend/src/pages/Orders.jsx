@@ -106,7 +106,7 @@ function Orders() {
           <Order />
         </div>
       )}
-      {!isLoadingOrder && orders?.length < 0 && <NoOrders />}
+      {!isLoadingOrder && orders?.length <= 0 && <NoOrders />}
     </Block>
   );
 }

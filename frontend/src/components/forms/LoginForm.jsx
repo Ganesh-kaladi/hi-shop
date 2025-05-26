@@ -12,10 +12,18 @@ const FormContainer = styled.div`
   margin-bottom: 0.7rem;
 `;
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+  position: relative;
+`;
+
 export const Label = styled.label`
   display: block;
   width: 100%;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.422rem;
   letter-spacing: 1px;
   font-size: 1.1rem;
   font-family: "Nunito", sans-serif;
@@ -28,7 +36,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   display: block;
   width: 100%;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.6899rem;
   border: none;
   outline: none;
   background-color: #f8f9fa;
@@ -57,7 +65,7 @@ const Button = styled.button`
   border: 1px solid #0995ad;
   background-color: #f8f9fa;
   color: #0995ad;
-  margin-top: 1.6rem;
+  margin-top: 1.2rem;
   border-radius: 26px;
   padding: 6px 0px;
   cursor: pointer;
@@ -78,11 +86,16 @@ const Button = styled.button`
 `;
 
 const P = styled.p`
-  color: red;
+  width: 100%;
   font-family: sans-serif;
-  font-size: 0.8rem;
-  margin-left: 6px;
-  margin-bottom: 6px;
+  position: absolute;
+  bottom: -10%;
+  left: 4%;
+  color: red;
+  font-weight: lighter;
+  font-size: 0.888rem;
+  font-family: sans-serif;
+  letter-spacing: 1px;
 `;
 
 function LoginForm() {
@@ -158,21 +171,26 @@ function LoginForm() {
   return (
     <FormContainer>
       <Label>user name</Label>
-      <Input
-        name="email"
-        type="email"
-        placeholder="Enter Your User Name..."
-        onChange={handleInputValue}
-      />
-      {errMessage.emailErr && <P>{errMessage.emailErr}</P>}
-      <Label>password</Label>
-      <Input
-        name="password"
-        type="password"
-        placeholder="Enter Your User Password..."
-        onChange={handleInputValue}
-      />
-      {errMessage.passwordErr && <P>{errMessage.passwordErr}</P>}
+      <Row>
+        <Input
+          name="email"
+          type="email"
+          placeholder="Enter Your User Name..."
+          onChange={handleInputValue}
+        />
+        {errMessage.emailErr && <P>{errMessage.emailErr}</P>}
+      </Row>
+      <Row>
+        <Label>password</Label>
+
+        <Input
+          name="password"
+          type="password"
+          placeholder="Enter Your User Password..."
+          onChange={handleInputValue}
+        />
+        {errMessage.passwordErr && <P>{errMessage.passwordErr}</P>}
+      </Row>
       <Button onClick={handleLoginClick}>login</Button>
     </FormContainer>
   );

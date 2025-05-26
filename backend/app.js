@@ -9,17 +9,30 @@ const productRoutes = require("./routes/productRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const morgan = require("morgan");
+const helmet = require("helmet");
+const qs = require("qs");
 
 app.use(
   cors({
-    origin: "https://hi-shop-lake.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: process.env.CORS_URL,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
-// app.use(cors());
+// Use qs to parse nested query params
+app.set("query parser", (str) => qs.parse(str));
+
+// set security HTTP headers
+app.use(helmet());
+
+//logging
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("dev"));
+}
+
 app.use(express.json());
 
 app.use("/api/v1/user", userRoutes);

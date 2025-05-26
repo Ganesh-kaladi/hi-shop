@@ -128,6 +128,7 @@ const kidCollection = {
 const Container = styled.div`
   margin: 0 auto;
   width: 90%;
+  margin-bottom: 4rem;
 `;
 
 function Home() {

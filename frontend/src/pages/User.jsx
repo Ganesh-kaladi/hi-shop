@@ -6,6 +6,8 @@ const Container = styled.div`
   margin: 0 auto;
   width: 80%;
   margin-top: 56px;
+  min-height: 74vh;
+  margin-bottom: 4rem;
 
   @media (max-width: 486px) {
     margin-top: 40px;

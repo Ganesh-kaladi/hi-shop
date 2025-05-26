@@ -265,9 +265,9 @@ function Order() {
     <>
       {orders?.length < 0 && <p>No Orders</p>}
       {orders?.length > 0 &&
-        orders?.map((el) => {
+        orders?.map((el, i) => {
           return (
-            <Container>
+            <Container key={i}>
               <H5>id:{el.orderId}</H5>
               <List>
                 <ListItem>

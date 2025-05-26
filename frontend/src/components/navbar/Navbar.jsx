@@ -85,22 +85,22 @@ const Nav2 = styled.nav`
   display: none;
   @media (max-width: 486px) {
     display: block;
-    max-height: ${({ condition }) => (!condition ? "300px" : "0")};
-    opacity: ${({ condition }) => (!condition ? 1 : 0)};
+    max-height: ${({ condition }) => (condition ? "300px" : "0")};
+    opacity: ${({ condition }) => (condition ? 1 : 0)};
     transform: ${({ condition }) =>
-      !condition ? "translateY(0)" : "translateY(-16px)"};
-    visibility: ${({ condition }) => (!condition ? "visible" : "hidden")};
+      condition ? "translateY(0)" : "translateY(-16px)"};
+    visibility: ${({ condition }) => (condition ? "visible" : "hidden")};
     overflow: hidden;
     transition: all 0.3s ease;
   }
 
   @media (min-width: 487px) and (max-width: 576px) {
     display: block;
-    max-height: ${({ condition }) => (!condition ? "300px" : "0")};
-    opacity: ${({ condition }) => (!condition ? 1 : 0)};
+    max-height: ${({ condition }) => (condition ? "300px" : "0")};
+    opacity: ${({ condition }) => (condition ? 1 : 0)};
     transform: ${({ condition }) =>
-      !condition ? "translateY(0)" : "translateY(-16px)"};
-    visibility: ${({ condition }) => (!condition ? "visible" : "hidden")};
+      condition ? "translateY(0)" : "translateY(-16px)"};
+    visibility: ${({ condition }) => (condition ? "visible" : "hidden")};
     overflow: hidden;
     transition: all 0.3s ease;
   }
@@ -227,7 +227,7 @@ function Navbar() {
             )}
           </ToggelIcon>
 
-          <Nav condition={open}>
+          <Nav>
             <NavRow>
               <li>
                 <Anchor to="/">Home</Anchor>

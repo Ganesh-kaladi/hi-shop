@@ -15,7 +15,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
 });
 
 exports.getCartItems = catchAsync(async (req, res, next) => {
-  const cart = await Cart.find().populate({
+  const cart = await Cart.find({ user: req.user._id }).populate({
     path: "product",
     select: "-__v -size -color -description -highlights -createdAt -updatedAt",
   });
