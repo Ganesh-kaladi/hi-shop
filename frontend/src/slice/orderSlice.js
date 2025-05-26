@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const base = "http://127.0.0.1:5050";
+
 export const createOrder = createAsyncThunk(
   "cart/addOrder",
   async function ({ data, token }, thunkApi) {
     try {
-      const res = await axios.post(`http://127.0.0.1:5050/api/v1/order`, data, {
+      const res = await axios.post(`${base}/api/v1/order`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -21,7 +23,7 @@ export const getAllOrders = createAsyncThunk(
   "cart/allOrders",
   async function (token, thunkApi) {
     try {
-      const res = await axios.get(`http://127.0.0.1:5050/api/v1/order`, {
+      const res = await axios.get(`${base}/api/v1/order`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +39,7 @@ export const getSingleOrder = createAsyncThunk(
   "cart/singleOrders",
   async function ({ id, token }, thunkApi) {
     try {
-      const res = await axios.get(`http://127.0.0.1:5050/api/v1/order/${id}`, {
+      const res = await axios.get(`${base}/api/v1/order/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

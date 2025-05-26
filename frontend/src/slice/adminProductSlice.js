@@ -1,19 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const base = "http://127.0.0.1:5050";
+
 export const createProduct = createAsyncThunk(
   "admin/createProduct",
   async function ({ formData, token }, thunkApi) {
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:5050/api/v1/product",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post(`${base}/api/v1/product`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return res.data;
     } catch (err) {

@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const base = "http://127.0.0.1:5050";
+
 export const getProductDetails = createAsyncThunk(
   "singleProduct/getDetails",
   async function (id, thunkAPI) {
     try {
-      const res = await axios.get(`http://127.0.0.1:5050/api/v1/product/${id}`);
+      const res = await axios.get(`${base}/api/v1/product/${id}`);
       return res.data;
     } catch (err) {
       console.log(err);

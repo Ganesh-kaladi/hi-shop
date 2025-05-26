@@ -1,14 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const base = "http://127.0.0.1:5050";
+
 export const loginUser = createAsyncThunk(
   "user/login",
   async function (form, thunkApi) {
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:5050/api/v1/user/login",
-        form
-      );
+      const res = await axios.post(`${base}/api/v1/user/login`, form);
       return res.data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response?.data || err.message);
@@ -20,10 +19,7 @@ export const signinUser = createAsyncThunk(
   "user/signin",
   async function (form, thunkApi) {
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:5050/api/v1/user/sign-up",
-        form
-      );
+      const res = await axios.post(`${base}/api/v1/user/sign-up`, form);
       return res.data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response?.data || err.message);
@@ -35,14 +31,11 @@ export const getUserAddress = createAsyncThunk(
   "user/getAddress",
   async function (token, thunkApi) {
     try {
-      const res = await axios.get(
-        "http://127.0.0.1:5050/api/v1/user/get-address",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.get(`${base}/api/v1/user/get-address`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return res.data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response?.data || err.message);
@@ -54,15 +47,11 @@ export const addUserAddress = createAsyncThunk(
   "user/addAddress",
   async function ({ data, token }, thunkApi) {
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:5050/api/v1/user/add-address",
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post(`${base}/api/v1/user/add-address`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return res.data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response?.data || err.message);

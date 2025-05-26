@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const base = "http://127.0.0.1:5050";
+
 export const addToCart = createAsyncThunk(
   "cart/addCart",
   async function ({ data, token }, thunkApi) {
     try {
-      const res = await axios.post(`http://127.0.0.1:5050/api/v1/cart`, data, {
+      const res = await axios.post(`${base}/api/v1/cart`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -21,7 +23,7 @@ export const getCartItems = createAsyncThunk(
   "cart/getCart",
   async function (token, thunkApi) {
     try {
-      const res = await axios.get(`http://127.0.0.1:5050/api/v1/cart`, {
+      const res = await axios.get(`${base}/api/v1/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +40,7 @@ export const incQunatity = createAsyncThunk(
   async function ({ quantity, id, token }, thunkApi) {
     try {
       const res = await axios.patch(
-        `http://127.0.0.1:5050/api/v1/cart/${id}`,
+        `${base}/api/v1/cart/${id}`,
         { quantity: quantity },
         {
           headers: {
@@ -58,7 +60,7 @@ export const decQuantity = createAsyncThunk(
   async function ({ quantity, id, token }, thunkApi) {
     try {
       const res = await axios.patch(
-        `http://127.0.0.1:5050/api/v1/cart/${id}`,
+        `${base}/api/v1/cart/${id}`,
         { quantity: quantity },
         {
           headers: {
@@ -77,14 +79,11 @@ export const removeFromCart = createAsyncThunk(
   "cart/removeCartItem",
   async function ({ id, token }, thunkApi) {
     try {
-      const res = await axios.delete(
-        `http://127.0.0.1:5050/api/v1/cart/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.delete(`${base}/api/v1/cart/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return res.data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response?.data || err.message);
@@ -97,7 +96,7 @@ export const removeAllCart = createAsyncThunk(
   async function ({ data, token }, thunkApi) {
     try {
       const res = await axios.patch(
-        "http://127.0.0.1:5050/api/v1/cart/delete-cart-items",
+        `${base}/api/v1/cart/delete-cart-items`,
         data,
         {
           headers: {

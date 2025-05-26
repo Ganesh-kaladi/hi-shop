@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const base = "http://127.0.0.1:5050";
+
 export const getAllProducts = createAsyncThunk(
   "allproducts/getAllProducts",
   async function (thunkApi) {
     try {
-      const res = await axios.get(`http://127.0.0.1:5050/api/v1/product`);
+      const res = await axios.get(`${base}/api/v1/product`);
       return res.data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response?.data || err.message);
@@ -17,9 +19,7 @@ export const getAllProductsBasedOnQuery = createAsyncThunk(
   "allproducts/getAllProductsBasedOnQuery",
   async function (query, thunkApi) {
     try {
-      const res = await axios.get(
-        `http://127.0.0.1:5050/api/v1/product${query}`
-      );
+      const res = await axios.get(`${base}/api/v1/product${query}`);
       return res.data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response?.data || err.message);
