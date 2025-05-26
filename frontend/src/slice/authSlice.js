@@ -8,9 +8,13 @@ export const loginUser = createAsyncThunk(
   "user/login",
   async function (form, thunkApi) {
     try {
-      const res = await axios.post(`${base}/api/v1/user/login`, form);
+      const res = await axios.post(
+        `hi-shop.up.railway.app/api/v1/user/login`,
+        form
+      );
       return res.data;
     } catch (err) {
+      console.log(err);
       return thunkApi.rejectWithValue(err.response?.data || err.message);
     }
   }
