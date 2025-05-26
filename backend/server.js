@@ -26,6 +26,8 @@ const server = app.listen(PORT, () => {
   console.log(`Server is listening on PORT ${process.env.PORT}...`);
 });
 
+//unhandled rejection
+
 process.on("unhandledRejection", (err) => {
   console.log("UNHANDLED REJECTIONS! 💥 shutting down...");
   console.log(err.name, err.message);
