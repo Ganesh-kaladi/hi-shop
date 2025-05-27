@@ -16,29 +16,29 @@ import ErrorMessage from "../ErrorMessage";
 const Container = styled.div`
   margin: auto;
   width: 90%;
-  margin-top: 56px;
+  margin-top: 52px;
   margin-bottom: 4rem;
   min-height: 70vh;
 
   @media (max-width: 486px) {
-    margin-top: 38px;
+    margin-top: 28px;
   }
 
   @media (min-width: 487px) and (max-width: 576px) {
-    margin-top: 42px;
+    margin-top: 34px;
   }
 
   @media (min-width: 577px) and (max-width: 768px) {
-    margin-top: 44px;
+    margin-top: 40px;
   }
 
   @media (min-width: 769px) and (max-width: 992px) {
-    margin-top: 48px;
+    margin-top: 44px;
   }
 
   @media (min-width: 993px) and (max-width: 1200px) {
     width: 90%;
-    margin-top: 52px;
+    margin-top: 48px;
   }
 `;
 

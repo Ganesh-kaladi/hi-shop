@@ -205,7 +205,7 @@ const Btn = styled.button`
   }
 
   @media (max-width: 480px) {
-    width: 30%;
+    width: 40%;
     font-size: 0.9rem;
   }
 `;

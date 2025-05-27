@@ -47,7 +47,7 @@ const UserNavigateContainer = styled.div`
     padding: 2rem;
 
     ${(props) =>
-      props.isOpen &&
+      props.isopen &&
       css`
         transform: translateX(0);
       `}
@@ -68,7 +68,7 @@ const UserNavigateContainer = styled.div`
     padding: 2rem;
 
     ${(props) =>
-      props.isOpen &&
+      props.isopen &&
       css`
         transform: translateX(0);
       `}
@@ -246,11 +246,11 @@ function UserNav() {
         {/* <H3>My account</H3> */}
         <UserNavigateBlock>
           <H5>About Shopping</H5>
-          <UserLinks links={myAcc} />
+          <UserLinks links={myAcc} setOpen={setOpen} />
         </UserNavigateBlock>
         <UserNavigateBlock>
           <H5>About User</H5>
-          <UserLinks links={aboutUser} />
+          <UserLinks links={aboutUser} setOpen={setOpen} />
         </UserNavigateBlock>
         <Icon onClick={() => setOpen((cur) => !cur)}>
           {open ? <FaChevronLeft /> : <FaChevronRight />}
@@ -260,9 +260,9 @@ function UserNav() {
   );
 }
 
-function UserLinks({ links }) {
+function UserLinks({ links, setOpen }) {
   return (
-    <List>
+    <List onClick={() => setOpen(false)}>
       {links?.map((el) => (
         <ListItem key={el.id}>
           <Anchor to={el.path}>{el.link}</Anchor>

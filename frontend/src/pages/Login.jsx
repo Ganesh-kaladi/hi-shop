@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import Spinner from "../components/spinner/Spinner";
 
 const Section = styled.section`
-  height: 90vh;
+  height: 74vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +14,7 @@ const Section = styled.section`
 
 const Container = styled.div`
   width: 360px;
-  height: 74%;
+  /* height: 74%; */
   margin: 0 auto;
   background-color: #f3f3f3;
   border-radius: 1rem;

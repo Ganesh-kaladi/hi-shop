@@ -43,7 +43,7 @@ const Hero = styled.section`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  height: 60vh;
+  height: 48vh;
   margin: 0;
   position: relative;
   top: 0;
@@ -53,27 +53,27 @@ const Hero = styled.section`
 
   @media (max-width: 486px) {
     padding: 1rem;
-    height: 40vh;
+    height: 26vh;
   }
 
   @media (min-width: 487px) and (max-width: 576px) {
     padding: 1rem;
-    height: 46vh;
+    height: 32vh;
   }
 
   @media (min-width: 577px) and (max-width: 768px) {
     padding: 1.111rem;
-    height: 48vh;
+    height: 34vh;
   }
 
   @media (min-width: 769px) and (max-width: 992px) {
     padding: 1.4rem;
-    height: 52vh;
+    height: 38vh;
   }
 
   @media (min-width: 993px) and (max-width: 1200px) {
     padding: 1.4rem;
-    height: 56vh;
+    height: 42vh;
   }
 `;
 
@@ -97,12 +97,12 @@ const Title = styled.h2`
   }
 
   @media (min-width: 487px) and (max-width: 576px) {
-    font-size: 1.155rem;
+    font-size: 0.933rem;
     margin-bottom: -0.2rem;
   }
 
   @media (min-width: 577px) and (max-width: 768px) {
-    font-size: 1.211rem;
+    font-size: 1.411rem;
     margin-bottom: -0.2rem;
   }
 
@@ -125,7 +125,7 @@ const Span = styled.span`
   font-weight: 300;
   font-style: normal;
   @media (max-width: 480px) {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 
   @media (min-width: 487px) and (max-width: 576px) {
@@ -154,8 +154,8 @@ const Subtitle = styled.p`
   font-style: normal;
   text-align: start;
   @media (max-width: 480px) {
-    font-size: 0.7rem;
-    margin-bottom: 1rem;
+    font-size: 0.6rem;
+    margin-bottom: 0.8rem;
   }
 
   @media (min-width: 487px) and (max-width: 576px) {
@@ -164,7 +164,7 @@ const Subtitle = styled.p`
   }
 
   @media (min-width: 577px) and (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 0.86rem;
     margin-bottom: 1rem;
   }
 
@@ -188,8 +188,9 @@ const Para = styled.p`
   width: 40%;
   text-align: start;
   @media (max-width: 480px) {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     width: 60%;
+    margin-bottom: 0.688;
   }
 
   @media (min-width: 487px) and (max-width: 576px) {
@@ -198,7 +199,7 @@ const Para = styled.p`
   }
 
   @media (min-width: 577px) and (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: 0.84rem;
     width: 60%;
   }
 

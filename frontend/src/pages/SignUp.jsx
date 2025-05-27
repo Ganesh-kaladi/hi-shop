@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Section = styled.section`
-  height: 90vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;

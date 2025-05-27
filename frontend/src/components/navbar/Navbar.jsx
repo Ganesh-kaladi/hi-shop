@@ -291,7 +291,14 @@ function Navbar() {
                 Login
               </ColAnchor>
             ) : (
-              <span onClick={handleLogOut}>Log Out</span>
+              <span
+                onClick={() => {
+                  handleLogOut();
+                  handleNavTogglerClick();
+                }}
+              >
+                Log Out
+              </span>
             )}
           </NavColumnList>
         </NavColoumn>

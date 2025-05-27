@@ -194,7 +194,7 @@ const StyledButton = styled.button`
   letter-spacing: 1px;
 
   &:hover {
-    background-color: #092b58;
+    background-color: #c4c4c4;
     box-shadow: 0px 0px 6px 0px #fff;
   }
 
